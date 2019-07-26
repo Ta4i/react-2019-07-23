@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
+import React, {PureComponent} from 'react'
 
-class Restaurant extends Component {
+class Restaurant extends PureComponent {
   render() {
     const {isOpen, toggleOpen, restaurant} = this.props
     const {
@@ -9,6 +9,7 @@ class Restaurant extends Component {
       name,
       menu
     } = restaurant;
+
     return (
       <li>
         <img
