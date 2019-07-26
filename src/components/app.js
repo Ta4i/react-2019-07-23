@@ -1,9 +1,12 @@
 import React, {Component} from 'react'
+import RestaurantsList from './restaurants-list';
 
 class App extends Component {
   render() {
     return (
-      <div>Hello world!</div>
+      <section>
+        <RestaurantsList restaurants={this.props.restaurants}/>
+      </section>
     )
   }
 }
