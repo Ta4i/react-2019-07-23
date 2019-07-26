@@ -2,7 +2,13 @@ import React, {Component} from 'react'
 
 class Restaurant extends Component {
   render() {
-    const {image, name, menu} = this.props.restaurant;
+    const {isOpen, toggleOpen, restaurant} = this.props
+    const {
+      id,
+      image,
+      name,
+      menu
+    } = restaurant;
     return (
       <li>
         <img
@@ -11,8 +17,21 @@ class Restaurant extends Component {
           height={64}
           alt={name}
         />
-        <h2>{name}</h2>
-        <div>Menu items: {menu.length}</div>
+        <button
+          onClick={() => toggleOpen(id)}
+        >
+          {isOpen ? 'Close' : 'Open'}
+        </button>
+        {
+          isOpen ?
+            (
+              <>
+                <h2>{name}</h2>
+                <div>Menu items: {menu.length}</div>
+              </>
+            ) :
+            null
+        }
       </li>
     )
   }
