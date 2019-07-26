@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react'
+import RestaurantReviews from './restaurant-reviews'
 
 class Restaurant extends PureComponent {
   render() {
@@ -29,6 +30,9 @@ class Restaurant extends PureComponent {
               <>
                 <h2>{name}</h2>
                 <div>Menu items: {menu.length}</div>
+                <RestaurantReviews
+                  restaurant={restaurant}
+                />
               </>
             ) :
             null
