@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react'
 import RestaurantReviews from './restaurant-reviews'
+import Button from 'antd/es/button';
 
 class Restaurant extends PureComponent {
   render() {
@@ -19,11 +20,12 @@ class Restaurant extends PureComponent {
           height={64}
           alt={name}
         />
-        <button
+        <Button
+          type='primary'
           onClick={() => toggleOpen(id)}
         >
           {isOpen ? 'Close' : 'Open'}
-        </button>
+        </Button>
         {
           isOpen ?
             (
