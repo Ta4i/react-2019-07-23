@@ -2410,7 +2410,7 @@ concat-stream@^1.5.0:
   version "1.6.2"
   resolved "https://registry.yarnpkg.com/concat-stream/-/concat-stream-1.6.2.tgz#904bdf194cd3122fc675c77fc4ac3d4ff0fd1a34"
   dependencies:
-    buffer-from "^1.0.0"
+    buffer-from '^1.0.0"
     inherits "^2.0.3"
     readable-stream "^2.2.2"
     typedarray "^0.0.6"
@@ -4345,27 +4345,27 @@ import-cwd@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/import-cwd/-/import-cwd-2.1.0.tgz#aa6cf36e722761285cb371ec6519f53e2435b0a9"
   dependencies:
-    import-from "^2.1.0"
+    import-from '^2.1.0"
 
 import-fresh@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/import-fresh/-/import-fresh-2.0.0.tgz#d81355c15612d386c61f9ddd3922d4304822a546"
   dependencies:
     caller-path "^2.0.0"
-    resolve-from "^3.0.0"
+    resolve-from '^3.0.0"
 
 import-fresh@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/import-fresh/-/import-fresh-3.0.0.tgz#a3d897f420cab0e671236897f75bc14b4885c390"
   dependencies:
     parent-module "^1.0.0"
-    resolve-from "^4.0.0"
+    resolve-from '^4.0.0"
 
 import-from@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/import-from/-/import-from-2.1.0.tgz#335db7f2a7affd53aaa471d4b8021dee36b7f3b1"
   dependencies:
-    resolve-from "^3.0.0"
+    resolve-from '^3.0.0"
 
 import-local@^2.0.0:
   version "2.0.0"
@@ -8065,7 +8065,7 @@ resolve-cwd@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/resolve-cwd/-/resolve-cwd-2.0.0.tgz#00a9f7387556e27038eae232caa372a6a59b665a"
   dependencies:
-    resolve-from "^3.0.0"
+    resolve-from '^3.0.0"
 
 resolve-from@^3.0.0:
   version "3.0.0"
@@ -8481,7 +8481,7 @@ source-map-support@^0.5.6, source-map-support@~0.5.10:
   version "0.5.12"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.12.tgz#b4f3b10d51857a5af0138d3ce8003b201613d599"
   dependencies:
-    buffer-from "^1.0.0"
+    buffer-from '^1.0.0"
     source-map "^0.6.0"
 
 source-map-url@^0.4.0:
