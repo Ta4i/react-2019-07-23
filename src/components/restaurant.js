@@ -19,7 +19,7 @@ class Restaurant extends PureComponent {
             <h2>{name}</h2>
             <div>Menu items: {menu.length}</div>
             <div>
-              <AverageRatiing reviews={reviews} />
+              <AverageRatiing ratings={reviews.map(review => review.rating)} />
             </div>
             <RestaurantReviews restaurant={restaurant} />
           </>

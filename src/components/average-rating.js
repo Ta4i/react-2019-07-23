@@ -2,11 +2,10 @@ import React from "react";
 import { Rate } from "antd";
 
 const AverageRatiing = props => {
-  const { reviews } = props;
+  const { ratings } = props;
 
   let average =
-    reviews.reduce((prev, current) => prev + current.rating, 0) /
-    reviews.length;
+    ratings.reduce((prev, current) => prev + current, 0) / ratings.length;
   average = Math.round(average * 2) / 2;
 
   return (
