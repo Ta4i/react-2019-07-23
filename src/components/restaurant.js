@@ -1,3 +1,4 @@
+import { Rate } from "antd";
 import React, { PureComponent } from "react";
 import RestaurantReviews from "./restaurant-reviews";
 import Button from "antd/es/button";
@@ -5,7 +6,8 @@ import Button from "antd/es/button";
 class Restaurant extends PureComponent {
   render() {
     const { isOpen, toggleOpen, restaurant } = this.props;
-    const { id, image, name, menu } = restaurant;
+    const { id, image, name, menu, reviews } = restaurant;
+    const rating = this.getAvg(reviews.map(review => review.rating));
 
     return (
       <li>
@@ -13,6 +15,7 @@ class Restaurant extends PureComponent {
         <Button type="primary" onClick={() => toggleOpen(id)}>
           {isOpen ? "Close" : "Open"}
         </Button>
+        <Rate style={{ display: "block" }} disabled defaultValue={rating} />
         {isOpen ? (
           <>
             <h2>{name}</h2>
@@ -23,6 +26,11 @@ class Restaurant extends PureComponent {
       </li>
     );
   }
+
+  getAvg = grades => {
+    const total = grades.reduce((acc, c) => acc + c, 0);
+    return Math.round(total / grades.length);
+  };
 }
 
 export default Restaurant;
