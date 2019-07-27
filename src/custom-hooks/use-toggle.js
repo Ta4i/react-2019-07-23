@@ -1,10 +1,7 @@
-import {useState} from 'react';
+import { useState } from "react";
 
 export function useToggle() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
-  return [
-    isOpen,
-    () => setIsOpen(!isOpen)
-  ]
+  return [isOpen, () => setIsOpen(!isOpen)];
 }
