@@ -13,7 +13,7 @@ class Review extends Component {
         </div>
         <div>
           <span style={{ fontWeight: "bold" }}>Rating: </span>
-          <Rate disabled defaultValue={{ rating }} />
+          <Rate disabled defaultValue={rating} />
         </div>
         <div style={{ fontStyle: "italic" }}>
           <span style={{ fontWeight: "bold" }}>Author: </span>
