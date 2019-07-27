@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
-import Restaurant from './restaurant'
-import {accordion} from '../decorators/accordion'
+import React, { Component } from "react";
+import { accordion } from "../decorators/accordion";
+import Restaurant from "./restaurant";
 
 class RestaurantsList extends Component {
   render() {
@@ -10,25 +10,20 @@ class RestaurantsList extends Component {
       // from decorator
       openItemId,
       toggleOpen
-    } = this.props
+    } = this.props;
     return (
       <ul>
-        {restaurants.map(
-          (restaurant) => (
-            <Restaurant
-              key={restaurant.id}
-              restaurant={restaurant}
-              isOpen={
-                openItemId === restaurant.id
-              }
-              toggleOpen={toggleOpen}
-            />
-          )
-        )}
+        {restaurants.map(restaurant => (
+          <Restaurant
+            key={restaurant.id}
+            restaurant={restaurant}
+            isOpen={openItemId === restaurant.id}
+            toggleOpen={toggleOpen}
+          />
+        ))}
       </ul>
-    )
+    );
   }
-
 }
 
-export default accordion(RestaurantsList)
+export default accordion(RestaurantsList);
