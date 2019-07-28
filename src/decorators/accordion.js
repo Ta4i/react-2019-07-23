@@ -1,22 +1,28 @@
 // HOC - higher order component / decorator
-import React, {Component} from 'react';
+import React, { Component } from "react";
 
-const accordion = (OriginalComponent) => class WrappedComponent extends Component {
-  state = {
-    openItemId: null
-  }
+const accordion = OriginalComponent =>
+  class WrappedComponent extends Component {
+    state = {
+      itemId: null,
+      isOpenBlock: false
+    };
 
-  render() {
-    return <OriginalComponent
-      {...this.props}
-      openItemId={this.state.openItemId}
-      toggleOpen={this.toggleOpen}
-    />;
-  }
+    render() {
+      return (
+        <OriginalComponent
+          {...this.props}
+          openItem={this.state}
+          toggleOpen={this.toggleOpen}
+        />
+      );
+    }
 
-  toggleOpen = (id) => this.setState({
-    openItemId: id
-  })
-}
+    toggleOpen = (id, isOpen) =>
+      this.setState({
+        itemId: id,
+        isOpenBlock: isOpen
+      });
+  };
 
-export {accordion}
+export { accordion };
