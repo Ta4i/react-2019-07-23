@@ -1,6 +1,6 @@
 {
-  "name": "react-2019-07-23",
-  "version": "0.1.0",
+  "name": "",
+  "version": "",
   "private": true,
   "dependencies": {
     "antd": "^3.20.7",
@@ -38,5 +38,10 @@
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
-  }
+  },
+  "description": "",
+  "main": "",
+  "repository": "https://github.com/mmorozan/react-2019-07-23.git",
+  "author": "Morozan Mikhail <morozan.misha@gmail.com>",
+  "license": "MIT"
 }
