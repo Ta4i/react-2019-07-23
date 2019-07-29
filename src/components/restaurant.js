@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import RestaurantReviews from "./restaurant-reviews";
+import ReviewsRate from "./reviews-rate";
 import Button from "antd/es/button";
 
 class Restaurant extends PureComponent {
@@ -16,6 +17,7 @@ class Restaurant extends PureComponent {
         {isOpen ? (
           <>
             <h2>{name}</h2>
+            <ReviewsRate reviews={restaurant.reviews} />
             <div>Menu items: {menu.length}</div>
             <RestaurantReviews restaurant={restaurant} />
           </>
