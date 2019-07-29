@@ -1,9 +1,14 @@
 import React, {useState} from 'react'
 import {useToggle} from '../custom-hooks/use-toggle'
+import RestaurantReview from './restaurant-review'
 
 function RestaurantReviews(props) {
   const [isOpen, toggleOpen] = useToggle()
   const {restaurant} = props
+  const reviews = restaurant.reviews.map(
+    (review) => (
+      <RestaurantReview key={review.id} review={review} />
+    ))
 
   return (
     <div>
@@ -13,9 +18,7 @@ function RestaurantReviews(props) {
         isOpen ? 'Hide reviews' : 'Show reviews'
       }</button>
       {
-        isOpen ?
-          (<>Reviews: {restaurant.reviews.length}</>) :
-          null
+        isOpen ? reviews : null
       }
     </div>
   )

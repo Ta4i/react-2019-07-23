@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react'
 import RestaurantReviews from './restaurant-reviews'
+import RestaurantRate from './restaurant-rate'
 import Button from 'antd/es/button';
 
 class Restaurant extends PureComponent {
@@ -9,7 +10,8 @@ class Restaurant extends PureComponent {
       id,
       image,
       name,
-      menu
+      menu,
+      reviews,
     } = restaurant;
 
     return (
@@ -34,6 +36,9 @@ class Restaurant extends PureComponent {
                 <div>Menu items: {menu.length}</div>
                 <RestaurantReviews
                   restaurant={restaurant}
+                />
+                <RestaurantRate 
+                  reviews={reviews} 
                 />
               </>
             ) :
