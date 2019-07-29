@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {useToggle} from '../custom-hooks/use-toggle'
 
 function RestaurantReviews(props) {
