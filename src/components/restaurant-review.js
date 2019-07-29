@@ -7,7 +7,10 @@ class RestaurantReview extends Component {
 		return (
 			<article>
 				<h4>{review.user}</h4>
-				<p>{review.text}</p>
+				<p>
+					{review.text}<br />
+					Rating: {review.rating}
+				</p>
 			</article>
 		);
 	}
