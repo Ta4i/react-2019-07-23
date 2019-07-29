@@ -1,6 +1,8 @@
 import React, {PureComponent} from 'react'
 import RestaurantReviews from './restaurant-reviews'
 import Button from 'antd/es/button';
+import { Rate } from "antd";
+import { getAverage } from "../utilits/math";
 
 class Restaurant extends PureComponent {
   render() {
@@ -31,6 +33,13 @@ class Restaurant extends PureComponent {
             (
               <>
                 <h2>{name}</h2>
+                Rate:{" "}
+                <Rate
+                  allowHalf
+                  defaultValue={getAverage(
+                    restaurant.reviews.map(review => review.rating)
+                  )}
+                />
                 <div>Menu items: {menu.length}</div>
                 <RestaurantReviews
                   restaurant={restaurant}
