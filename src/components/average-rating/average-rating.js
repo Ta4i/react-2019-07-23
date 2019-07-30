@@ -1,9 +1,10 @@
 import React, { PureComponent } from "react";
+import PropTypes from 'prop-types';
 import { Rate } from "antd";
 
 class AverageRating extends PureComponent {
   render() {
-    const { reviews } = this.props;
+    const { reviews = [] } = this.props;
     const rawRating =
       reviews.reduce((acc, { rating }) => {
         return acc + rating;
@@ -16,5 +17,12 @@ class AverageRating extends PureComponent {
     />;
   }
 }
+
+AverageRating.propTypes = {
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    rating: PropTypes.number.isRequired
+  })).isRequired
+}
+
 
 export default AverageRating;
