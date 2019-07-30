@@ -6,6 +6,12 @@ import RestaurantList from "../restaurant-list"
 // import RestaurantsMap from '../restaurants-map'
 
 class App extends Component {
+  componentDidMount() {
+    if (this.props.fetchData) {
+      this.props.fetchData();
+    }
+  }
+
   render() {
     return (
       <Layout>
