@@ -7,9 +7,23 @@ import RestaurantMenu from '../restaurant-menu'
 
 
 class Restaurant extends PureComponent {
+  state = {
+    error: null
+  }
+
+  componentDidCatch(error, errorInfo) {
+    this.setState({
+      error
+    })
+  }
+
   render() {
     const {isOpen, toggleOpen,isMenuOpen, toggleOpenMenu, restaurant} = this.props
     const {id, image, name, menu, reviews} = restaurant;
+
+    if (this.state.error) {
+      return <h2>Something went wrong</h2>
+    }
 
     return (
       <>

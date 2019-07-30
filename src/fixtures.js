@@ -28,20 +28,20 @@ const restaurants = [
         ingredients: ["chicken", "bread"]
       }
     ],
-    // reviews: [
-    //   {
-    //     id: "5909796d-5030-4e36-adec-68b8f9ec2d96",
-    //     user: "Antony",
-    //     text: "Not bad",
-    //     rating: 5
-    //   },
-    //   {
-    //     id: "429dea85-11dd-4054-a31e-c60c92e17255",
-    //     user: "Sam",
-    //     text: "No burgers",
-    //     rating: 3
-    //   }
-    // ]
+    reviews: [
+      {
+        id: "5909796d-5030-4e36-adec-68b8f9ec2d96",
+        user: "Antony",
+        text: "Not bad",
+        rating: 5
+      },
+      {
+        id: "429dea85-11dd-4054-a31e-c60c92e17255",
+        user: "Sam",
+        text: "No burgers",
+        rating: 3
+      }
+    ]
   },
   {
     id: "bb8afbec-2fec-491f-93e9-7f13950dd80b",
