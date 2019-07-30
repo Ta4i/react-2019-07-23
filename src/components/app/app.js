@@ -3,6 +3,7 @@ import { Layout } from "antd"
 import './app.css';
 import Header from '../header'
 import RestaurantList from "../restaurant-list"
+// import RestaurantsMap from '../restaurants-map'
 
 class App extends Component {
   render() {
@@ -11,6 +12,7 @@ class App extends Component {
         <Header />
         <main role="main">
           <RestaurantList restaurants={this.props.restaurants} />
+          {/*<RestaurantsMap restaurants={this.props.restaurants} />*/}
         </main>
       </Layout>
     );
