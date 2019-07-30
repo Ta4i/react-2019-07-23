@@ -1,13 +1,15 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import Leaflet from "leaflet";
 
-class RestaurantsMap extends Component {
+class RestaurantsMap extends PureComponent {
   render() {
     return <div ref={this.setEl} className="map" />;
   }
+
   setEl = ref => {
     this.div = ref;
   };
+
   componentDidMount() {
     this.map = Leaflet.map(this.div, {
       center: [51.51847684708113, -0.13999606534701844],
