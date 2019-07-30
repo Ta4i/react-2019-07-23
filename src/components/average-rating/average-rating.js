@@ -4,7 +4,7 @@ import { Rate } from "antd";
 
 class AverageRating extends PureComponent {
   render() {
-    const { reviews = [] } = this.props;
+    const { reviews } = this.props;
     const rawRating =
       reviews.reduce((acc, { rating }) => {
         return acc + rating;
@@ -16,6 +16,10 @@ class AverageRating extends PureComponent {
       allowHalf
     />;
   }
+}
+
+AverageRating.defaultProps = {
+  reviews: []
 }
 
 AverageRating.propTypes = {
