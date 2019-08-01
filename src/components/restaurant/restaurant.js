@@ -1,28 +1,33 @@
-import React, {PureComponent} from 'react'
-import {Button, List} from 'antd'
-import RestaurantReviews from '../restaurant-reviews'
-import {toggleVisibility} from '../../decorators/toggle-visibility';
-import AverageRating from '../average-rating'
-import RestaurantMenu from '../restaurant-menu'
-
+import React, { PureComponent } from "react";
+import { Button, List } from "antd";
+import RestaurantReviews from "../restaurant-reviews";
+import { toggleVisibility } from "../../decorators/toggle-visibility";
+import AverageRating from "../average-rating";
+import RestaurantMenu from "../restaurant-menu";
 
 class Restaurant extends PureComponent {
   state = {
     error: null
-  }
+  };
 
   componentDidCatch(error, errorInfo) {
     this.setState({
       error
-    })
+    });
   }
 
   render() {
-    const {isOpen, toggleOpen,isMenuOpen, toggleOpenMenu, restaurant} = this.props
-    const {id, image, name, menu, reviews} = restaurant;
+    const {
+      isOpen,
+      toggleOpen,
+      isMenuOpen,
+      toggleOpenMenu,
+      restaurant
+    } = this.props;
+    const { id, image, name, menu, reviews } = restaurant;
 
     if (this.state.error) {
-      return <h2>Something went wrong</h2>
+      return <h2>Something went wrong</h2>;
     }
 
     return (
@@ -31,32 +36,35 @@ class Restaurant extends PureComponent {
           actions={[
             <AverageRating reviews={reviews} />,
             <Button
-              type={'primary'}
+              type={"primary"}
               onClick={toggleOpen}
-            >{
-              isOpen ? 'Hide reviews' : 'Show reviews'
-            }</Button>,
+              data-autoid={`SHOW_REVIEWS_${id}`}
+            >
+              {isOpen ? "Hide reviews" : "Show reviews"}
+            </Button>,
             <Button
-              type='primary'
+              type="primary"
               onClick={() => toggleOpenMenu(id)}
               data-autoid={`OPEN_MENU_ITEM_${id}`}
             >
-              {isMenuOpen ? 'Close menu' : 'Open menu'}
+              {isMenuOpen ? "Close menu" : "Open menu"}
             </Button>
           ]}
           data-autoid="RESTAURANT_ITEM"
         >
           <List.Item.Meta
-            avatar={<img src={image} width={64} height={64} alt={name}/>}
+            avatar={<img src={image} width={64} height={64} alt={name} />}
             title={name}
             description={`Menu positions: ${menu.length}`}
           />
         </List.Item>
-        {isOpen ? <RestaurantReviews restaurant={restaurant}/> : null}
-        {isMenuOpen ? <RestaurantMenu menu={restaurant.menu} restaurantId={restaurant.id} /> : null}
+        {isOpen ? <RestaurantReviews restaurant={restaurant} /> : null}
+        {isMenuOpen ? (
+          <RestaurantMenu menu={restaurant.menu} restaurantId={restaurant.id} />
+        ) : null}
       </>
-    )
+    );
   }
 }
 
-export default toggleVisibility(Restaurant)
+export default toggleVisibility(Restaurant);

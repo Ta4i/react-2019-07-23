@@ -1,17 +1,23 @@
-import React from 'react'
-import {List} from 'antd'
-import Review from '../review'
+import React from "react";
+import { List } from "antd";
+import Review from "../review";
 
 function RestaurantReviews(props) {
-  const {restaurant} = props
+  const { restaurant } = props;
 
   return (
     <List
-      itemLayout={'horizontal'}
+      itemLayout={"horizontal"}
       dataSource={restaurant.reviews}
-      renderItem={review => <Review key={review.id} review={review} />}
+      renderItem={review => (
+        <Review
+          key={review.id}
+          review={review}
+          data-autoid={`REVIEW_ITEM_${restaurant.id}`}
+        />
+      )}
     />
-  )
+  );
 }
 
-export default RestaurantReviews
+export default RestaurantReviews;

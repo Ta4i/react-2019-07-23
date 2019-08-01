@@ -10,7 +10,7 @@ function RestaurantMenu(props) {
     >
       <Row gutter={16}>
         {props.menu.map(dish => (
-          <Col key={dish.id} span={8}>
+          <Col data-autoid={`MENU_ITEM`} key={dish.id} span={8}>
             <Dish {...dish} />
           </Col>
         ))}
