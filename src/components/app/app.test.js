@@ -32,4 +32,42 @@ describe('At starts', function () {
     });
   });
 
+  describe('when click on show reviews button', function () {
+    it('should show menu only for one restaurant', function () {
+      const wrapper = mount(<App restaurants={restaurants} />)
+      const id = restaurants[0].id
+      const targetButton = wrapper.find(`button[data-autoid="SHOW_REVIEWS_ITEM_${id}"]`);
+      targetButton.simulate('click')
+      expect(wrapper.find(`div[data-autoid="REVIEW"]`).length).toEqual(2)
+      expect(targetButton.text()).toEqual('Hide reviews')
+    });
+  });
+
+  describe('when double click on reviews button', function () {
+    it('close menu', function () {
+      const wrapper = mount(<App restaurants={restaurants} />)
+      const id = restaurants[0].id
+      const targetButton = wrapper.find(`button[data-autoid="SHOW_REVIEWS_ITEM_${id}"]`);
+      targetButton.simulate('click')
+      targetButton.simulate('click')
+      expect(wrapper.find(`div[data-autoid="REVIEW"]`).length).toEqual(0)
+      expect(targetButton.text()).toEqual('Show reviews')
+    });
+  });
+
+  describe('when open menu', function () {
+    it('increase dish', function () {
+      const wrapper = mount(<App restaurants={restaurants} />)
+      const id = restaurants[0].id
+      const dishId = restaurants[0].menu[0].id
+      wrapper
+        .find(`button[data-autoid="OPEN_MENU_ITEM_${id}"]`)
+        .simulate('click')
+      wrapper
+        .find(`button[data-autoid="DISH_INCREASE_${dishId}"]`)
+        .simulate('click')
+        .simulate('click')
+      expect(wrapper.find(`span[data-autoid="DISH_${dishId}"]`).text()).toEqual('2')
+    });
+  });
 });
