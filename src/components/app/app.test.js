@@ -32,8 +32,9 @@ describe("At starts", function() {
           .find(`div[data-autoid="DISH_ITEM_0"]`);
 
         menu.find('button[data-autoid="DISH_ADD"]').simulate("click");
-        console.dir(menu.find('span[data-autoid="DISH_AMOUNT"]'));
-        expect(menu.find('span[data-autoid="DISH_AMOUNT"]').length).toEqual(1);
+        expect(menu.find('span[data-autoid="DISH_AMOUNT"]').text()).toEqual(
+          "1"
+        );
       });
     });
 
