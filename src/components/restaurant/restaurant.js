@@ -33,6 +33,7 @@ class Restaurant extends PureComponent {
             <Button
               type={'primary'}
               onClick={toggleOpen}
+              data-autoid={`SHOW_REVIEWS_ITEM_${id}`}
             >{
               isOpen ? 'Hide reviews' : 'Show reviews'
             }</Button>,

@@ -32,4 +32,15 @@ describe('At starts', function () {
     });
   });
 
+  describe('when click on show reviews button', function () {
+    it('should show menu only for one restaurant', function () {
+      const wrapper = mount(<App restaurants={restaurants} />)
+      const id = restaurants[0].id
+      const targetButton = wrapper.find(`button[data-autoid="SHOW_REVIEWS_ITEM_${id}"]`);
+      targetButton.simulate('click')
+      expect(wrapper.find(`div[data-autoid="REVIEW"]`).length).toEqual(2)
+      expect(targetButton.text()).toEqual('Hide reviews')
+    });
+  });
+
 });

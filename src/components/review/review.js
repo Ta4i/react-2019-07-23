@@ -20,6 +20,7 @@ function Review({ review }) {
           />
         ]}
         content={review.text}
+        data-autoid="REVIEW"
       />
     </List.Item>
   );
