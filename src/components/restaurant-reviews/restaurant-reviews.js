@@ -10,6 +10,7 @@ function RestaurantReviews(props) {
       itemLayout={'horizontal'}
       dataSource={restaurant.reviews}
       renderItem={review => <Review key={review.id} review={review} />}
+      data-autoid={`REVIEWS_LIST_${restaurant.id}`}
     />
   )
 }
