@@ -1,6 +1,6 @@
-import React from "react"
-import { Card, Button } from "antd"
-import {useCounter} from '../../custom-hooks/use-counter'
+import React from "react";
+import { Card, Button } from "antd";
+import { useCounter } from "../../custom-hooks/use-counter";
 
 function Dish(props) {
   const [amount, decrease, increase] = useCounter(0);
@@ -10,7 +10,9 @@ function Dish(props) {
       actions={[
         `£${props.price}`,
         <>
-          <span style={{ margin: "0 12px" }}>{amount}</span>
+          <span style={{ margin: "0 12px" }} data-autoid="DISH_AMOUNT">
+            {amount}
+          </span>
           <Button.Group>
             <Button
               onClick={decrease}
@@ -23,6 +25,7 @@ function Dish(props) {
               type="primary"
               shape="circle"
               icon="plus"
+              data-autoid="DISH_ADD"
             />
           </Button.Group>
         </>
