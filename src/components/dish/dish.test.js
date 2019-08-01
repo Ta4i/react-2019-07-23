@@ -12,7 +12,10 @@ const menu = restaurants[0].menu[0];
 describe("On load", () => {
   it("should have no items", () => {
     const wrapper = mount(<Dish {...menu} />);
-    expect(wrapper.state.amount).toEqual(undefined);
+    const value = parseInt(
+      wrapper.find('span[data-autoid="CURRENT_AMOUNT_VALUE"]').text()
+    );
+    expect(value).toEqual(0);
   });
 
   describe("On click increase button", () => {
