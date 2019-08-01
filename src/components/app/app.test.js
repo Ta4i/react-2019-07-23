@@ -23,6 +23,20 @@ describe('At starts', function () {
       expect(wrapper.find(`div[data-autoid="MENU_ITEMS_${id}"]`).length).toEqual(1)
     });
 
+    describe('when click on Dish increase button', function () {
+      const menuId = restaurants[0].menu[0].id
+      it('should increase Dish total ammount', function () {
+        wrapper
+          .find(`button[data-autoid="DISH_INCREASE_BUTTON_${menuId}"]`)
+          .simulate('click')
+          .simulate('click')
+          .simulate('click')
+          .simulate('click')
+          .simulate('click')
+        expect(wrapper.find(`span[data-autoid="DISH_TOTAL_AMOUNT_${menuId}"]`).text()).toEqual("5")
+      });
+    });
+
     describe('when click on Close menu button', function () {
       it('should hide menu of current restaurant', function () {
         wrapper
