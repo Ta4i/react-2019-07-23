@@ -4,7 +4,7 @@ import "./app.css";
 import Header from "../header";
 import RestaurantList from "../restaurant-list";
 import Order from "../order";
-import RestaurantsMap from "../restaurants-map";
+// import RestaurantsMap from '../restaurants-map'
 
 class App extends Component {
   componentDidMount() {
@@ -19,7 +19,7 @@ class App extends Component {
         <Header />
         <main role="main">
           <RestaurantList restaurants={this.props.restaurants} />
-          <RestaurantsMap restaurants={this.props.restaurants} />
+          {/* <RestaurantsMap restaurants={this.props.restaurants} /> */}
           <Order />
         </main>
       </Layout>

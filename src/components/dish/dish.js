@@ -10,19 +10,27 @@ function Dish(props) {
       actions={[
         `£${props.price}`,
         <>
-          <span style={{ margin: "0 12px" }}>{amount}</span>
+          <span
+            name="sasa"
+            data-autoid={`COUNT_${props.id}`}
+            style={{ margin: "0 12px" }}
+          >
+            {amount}
+          </span>
           <Button.Group>
             <Button
               onClick={decrease}
               type="primary"
               shape="circle"
               icon="minus"
+              data-autoid={`MINUS_DISH_BUTTON_${props.id}`}
             />
             <Button
               onClick={increase}
               type="primary"
               shape="circle"
               icon="plus"
+              data-autoid={`PLUS_DISH_BUTTON_${props.id}`}
             />
           </Button.Group>
         </>
