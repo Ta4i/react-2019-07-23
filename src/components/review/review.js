@@ -1,10 +1,9 @@
-
 import React from "react";
 import { Comment, Rate, List } from "antd";
 
 function Review({ review }) {
   return (
-    <List.Item>
+    <List.Item data-autoid="RESTAURANT_REVIEW">
       <Comment
         style={{
           margin: "16px",
