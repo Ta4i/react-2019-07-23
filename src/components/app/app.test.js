@@ -54,4 +54,20 @@ describe('At starts', function () {
       expect(targetButton.text()).toEqual('Show reviews')
     });
   });
+
+  describe('when open menu', function () {
+    it('increase dish', function () {
+      const wrapper = mount(<App restaurants={restaurants} />)
+      const id = restaurants[0].id
+      const dishId = restaurants[0].menu[0].id
+      wrapper
+        .find(`button[data-autoid="OPEN_MENU_ITEM_${id}"]`)
+        .simulate('click')
+      wrapper
+        .find(`button[data-autoid="DISH_INCREASE_${dishId}"]`)
+        .simulate('click')
+        .simulate('click')
+      expect(wrapper.find(`span[data-autoid="DISH_${dishId}"]`).text()).toEqual('2')
+    });
+  });
 });
