@@ -43,4 +43,15 @@ describe('At starts', function () {
     });
   });
 
+  describe('when double click on reviews button', function () {
+    it('close menu', function () {
+      const wrapper = mount(<App restaurants={restaurants} />)
+      const id = restaurants[0].id
+      const targetButton = wrapper.find(`button[data-autoid="SHOW_REVIEWS_ITEM_${id}"]`);
+      targetButton.simulate('click')
+      targetButton.simulate('click')
+      expect(wrapper.find(`div[data-autoid="REVIEW"]`).length).toEqual(0)
+      expect(targetButton.text()).toEqual('Show reviews')
+    });
+  });
 });
