@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Comment, Rate, List } from "antd";
 
@@ -20,6 +19,7 @@ function Review({ review }) {
           />
         ]}
         content={review.text}
+        data-autoid="REVIEW_ITEM"
       />
     </List.Item>
   );
