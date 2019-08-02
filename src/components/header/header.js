@@ -7,7 +7,7 @@ import "./header.css";
 const Header = () => (
   <header className='header'>
     <Logo />
-    <CartBadge amount={100500} />
+    <CartBadge amount={0} />
   </header>
 );
 
