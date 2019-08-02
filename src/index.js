@@ -3,10 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/app';
 import {restaurants} from './fixtures';
+import store from './store';
+import {Provider} from 'react-redux';
 
 ReactDOM.render(
-  <App
-    restaurants={restaurants}
-  />,
+  <Provider store={store}>
+    <App
+      restaurants={restaurants}
+    />
+  </Provider>,
   document.getElementById('root')
 );
