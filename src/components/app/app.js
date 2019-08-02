@@ -6,6 +6,7 @@ import RestaurantList from "../restaurant-list"
 import Order from '../order'
 import Counter from '../counter'
 // import RestaurantsMap from '../restaurants-map'
+import {connect} from 'react-redux';
 
 class App extends Component {
   componentDidMount() {
@@ -29,4 +30,8 @@ class App extends Component {
   }
 }
 
-export default App
+export default connect(
+  state => ({
+    restaurants: state.restaurants
+  })
+)(App)
