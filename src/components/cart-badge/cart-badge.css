@@ -1,0 +1,11 @@
+.cart-button {
+  width: 40px;
+  height: 40px;
+}
+
+.cart-button-container {
+  float: right;
+  position: relative;
+  top: -7px;
+  right: 3px;
+}
