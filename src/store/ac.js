@@ -20,3 +20,24 @@ export const removeDish = (id) => ({
     id
   }
 })
+
+export const addOrderItem = (dish) => ({
+  type: 'ADD_ORDER_ITEM',
+  payload: {
+    dish
+  }
+})
+
+export const removeOrderItem = (dish) => ({
+  type: 'REMOVE_ORDER_ITEM',
+  payload: {
+    dish
+  }
+})
+
+export const deleteOrderItem = (id) => ({
+  type: 'DELETE_ORDER_ITEM',
+  payload: {
+    id
+  }
+})
