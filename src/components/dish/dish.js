@@ -1,13 +1,13 @@
-import React from "react"
-import { Card, Button } from "antd"
-import {useDispatch, useSelector} from 'react-redux'
-import {addDish, removeDish} from '../../store/ac';
+import React from "react";
+import { Card, Button } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { addDish, removeDish } from "../../store/ac";
 
 function Dish(props) {
-  const {id} = props
-  const dispatch = useDispatch()
-  const cart = useSelector(state => state.cart)
-  const amount = cart[id] || 0
+  const { id } = props;
+  const dispatch = useDispatch();
+  const cart = useSelector(state => state.cart);
+  const amount = cart[id] !== undefined ? cart[id].count : 0;
 
   return (
     <Card
@@ -18,17 +18,19 @@ function Dish(props) {
           <span
             style={{ margin: "0 12px" }}
             data-autoid={`DISH_AMOUNT_${props.id}`}
-          >{amount}</span>
+          >
+            {amount}
+          </span>
           <Button.Group>
             <Button
-              onClick={() => dispatch(removeDish(id))}
+              onClick={() => dispatch(removeDish(props))}
               type="primary"
               shape="circle"
               icon="minus"
               data-autoid={`REMOVE_DISH_${props.id}`}
             />
             <Button
-              onClick={() => dispatch(addDish(id))}
+              onClick={() => dispatch(addDish(props))}
               type="primary"
               shape="circle"
               icon="plus"
