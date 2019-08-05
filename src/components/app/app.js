@@ -7,6 +7,7 @@ import Order from "../order";
 import Counter from "../counter";
 // import RestaurantsMap from '../restaurants-map'
 import { connect } from "react-redux";
+import OrderList from "../order-list/OrderList";
 
 class App extends Component {
   componentDidMount() {
@@ -23,6 +24,7 @@ class App extends Component {
           <RestaurantList restaurants={this.props.restaurants} />
           {/*<RestaurantsMap restaurants={this.props.restaurants} />*/}
           <Order />
+          <OrderList />
         </main>
         <Counter />
       </Layout>
