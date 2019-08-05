@@ -6,9 +6,8 @@ import { useSelector } from "react-redux";
 
 function CartBadge(props) {
   const cart = useSelector(state => state.cart);
-
   const amount = Object.values(cart).reduce(
-    (acc, dishAmount) => acc + dishAmount,
+    (acc, dishAmount) => acc + dishAmount.count,
     0
   );
 
