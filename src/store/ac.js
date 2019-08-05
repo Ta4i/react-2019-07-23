@@ -1,22 +1,32 @@
-
 export const increase = () => ({
-  type: 'INCREMENT'
-})
+  type: "INCREMENT"
+});
 
 export const decrease = () => ({
-  type: 'DECREMENT'
-})
+  type: "DECREMENT"
+});
 
-export const addDish = (id) => ({
-  type: 'ADD_DISH',
+export const addDish = (id, name, price) => ({
+  type: "ADD_DISH",
+  payload: {
+    id,
+    name,
+    price
+  }
+});
+
+export const removeDish = (id, name, price) => ({
+  type: "REMOVE_DISH",
+  payload: {
+    id,
+    name,
+    price
+  }
+});
+
+export const deleteDish = id => ({
+  type: "DELETE_DISH",
   payload: {
     id
   }
-})
-
-export const removeDish = (id) => ({
-  type: 'REMOVE_DISH',
-  payload: {
-    id
-  }
-})
+});
