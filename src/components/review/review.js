@@ -4,7 +4,9 @@ import { Comment, Rate, List } from "antd";
 
 function Review({ review }) {
   return (
-    <List.Item>
+    <List.Item
+      data-autoid='REVIEW'
+    >
       <Comment
         style={{
           margin: "16px",
