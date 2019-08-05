@@ -20,3 +20,10 @@ export const removeDish = (id) => ({
     id
   }
 })
+
+export const deleteAllDishesOfTheSameType = (id) => ({
+  type: 'DELETE_ALL_DISHES_OF_THE_SAME_TYPE',
+  payload: {
+    id
+  }
+})

@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import OrderItemsList from '../order-items-list'
 
 class Order extends Component {
   state = {
@@ -7,20 +8,23 @@ class Order extends Component {
 
   render() {
     return (
-      <form
-        style={{padding: '24px'}}
-        onSubmit={this.handleSubmit}
-      >
-        <input
-          ref={this.setInput}
-          placeholder={'User name'}
-          value={this.state.userName}
-          onChange={this.handleUserNameInputChange}
-        />
-        <button
-          type={'submit'}
-        >Send order</button>
-      </form>
+      <>
+        <form
+          style={{padding: '24px'}}
+          onSubmit={this.handleSubmit}
+        >
+          <input
+            ref={this.setInput}
+            placeholder={'User name'}
+            value={this.state.userName}
+            onChange={this.handleUserNameInputChange}
+          />
+          <button
+            type={'submit'}
+          >Send order</button>
+        </form>
+        <OrderItemsList />
+      </>
     )
   }
 

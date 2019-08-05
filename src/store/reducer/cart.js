@@ -20,6 +20,15 @@ export default (cartState = {}, action) => {
       }
       return newCartState
     }
+    case 'DELETE_ALL_DISHES_OF_THE_SAME_TYPE': {
+      const {id} = action.payload
+      if (!cartState[id]) {
+        return cartState
+      }
+      const newCartState = {...cartState}
+      delete newCartState[id]
+      return newCartState
+    }
     default:
       return cartState
   }
