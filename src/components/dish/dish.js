@@ -4,16 +4,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { addDish, removeDish } from "../../store/ac";
 
 function Dish(props) {
-  const { id } = props;
+  const { id, name, price } = props;
   const dispatch = useDispatch();
   const cart = useSelector(state => state.cart);
-  const amount = cart[id] || 0;
-
+  const dish_info = cart[id] || {};
+  const amount = cart[id] ? cart[id]["num"] : 0;
+  // console.log(props)
+  // console.log(name,price)
   return (
     <Card
       bordered
       actions={[
-        `£${props.price}`,
+        `£${price}`,
         <>
           <span
             style={{ margin: "0 12px" }}
@@ -30,7 +32,9 @@ function Dish(props) {
               data-autoid={`REMOVE_DISH_${props.id}`}
             />
             <Button
-              onClick={() => dispatch(addDish(id))}
+              onClick={() =>
+                dispatch(addDish(id, { name: name, price: price }))
+              }
               type="primary"
               shape="circle"
               icon="plus"
@@ -40,10 +44,7 @@ function Dish(props) {
         </>
       ]}
     >
-      <Card.Meta
-        title={props.name}
-        description={props.ingredients.join(", ")}
-      />
+      <Card.Meta title={name} description={props.ingredients.join(", ")} />
     </Card>
   );
 }

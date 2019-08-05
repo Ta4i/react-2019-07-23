@@ -4,10 +4,11 @@ import "./app.css";
 import Header from "../header";
 import RestaurantList from "../restaurant-list";
 import Order from "../order";
+import OrderList from "../order-list";
 import Counter from "../counter";
+
 // import RestaurantsMap from '../restaurants-map'
 import { connect } from "react-redux";
-import OrderList from "../order-list/OrderList";
 
 class App extends Component {
   componentDidMount() {
