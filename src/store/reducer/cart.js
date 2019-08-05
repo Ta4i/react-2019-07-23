@@ -1,26 +1,30 @@
-export default (cartState = {}, action) => {
+const initialState = {
+  cart: []
+};
+
+export default (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD_DISH': {
-      const {id} = action.payload
+    case "ADD_DISH": {
       return {
-        ...cartState,
-        [id]: cartState[id] ? cartState[id] + 1 : 1
-      }
+        ...state,
+        // id: state.id ? state.id + 1 : 1,
+        cart: [...state.cart, action.payload.cart]
+      };
     }
-    case 'REMOVE_DISH': {
-      const {id} = action.payload
-      if (!cartState[id]) {
-        return cartState
+    case "REMOVE_DISH": {
+      const { id } = action.payload;
+      if (!state[id]) {
+        return state;
       }
-      const newCartState = {...cartState}
+      const newCartState = { ...state };
       if (newCartState[id] === 1) {
-        delete newCartState[id]
+        delete newCartState[id];
       } else {
-        newCartState[id] = newCartState[id] - 1
+        newCartState[id] = newCartState[id] - 1;
       }
-      return newCartState
+      return newCartState;
     }
     default:
-      return cartState
+      return state;
   }
-}
+};

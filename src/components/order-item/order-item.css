@@ -1,0 +1,37 @@
+.order-container {
+  padding: 0 20px;
+}
+
+.order-list {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+}
+
+.order-item {
+  align-items: center;
+  border-top: 1px solid #ccc;
+  display: flex;
+  padding: 15px 0;
+}
+
+.order-item:last-child {
+  border-bottom: 1px solid #ccc;
+}
+
+.order-item > * {
+  margin-bottom: 0;
+}
+
+.order-item > * + * {
+  margin-left: 30px;
+}
+
+.order-item__title {
+  min-width: 30%;
+}
+
+.total-amount {
+  font-weight: bold;
+  font-size: 24px;
+}

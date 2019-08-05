@@ -1,34 +1,38 @@
-import React from "react"
-import { Card, Button } from "antd"
-import {useDispatch, useSelector} from 'react-redux'
-import {addDish, removeDish} from '../../store/ac';
+import React from "react";
+import { Card, Button } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { addDish, removeDish } from "../../store/ac";
 
 function Dish(props) {
-  const {id} = props
-  const dispatch = useDispatch()
-  const cart = useSelector(state => state.cart)
-  const amount = cart[id] || 0
+  const { dish } = props;
+  const dispatch = useDispatch();
+  const cart = useSelector(state => state.cart);
+  if (!cart) {
+    return;
+  }
 
   return (
     <Card
       bordered
       actions={[
-        `£${props.price}`,
+        `£${dish.price}`,
         <>
           <span
             style={{ margin: "0 12px" }}
-            data-autoid={`DISH_AMOUNT_${props.id}`}
-          >{amount}</span>
+            data-autoid={`DISH_AMOUNT_${dish.id}`}
+          >
+            count:{" "}
+          </span>
           <Button.Group>
             <Button
-              onClick={() => dispatch(removeDish(id))}
+              // onClick={() => dispatch(removeDish(id))}
               type="primary"
               shape="circle"
               icon="minus"
-              data-autoid={`REMOVE_DISH_${props.id}`}
+              data-autoid={`REMOVE_DISH_${dish.id}`}
             />
             <Button
-              onClick={() => dispatch(addDish(id))}
+              onClick={() => dispatch(addDish(dish))}
               type="primary"
               shape="circle"
               icon="plus"
@@ -38,10 +42,7 @@ function Dish(props) {
         </>
       ]}
     >
-      <Card.Meta
-        title={props.name}
-        description={props.ingredients.join(", ")}
-      />
+      <Card.Meta title={dish.name} description={dish.ingredients.join(", ")} />
     </Card>
   );
 }
