@@ -7,9 +7,7 @@ function Dish(props) {
   const { dish } = props;
   const dispatch = useDispatch();
   const cart = useSelector(state => state.cart);
-  if (!cart) {
-    return;
-  }
+  console.log(cart);
 
   return (
     <Card
