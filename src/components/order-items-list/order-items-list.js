@@ -1,10 +1,12 @@
 import React, {Component} from 'react'
-import {Table, Button} from 'antd';
+import {List} from 'antd';
 import {connect} from 'react-redux';
+import {deleteAllDishesOfTheSameType} from '../../store/ac';
+import OrderItem from '../order-item/order-item';
 
 class OrderItemsList extends Component {
-    
-  render() {
+
+render() {
     const {restaurants, cart} = this.props
 
     let fullMenu = restaurants
@@ -32,39 +34,17 @@ class OrderItemsList extends Component {
          0
     )
 
-    const columns = [
-        {
-            title: 'Name',
-            dataIndex: 'name',
-            key: 'name',
-        },
-        {
-            title: 'Price for item',
-            dataIndex: 'price',
-            key: 'price',
-        },
-        {
-            title: 'Count',
-            dataIndex: 'count',
-            key: 'count',
-        },
-        {
-            title: 'Price',
-            dataIndex: 'fullPrice',
-            key: 'fullPrice',
-        },
-        {
-            title: 'Action',
-            key: 'action',
-            render: (text, record) => (
-                <Button type={'danger'} >Delete item</Button>
-            ),
-        },
-    ]
-
     return (
       <>
-        <Table columns={columns} dataSource={order} />
+        <List
+            itemLayout={'horizontal'}
+            dataSource={order}
+            renderItem={item => <OrderItem
+                key={item.id}
+                item={item}
+                deleteAllDishesOfTheSameType={this.props.dispatchDeleteAllDishesOfTheSameType}
+            />}
+        />
         FullPrice: {fullPrice}
       </>  
     )
@@ -76,6 +56,12 @@ const mapStateToProps = state => ({
     cart: state.cart
 })
 
+const mapDispatchToProps = {
+    dispatchDeleteAllDishesOfTheSameType: deleteAllDishesOfTheSameType,
+}
+  
+
 export default connect(
     mapStateToProps,
+    mapDispatchToProps
 )(OrderItemsList)
