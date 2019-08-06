@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Badge, Button } from "antd";
-import "./cart-badge.css";
-import {useSelector} from 'react-redux';
+import React from 'react'
+import PropTypes from 'prop-types'
+import {Badge, Button} from 'antd'
+import './cart-badge.css'
+import {useSelector} from 'react-redux'
 
 function CartBadge(props) {
   const cart = useSelector(state => state.cart)
@@ -13,10 +13,7 @@ function CartBadge(props) {
   )
 
   return (
-    <Badge
-      count={amount}
-      className={'cart-button-container'}
-    >
+    <Badge count={amount} className={'cart-button-container'}>
       <Button
         icon="shopping-cart"
         size="large"
@@ -24,11 +21,11 @@ function CartBadge(props) {
         className="cart-button"
       />
     </Badge>
-  );
+  )
 }
 
 CartBadge.propTypes = {
-  amount: PropTypes.number.isRequired
-};
+  amount: PropTypes.number.isRequired,
+}
 
 export default CartBadge

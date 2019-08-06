@@ -1,17 +1,17 @@
-import React, { Component } from "react"
-import { Layout } from "antd"
-import './app.css';
+import React, {Component} from 'react'
+import {Layout} from 'antd'
+import './app.css'
 import Header from '../header'
-import RestaurantList from "../restaurant-list"
+import RestaurantList from '../restaurant-list'
 import Order from '../order'
 import Counter from '../counter'
 // import RestaurantsMap from '../restaurants-map'
-import {connect} from 'react-redux';
+import {connect} from 'react-redux'
 
 class App extends Component {
   componentDidMount() {
     if (this.props.fetchData) {
-      this.props.fetchData();
+      this.props.fetchData()
     }
   }
 
@@ -26,12 +26,10 @@ class App extends Component {
         </main>
         <Counter />
       </Layout>
-    );
+    )
   }
 }
 
-export default connect(
-  state => ({
-    restaurants: state.restaurants
-  })
-)(App)
+export default connect(state => ({
+  restaurants: state.restaurants,
+}))(App)

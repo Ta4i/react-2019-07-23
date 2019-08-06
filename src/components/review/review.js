@@ -1,16 +1,13 @@
+import React from 'react'
+import {Comment, Rate, List} from 'antd'
 
-import React from "react";
-import { Comment, Rate, List } from "antd";
-
-function Review({ review }) {
+function Review({review}) {
   return (
-    <List.Item
-      data-autoid='REVIEW'
-    >
+    <List.Item data-autoid="REVIEW">
       <Comment
         style={{
-          margin: "16px",
-          backgroundColor: "white"
+          margin: '16px',
+          backgroundColor: 'white',
         }}
         author={[
           review.user,
@@ -18,13 +15,13 @@ function Review({ review }) {
             key={review.id}
             disabled
             defaultValue={review.rating}
-            style={{ marginLeft: "24px" }}
-          />
+            style={{marginLeft: '24px'}}
+          />,
         ]}
         content={review.text}
       />
     </List.Item>
-  );
+  )
 }
 
-export default Review;
+export default Review

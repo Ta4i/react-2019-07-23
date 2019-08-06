@@ -4,7 +4,7 @@ export default (cartState = {}, action) => {
       const {id} = action.payload
       return {
         ...cartState,
-        [id]: cartState[id] ? cartState[id] + 1 : 1
+        [id]: cartState[id] ? cartState[id] + 1 : 1,
       }
     }
     case 'REMOVE_DISH': {

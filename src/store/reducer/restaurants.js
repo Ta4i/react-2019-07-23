@@ -1,4 +1,4 @@
-import {restaurants} from '../../fixtures';
+import {restaurants} from '../../fixtures'
 
 export default (restaurantsState = restaurants, action) => {
   return restaurantsState
