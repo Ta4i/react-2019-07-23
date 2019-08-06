@@ -19,11 +19,10 @@ class OrderList extends Component {
       subtractDishFromCart,
       deleteDishFromCart,
     } = this.props
+
     if (dishes.length === 0) {
       return null
     }
-
-    console.log('OrderList')
 
     return (
       <div className="order">

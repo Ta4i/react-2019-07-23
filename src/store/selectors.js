@@ -1,8 +1,24 @@
 import {createSelector} from 'reselect'
 
+export const selectId = (_, ownProps) => ownProps.id
+
 export const selectCart = state => state.cart
 
+export const selectDishes = state => state.dishes
+
 export const selectRestaurants = state => state.restaurants
+
+export const selectDish = createSelector(
+  selectDishes,
+  selectId,
+  (dishes, id) => dishes.find(dish => dish.id === id)
+)
+
+export const selectDishAmount = createSelector(
+  selectCart,
+  selectId,
+  (cart, id) => cart[id] || 0
+)
 
 export const selectOrderedDishes = createSelector(
   selectCart,

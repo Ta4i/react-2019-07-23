@@ -9,9 +9,9 @@ function RestaurantMenu(props) {
       data-autoid={`MENU_ITEMS_${props.restaurantId}`}
     >
       <Row gutter={16}>
-        {props.menu.map(dish => (
-          <Col key={dish.id} span={8}>
-            <Dish {...dish} />
+        {props.menu.map(dishId => (
+          <Col key={dishId} span={8}>
+            <Dish id={dishId} />
           </Col>
         ))}
       </Row>
