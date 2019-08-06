@@ -6,7 +6,9 @@ import { useSelector } from "react-redux";
 
 function CartBadge(props) {
   const cart = useSelector(state => state.cart);
-  const amount = cart.cart.length;
+  const amount = cart.cart.reduce((acc, item) => {
+    return acc + item.counter;
+  }, 0);
 
   return (
     <Badge count={amount} className={"cart-button-container"}>
