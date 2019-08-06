@@ -10,8 +10,6 @@ function Dish(props) {
   const amount = cart.cart.find(item => item.id === dish.id);
   const total = amount !== undefined ? amount.counter : null;
 
-  // console.log(cart);
-
   return (
     <Card
       bordered

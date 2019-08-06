@@ -5,15 +5,31 @@ import OrderList from "../order-list";
 class OrderContainer extends Component {
   render() {
     const { cart, restaurants } = this.props;
-    const sum = cart.reduce((acc, item) => {
-      return acc + item.price;
+
+    const orderList = cart.map(item => {
+      const restaurantItem = restaurants.find(
+        restItem => restItem.id === item.restaurantId
+      );
+      const dishItem = restaurantItem.menu.find(
+        menuItem => menuItem.id === item.id
+      );
+      if (dishItem !== undefined) {
+        return { ...dishItem, counter: item.counter };
+      }
+      return dishItem;
+    });
+
+    const sum = orderList.reduce((acc, item) => {
+      return acc + item.price * item.counter;
     }, 0);
 
     return (
       <div className="order-container">
         <h2>Your order:</h2>
-        <OrderList cart={cart} restaurants={restaurants} />
-        {cart.length !== 0 && <p className="total-amount">Total: £{sum}</p>}
+        <OrderList orderList={orderList} />
+        {orderList.length !== 0 && (
+          <p className="total-amount">Total: £{sum}</p>
+        )}
       </div>
     );
   }
