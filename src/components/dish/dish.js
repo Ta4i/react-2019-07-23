@@ -3,11 +3,12 @@ import {Card, Button} from 'antd'
 import {useDispatch, useSelector} from 'react-redux'
 import {addDishToCart, subtractDishFromCart} from '../../store/ac'
 import Price from '../price'
+import {selectCart} from '../../store/selectors'
 
 function Dish(props) {
   const {id, price} = props
   const dispatch = useDispatch()
-  const cart = useSelector(state => state.cart)
+  const cart = useSelector(selectCart)
   const amount = cart[id] || 0
 
   return (

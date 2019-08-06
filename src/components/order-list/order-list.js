@@ -8,6 +8,7 @@ import {
   deleteDishFromCart,
   subtractDishFromCart,
 } from '../../store/ac'
+import {selectOrderedDishes} from '../../store/selectors'
 
 class OrderList extends Component {
   render() {
@@ -21,6 +22,9 @@ class OrderList extends Component {
     if (dishes.length === 0) {
       return null
     }
+
+    console.log('OrderList')
+
     return (
       <div className="order">
         <h3>Your order</h3>
@@ -74,31 +78,9 @@ class OrderList extends Component {
 }
 
 export default connect(
-  state => {
-    const {cart, restaurants} = state
-
-    return restaurants.reduce(
-      (result, restaurant) => {
-        restaurant.menu.forEach(dish => {
-          const amount = cart[dish.id]
-          if (amount) {
-            const totalDishPrice = amount * dish.price
-            result.totalPrice += totalDishPrice
-            result.dishes.push({
-              ...dish,
-              amount,
-              totalDishPrice,
-            })
-          }
-        })
-        return result
-      },
-      {
-        dishes: [],
-        totalPrice: 0,
-      }
-    )
-  },
+  state => ({
+    ...selectOrderedDishes(state),
+  }),
   {
     addDishToCart,
     subtractDishFromCart,

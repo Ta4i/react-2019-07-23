@@ -6,6 +6,9 @@ import {increase, decrease} from '../../store/ac'
 class Counter extends Component {
   render() {
     const {countFromStore} = this.props
+
+    console.log('Counter')
+
     return (
       <div style={{textAlign: 'center', padding: '16px'}}>
         <span>{countFromStore}</span>
