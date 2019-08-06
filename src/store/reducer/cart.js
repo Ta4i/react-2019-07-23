@@ -1,26 +1,50 @@
-export default (cartState = {}, action) => {
+const initialState = {
+  cart: []
+};
+
+export default (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD_DISH': {
-      const {id} = action.payload
+    case "ADD_DISH": {
+      const newItem = state.cart.find(
+        item => item.id === action.payload.cart.id
+      );
+
+      if (newItem !== undefined) {
+        const newItemArray = state.cart.map(item =>
+          item.id === action.payload.cart.id
+            ? { ...item, counter: item.counter + 1 }
+            : item
+        );
+
+        return { ...state, cart: newItemArray };
+      }
+
       return {
-        ...cartState,
-        [id]: cartState[id] ? cartState[id] + 1 : 1
-      }
+        ...state,
+        cart: [
+          ...state.cart,
+          {
+            id: action.payload.cart.id,
+            counter: 1,
+            restaurantId: action.payload.restaurantId
+          }
+        ]
+      };
     }
-    case 'REMOVE_DISH': {
-      const {id} = action.payload
-      if (!cartState[id]) {
-        return cartState
+    case "REMOVE_DISH": {
+      const { id } = action.payload;
+      if (!state[id]) {
+        return state;
       }
-      const newCartState = {...cartState}
+      const newCartState = { ...state };
       if (newCartState[id] === 1) {
-        delete newCartState[id]
+        delete newCartState[id];
       } else {
-        newCartState[id] = newCartState[id] - 1
+        newCartState[id] = newCartState[id] - 1;
       }
-      return newCartState
+      return newCartState;
     }
     default:
-      return cartState
+      return state;
   }
-}
+};
