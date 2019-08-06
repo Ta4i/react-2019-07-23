@@ -11,7 +11,7 @@ export const selectRestaurants = state => state.restaurants
 export const selectDish = createSelector(
   selectDishes,
   selectId,
-  (dishes, id) => dishes.find(dish => dish.id === id)
+  (dishes, id) => dishes[id]
 )
 
 export const selectDishAmount = createSelector(

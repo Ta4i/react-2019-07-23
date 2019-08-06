@@ -1,5 +1,12 @@
 import {normalizedDishes} from '../../fixtures'
 
-export default (dishesState = normalizedDishes, action) => {
+const initialState = normalizedDishes.reduce((dishesMap, dish) => {
+  return {
+    ...dishesMap,
+    [dish.id]: dish,
+  }
+}, {})
+
+export default (dishesState = initialState, action) => {
   return dishesState
 }
