@@ -10,8 +10,6 @@ class Dish extends Component {
     const {id, dish, amount} = this.props
     const dispatch = this.props.dispatch
 
-    console.log('Dish')
-
     return (
       <Card
         bordered
