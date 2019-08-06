@@ -24,7 +24,7 @@ class App extends Component {
           <RestaurantList restaurants={this.props.restaurants} />
           {/*<RestaurantsMap restaurants={this.props.restaurants} />*/}
           <Order />
-          <OrderContainer />
+          <OrderContainer restaurants={this.props.restaurants} />
         </main>
         <Counter />
       </Layout>

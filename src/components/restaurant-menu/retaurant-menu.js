@@ -3,7 +3,7 @@ import Dish from "../dish";
 import { Row, Col } from "antd";
 
 function RestaurantMenu(props) {
-  // console.log(props.menu);
+  // console.log(props.menu, props.restaurantId);
   return (
     <div
       style={{ padding: "16px" }}
@@ -12,7 +12,7 @@ function RestaurantMenu(props) {
       <Row gutter={16}>
         {props.menu.map(dish => (
           <Col key={dish.id} span={8}>
-            <Dish dish={dish} />
+            <Dish dish={dish} restaurantId={props.restaurantId} />
           </Col>
         ))}
       </Row>

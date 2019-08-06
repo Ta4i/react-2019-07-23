@@ -8,7 +8,20 @@ class OrderList extends Component {
   };
 
   render() {
-    const { cart } = this.props;
+    const { cart, restaurants } = this.props;
+
+    const test = cart.map((item, i) => {
+      const newItem = restaurants[i].menu.find(
+        menuItem => menuItem.id === item.id
+      );
+      console.log(newItem);
+      if (newItem !== undefined && newItem.id === item.id) {
+        return { ...newItem, counter: item.counter };
+      }
+      return newItem;
+    });
+
+    // console.log(test);
 
     if (cart.length === 0) {
       return <h3>Your order is empty</h3>;

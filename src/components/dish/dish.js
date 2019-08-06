@@ -4,10 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { addDish, removeDish } from "../../store/ac";
 
 function Dish(props) {
-  const { dish } = props;
+  const { dish, restaurantId } = props;
   const dispatch = useDispatch();
   const cart = useSelector(state => state.cart);
-  console.log(cart);
+  const amount = cart.cart.find(item => item.id === dish.id);
+  const total = amount !== undefined ? amount.counter : null;
+
+  // console.log(cart);
 
   return (
     <Card
@@ -19,7 +22,7 @@ function Dish(props) {
             style={{ margin: "0 12px" }}
             data-autoid={`DISH_AMOUNT_${dish.id}`}
           >
-            count:{" "}
+            count: {total}
           </span>
           <Button.Group>
             <Button
@@ -30,7 +33,7 @@ function Dish(props) {
               data-autoid={`REMOVE_DISH_${dish.id}`}
             />
             <Button
-              onClick={() => dispatch(addDish(dish))}
+              onClick={() => dispatch(addDish(dish, restaurantId))}
               type="primary"
               shape="circle"
               icon="plus"
