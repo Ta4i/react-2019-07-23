@@ -6,5 +6,5 @@ import cart from './cart'
 export default combineReducers({
   count: counter,
   restaurants,
-  cart
+  cart,
 })

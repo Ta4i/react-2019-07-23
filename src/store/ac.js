@@ -20,3 +20,10 @@ export const removeDish = (id) => ({
     id
   }
 })
+
+export const deleteOrderItem = (id) => ({
+  type: 'DELETE_ORDER_ITEM',
+  payload: {
+    id
+  }
+})

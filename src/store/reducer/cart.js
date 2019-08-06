@@ -20,6 +20,16 @@ export default (cartState = {}, action) => {
       }
       return newCartState
     }
+    case 'DELETE_ORDER_ITEM': {
+      const {id} = action.payload
+      if (!cartState[id]) {
+        return cartState
+      }
+      const newCartState = {...cartState}
+
+      delete newCartState[id]
+      return newCartState
+    }
     default:
       return cartState
   }

@@ -21,14 +21,21 @@ function Dish(props) {
           >{amount}</span>
           <Button.Group>
             <Button
-              onClick={() => dispatch(removeDish(id))}
+              onClick={
+                () => {
+                  dispatch(removeDish(id))
+                }
+              }
               type="primary"
               shape="circle"
               icon="minus"
               data-autoid={`REMOVE_DISH_${props.id}`}
             />
             <Button
-              onClick={() => dispatch(addDish(id))}
+              onClick={() => {
+                  dispatch(addDish(id))
+                }
+              }
               type="primary"
               shape="circle"
               icon="plus"
