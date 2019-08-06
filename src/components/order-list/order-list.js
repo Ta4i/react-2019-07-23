@@ -5,7 +5,7 @@ import {deleteOrderItem} from '../../store/ac';
 
 class OrderList extends Component {
 	render() {
-		const {orderListFromStore} = this.props
+		const {cart, restaurants} = this.props
 		const columns = [
 			{
 				title: 'Name',
@@ -37,11 +37,32 @@ class OrderList extends Component {
 		return (
 			<Table
 				rowKey="id"
-				dataSource={Object.values(orderListFromStore)}
+				dataSource={Object.values(this.getOrderList(restaurants, cart))}
 				columns={columns}
 				pagination={{ pageSize: 5 }}
 			/>
 		);
+	}
+
+	getOrderList = (restaurants, cart) => {
+		const orderList = [];
+
+		for (const orderId in cart) {
+			restaurants.forEach(restaurant => {
+				const menu = restaurant.menu.find(menu => menu.id === orderId);
+
+				if (menu) {
+					orderList.push({
+						"id": menu.id,
+						"name": menu.name,
+						"qty": cart[orderId],
+						"totalPrice": menu.price * cart[orderId]
+					})
+				}
+			});
+		}
+
+		return orderList
 	}
 
   deleteOrderItem = (id) => {
@@ -50,7 +71,8 @@ class OrderList extends Component {
 }
 
 const mapStateToProps = state => ({
-	orderListFromStore: state.orderList
+	cart: state.cart,
+	restaurants: state.restaurants,
 })
 
 const mapDispatchToProps = {

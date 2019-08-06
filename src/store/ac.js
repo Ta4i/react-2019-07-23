@@ -7,17 +7,17 @@ export const decrease = () => ({
   type: 'DECREMENT'
 })
 
-export const addDish = (dish) => ({
+export const addDish = (id) => ({
   type: 'ADD_DISH',
   payload: {
-    dish
+    id
   }
 })
 
-export const removeDish = (dish) => ({
+export const removeDish = (id) => ({
   type: 'REMOVE_DISH',
   payload: {
-    dish
+    id
   }
 })
 

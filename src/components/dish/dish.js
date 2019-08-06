@@ -5,7 +5,6 @@ import {addDish, removeDish} from '../../store/ac';
 
 function Dish(props) {
   const {id} = props
-  const dish = props
   const dispatch = useDispatch()
   const cart = useSelector(state => state.cart)
   const amount = cart[id] || 0
@@ -24,7 +23,7 @@ function Dish(props) {
             <Button
               onClick={
                 () => {
-                  dispatch(removeDish(dish))
+                  dispatch(removeDish(id))
                 }
               }
               type="primary"
@@ -34,7 +33,7 @@ function Dish(props) {
             />
             <Button
               onClick={() => {
-                  dispatch(addDish(dish))
+                  dispatch(addDish(id))
                 }
               }
               type="primary"
