@@ -381,4 +381,10 @@ const normalizedUsers = [
   },
 ]
 
-export {restaurants}
+export {
+  restaurants,
+  normalizedUsers,
+  normalizedReviews,
+  normalizedDishes,
+  normalizedRestaurants,
+}
