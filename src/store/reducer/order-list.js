@@ -1,6 +1,6 @@
 export default (orderListState = {}, action) => {
 	switch (action.type) {
-    case 'ADD_ORDER_ITEM': {
+    case 'ADD_DISH': {
 			const {dish} = action.payload
 			const qty = orderListState[dish.id] ? orderListState[dish.id].qty + 1 : 1
 
@@ -14,7 +14,7 @@ export default (orderListState = {}, action) => {
 				}
       }
     }
-    case 'REMOVE_ORDER_ITEM': {
+    case 'REMOVE_DISH': {
       const {dish} = action.payload
       if (!orderListState[dish.id]) {
         return orderListState

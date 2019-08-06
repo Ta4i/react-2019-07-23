@@ -1,7 +1,7 @@
 import React from "react"
 import { Card, Button } from "antd"
 import {useDispatch, useSelector} from 'react-redux'
-import {addDish, removeDish, addOrderItem, removeOrderItem} from '../../store/ac';
+import {addDish, removeDish} from '../../store/ac';
 
 function Dish(props) {
   const {id} = props
@@ -24,8 +24,7 @@ function Dish(props) {
             <Button
               onClick={
                 () => {
-                  dispatch(removeDish(id))
-                  dispatch(removeOrderItem(dish))
+                  dispatch(removeDish(dish))
                 }
               }
               type="primary"
@@ -35,8 +34,7 @@ function Dish(props) {
             />
             <Button
               onClick={() => {
-                  dispatch(addDish(id))
-                  dispatch(addOrderItem(dish))
+                  dispatch(addDish(dish))
                 }
               }
               type="primary"

@@ -7,29 +7,15 @@ export const decrease = () => ({
   type: 'DECREMENT'
 })
 
-export const addDish = (id) => ({
+export const addDish = (dish) => ({
   type: 'ADD_DISH',
-  payload: {
-    id
-  }
-})
-
-export const removeDish = (id) => ({
-  type: 'REMOVE_DISH',
-  payload: {
-    id
-  }
-})
-
-export const addOrderItem = (dish) => ({
-  type: 'ADD_ORDER_ITEM',
   payload: {
     dish
   }
 })
 
-export const removeOrderItem = (dish) => ({
-  type: 'REMOVE_ORDER_ITEM',
+export const removeDish = (dish) => ({
+  type: 'REMOVE_DISH',
   payload: {
     dish
   }

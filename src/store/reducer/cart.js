@@ -1,22 +1,22 @@
 export default (cartState = {}, action) => {
   switch (action.type) {
     case 'ADD_DISH': {
-      const {id} = action.payload
+      const {dish} = action.payload
       return {
         ...cartState,
-        [id]: cartState[id] ? cartState[id] + 1 : 1
+        [dish.id]: cartState[dish.id] ? cartState[dish.id] + 1 : 1
       }
     }
     case 'REMOVE_DISH': {
-      const {id} = action.payload
-      if (!cartState[id]) {
+      const {dish} = action.payload
+      if (!cartState[dish.id]) {
         return cartState
       }
       const newCartState = {...cartState}
-      if (newCartState[id] === 1) {
-        delete newCartState[id]
+      if (newCartState[dish.id] === 1) {
+        delete newCartState[dish.id]
       } else {
-        newCartState[id] = newCartState[id] - 1
+        newCartState[dish.id] = newCartState[dish.id] - 1
       }
       return newCartState
     }
