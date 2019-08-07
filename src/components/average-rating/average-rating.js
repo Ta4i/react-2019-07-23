@@ -12,11 +12,7 @@ class AverageRating extends PureComponent {
 }
 
 AverageRating.propTypes = {
-  reviews: PropTypes.arrayOf(
-    PropTypes.shape({
-      rating: PropTypes.number.isRequired,
-    })
-  ).isRequired,
+  reviews: PropTypes.array.isRequired,
 }
 
 export default connect((state, ownProps) => ({
