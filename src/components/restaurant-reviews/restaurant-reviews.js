@@ -9,7 +9,7 @@ function RestaurantReviews(props) {
     <List
       itemLayout={'horizontal'}
       dataSource={restaurant.reviews}
-      renderItem={review => <Review key={review.id} review={review} />}
+      renderItem={review => <Review key={review} id={review} />}
     />
   )
 }

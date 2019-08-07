@@ -8,6 +8,22 @@ export const selectDishes = state => state.dishes
 
 export const selectRestaurants = state => state.restaurants
 
+export const selectUsers = state => state.users
+
+export const selectReviews = state => state.reviews
+
+export const selectReview = createSelector(
+  selectReviews,
+  selectId,
+  (reviews, id) => reviews[id]
+)
+
+export const selectUser = createSelector(
+  selectUsers,
+  selectReview,
+  (users, review) => users[review.userId]
+)
+
 export const selectDish = createSelector(
   selectDishes,
   selectId,
@@ -45,5 +61,30 @@ export const selectOrderedDishes = createSelector(
         totalPrice: 0,
       }
     )
+  }
+)
+
+export const selectRestaurantReviewsRating = (_, ownProps) => ownProps.reviews
+
+export const selectAverageRating = createSelector(
+  selectReviews,
+  selectRestaurantReviewsRating,
+  (reviews, restaurantRating) => {
+    const ratings = []
+    let sumRatings = 0
+
+    for (const review of restaurantRating) {
+      if (reviews.hasOwnProperty(review)) {
+        ratings.push(reviews[review].rating)
+      }
+    }
+
+    for (const rating of ratings) {
+      sumRatings += rating
+    }
+
+    const rating = sumRatings / ratings.length
+
+    return Math.floor(rating * 2) / 2
   }
 )
