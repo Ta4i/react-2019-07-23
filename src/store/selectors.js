@@ -6,6 +6,8 @@ export const selectCart = state => state.cart
 
 export const selectDishes = state => state.dishes
 
+export const selectReviews = state => state.reviews
+
 export const selectRestaurants = state => state.restaurants
 
 export const selectDish = createSelector(
@@ -44,5 +46,20 @@ export const selectOrderedDishes = createSelector(
         totalPrice: 0,
       }
     )
+  }
+)
+
+export const selectRating = createSelector(
+  selectRestaurants,
+  selectReviews,
+  selectId,
+  (restaurants, reviews, id) => {
+    const restaurant = restaurants[id]
+    console.log(reviews)
+    const rawRating =
+      restaurant.reviews.reduce((result, reviewId) => {
+        return result + reviews[reviewId].rating
+      }, 0) / restaurant.reviews.length
+    return Math.floor(rawRating * 2) / 2
   }
 )

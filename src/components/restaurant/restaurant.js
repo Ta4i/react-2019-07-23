@@ -1,9 +1,11 @@
+import {connect} from 'react-redux'
 import React, {PureComponent} from 'react'
 import {Button, List} from 'antd'
 import RestaurantReviews from '../restaurant-reviews'
 import {toggleVisibility} from '../../decorators/toggle-visibility'
 import AverageRating from '../average-rating'
 import RestaurantMenu from '../restaurant-menu'
+import {selectRating} from '../../store/selectors'
 
 class Restaurant extends PureComponent {
   state = {
@@ -23,8 +25,10 @@ class Restaurant extends PureComponent {
       isMenuOpen,
       toggleOpenMenu,
       restaurant,
+      rating,
+      id,
     } = this.props
-    const {id, image, name, menu, reviews} = restaurant
+    const {image, name, menu} = restaurant
 
     if (this.state.error) {
       return <h2>Something went wrong</h2>
@@ -34,7 +38,7 @@ class Restaurant extends PureComponent {
       <>
         <List.Item
           actions={[
-            <AverageRating reviews={reviews} />,
+            <AverageRating rating={rating} />,
             <Button type={'primary'} onClick={toggleOpen}>
               {isOpen ? 'Hide reviews' : 'Show reviews'}
             </Button>,
@@ -63,4 +67,8 @@ class Restaurant extends PureComponent {
   }
 }
 
-export default toggleVisibility(Restaurant)
+const mapStateToProps = (state, ownProps) => ({
+  rating: selectRating(state, ownProps),
+})
+
+export default connect(mapStateToProps)(toggleVisibility(Restaurant))
