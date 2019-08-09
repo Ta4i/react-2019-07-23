@@ -1,4 +1,5 @@
 import {put, takeEvery, select} from 'redux-saga/effects'
+import {head, isEmpty} from 'lodash'
 import {SUBMIT_REVIEW_FORM} from '../store/constants'
 import {
   successReviewForm,
@@ -12,18 +13,18 @@ import {selectUsers} from '../store/selectors'
 export function* createReviewSaga({payload}) {
   const userName = payload.name
   const users = yield select(state => selectUsers(state))
+  const uuidv1 = require('uuid/v1')
 
   try {
     const existUser = Object.values(users).filter(
       user => user.name === userName
     )
-    const uuidv1 = require('uuid/v1')
 
-    let user
-    if (existUser.length) {
-      user = existUser[0]
-    } else {
-      user = {id: uuidv1(), name: userName}
+    const user = isEmpty(existUser)
+      ? {id: uuidv1(), name: userName}
+      : head(existUser)
+
+    if (isEmpty(existUser)) {
       yield put(addNewUser(user))
     }
 
