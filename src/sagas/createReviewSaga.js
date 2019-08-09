@@ -1,5 +1,5 @@
 import {put, takeEvery, select} from 'redux-saga/effects'
-import {head, isEmpty, values} from 'lodash'
+import {isUndefined, find} from 'lodash'
 import {SUBMIT_REVIEW_FORM} from '../store/constants'
 import {
   successReviewForm,
@@ -17,10 +17,10 @@ export function* createReviewSaga({payload}) {
   const {rate, reviewText, restaurant, name} = payload
 
   try {
-    const existUser = values(users).filter(user => user.name === name)
-    const user = head(existUser) || {id: uuidv1(), name}
+    const existUser = find(users, {name})
+    const user = existUser || {id: uuidv1(), name}
 
-    if (isEmpty(existUser)) {
+    if (isUndefined(existUser)) {
       yield put(addNewUser(user))
     }
 
