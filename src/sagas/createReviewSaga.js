@@ -18,9 +18,6 @@ export function* createReviewSaga({payload}) {
 
   try {
     const existUser = Object.values(users).filter(user => user.name === name)
-
-    console.log(existUser)
-
     const user = isEmpty(existUser) ? {id: uuidv1(), name} : head(existUser)
 
     if (isEmpty(existUser)) {
