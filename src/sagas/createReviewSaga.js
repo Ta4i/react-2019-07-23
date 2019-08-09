@@ -11,28 +11,27 @@ import ReviewModel from '../models/Review'
 import {selectUsers} from '../store/selectors'
 
 export function* createReviewSaga({payload}) {
-  const userName = payload.name
   const users = yield select(state => selectUsers(state))
   const uuidv1 = require('uuid/v1')
 
-  try {
-    const existUser = Object.values(users).filter(
-      user => user.name === userName
-    )
+  const {rate, reviewText, restaurant, name} = payload
 
-    const user = isEmpty(existUser)
-      ? {id: uuidv1(), name: userName}
-      : head(existUser)
+  try {
+    const existUser = Object.values(users).filter(user => user.name === name)
+
+    console.log(existUser)
+
+    const user = isEmpty(existUser) ? {id: uuidv1(), name} : head(existUser)
 
     if (isEmpty(existUser)) {
       yield put(addNewUser(user))
     }
 
     const review = new ReviewModel({
-      restaurantId: payload.restaurant,
+      restaurantId: restaurant,
       userId: user.id,
-      reviewText: payload.reviewText,
-      rate: payload.rate,
+      reviewText: reviewText || '',
+      rate: rate,
     })
 
     yield put(addNewReview(review))
