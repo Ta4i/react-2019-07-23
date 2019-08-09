@@ -25,6 +25,7 @@ class Restaurant extends PureComponent {
       restaurant,
     } = this.props
     const {id, image, name, menu, reviews} = restaurant
+    console.log(reviews)
 
     if (this.state.error) {
       return <h2>Something went wrong</h2>

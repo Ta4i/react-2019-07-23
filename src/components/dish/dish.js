@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import {Card, Button} from 'antd'
 import {connect} from 'react-redux'
 import {addDishToCart, subtractDishFromCart} from '../../store/ac'
-import Price from '../price'
 import {selectDish, selectDishAmount} from '../../store/selectors'
+import Price from '../price'
 
 class Dish extends Component {
   render() {
