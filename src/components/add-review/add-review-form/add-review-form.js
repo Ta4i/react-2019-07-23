@@ -80,6 +80,7 @@ class ReviewForm extends React.PureComponent {
             type="primary"
             htmlType="submit"
             className="review-form-button"
+            loading={status === Status.SENDING}
           >
             Save
           </Button>
