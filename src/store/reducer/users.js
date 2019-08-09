@@ -1,4 +1,5 @@
 import {normalizedUsers} from '../../fixtures'
+import {ADD_NEW_USER} from '../constants'
 
 const initialState = normalizedUsers.reduce((usersMap, user) => {
   return {
@@ -8,5 +9,17 @@ const initialState = normalizedUsers.reduce((usersMap, user) => {
 }, {})
 
 export default (usersState = initialState, action) => {
-  return usersState
+  switch (action.type) {
+    case ADD_NEW_USER: {
+      return {
+        ...usersState,
+        [action.payload.id]: {
+          id: action.payload.id,
+          name: action.payload.name,
+        },
+      }
+    }
+    default:
+      return usersState
+  }
 }
