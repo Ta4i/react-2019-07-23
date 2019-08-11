@@ -1,5 +1,4 @@
 import {normalizedReviews} from '../../fixtures'
-import users from './users'
 
 const initialState = normalizedReviews.reduce((reviewsMap, rewiev) => {
   return {
