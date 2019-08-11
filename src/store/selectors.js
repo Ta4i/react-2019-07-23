@@ -8,6 +8,18 @@ export const selectDishes = state => state.dishes
 
 export const selectRestaurants = state => state.restaurants
 
+export const selectReviewsId = (_, ownProps) => ownProps.restaurant.reviews
+
+export const selectReviews = state => state.reviews
+
+export const selectRestaurantReviews = createSelector(
+  selectReviewsId,
+  selectReviews,
+  (ids, reviews) => {
+    return ids.map((id) => reviews[id])
+  }
+)
+
 export const selectDish = createSelector(
   selectDishes,
   selectId,

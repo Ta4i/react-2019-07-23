@@ -4,6 +4,8 @@ import RestaurantReviews from '../restaurant-reviews'
 import {toggleVisibility} from '../../decorators/toggle-visibility'
 import AverageRating from '../average-rating'
 import RestaurantMenu from '../restaurant-menu'
+import { connect } from 'react-redux';
+import { selectRestaurantReviews } from '../../store/selectors';
 
 class Restaurant extends PureComponent {
   state = {
@@ -23,8 +25,9 @@ class Restaurant extends PureComponent {
       isMenuOpen,
       toggleOpenMenu,
       restaurant,
+      reviews,
     } = this.props
-    const {id, image, name, menu, reviews} = restaurant
+    const {id, image, name, menu} = restaurant
 
     if (this.state.error) {
       return <h2>Something went wrong</h2>
@@ -63,4 +66,8 @@ class Restaurant extends PureComponent {
   }
 }
 
-export default toggleVisibility(Restaurant)
+const mapStateToProps = (state, ownProps) => ({
+  reviews: selectRestaurantReviews(state, ownProps)
+})
+
+export default connect(mapStateToProps)(toggleVisibility(Restaurant))
