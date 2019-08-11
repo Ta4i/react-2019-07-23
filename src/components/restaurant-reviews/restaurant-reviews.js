@@ -2,13 +2,11 @@ import React from "react";
 import { List } from "antd";
 import Review from "../review";
 import { useDispatch, useSelector } from "react-redux";
-import { selectRestaurantReviews } from "../../store/selectors";
+import { selectRestaurantReviewIds } from "../../store/selectors";
 
 function RestaurantReviews(props) {
   const { restaurantId } = props;
-  const reviews = useSelector(state =>
-    selectRestaurantReviews(state, restaurantId)
-  );
+  const reviews = useSelector(state => selectRestaurantReviewIds(state, props));
 
   return (
     <List

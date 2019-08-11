@@ -34,7 +34,7 @@ class Restaurant extends PureComponent {
       <>
         <List.Item
           actions={[
-            <AverageRating reviews={reviews} />,
+            <AverageRating restaurantId={restaurant.id} />,
             <Button type={"primary"} onClick={toggleOpen}>
               {isOpen ? "Hide reviews" : "Show reviews"}
             </Button>,

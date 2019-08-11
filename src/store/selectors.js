@@ -12,10 +12,29 @@ export const selectRestaurants = state => state.restaurants;
 
 export const selectReviews = state => state.reviews;
 
-export const selectRestaurantReviews = (state, restoranId) => {
+export const selectRestaurantReviewIds = (state, ownProps) => {
   const restaurants = selectRestaurants(state);
-  const restaurant = restaurants.find(rest => rest.id === restoranId);
+  const restaurant = restaurants.find(
+    rest => rest.id === ownProps.restaurantId
+  );
   return restaurant.reviews;
+};
+
+export const selectRestaurantReviews = (state, ownProps) => {
+  const ids = selectRestaurantReviewIds(state, ownProps);
+  const reviews = selectReviews(state);
+  var retVal = [];
+  for (var i in ids) {
+    var id = ids[i];
+    for (var j in reviews) {
+      var review = reviews[j];
+      if (review.id === id) {
+        retVal.push(review);
+        break;
+      }
+    }
+  }
+  return retVal;
 };
 
 export const selectReviewById = (state, ownProps) => {
@@ -45,7 +64,6 @@ export const selectOrderedDishes = createSelector(
     var totalPrice = 0;
     var orderedDishes = [];
     for (var dishId in cart) {
-      console.log("dish id=" + dishId);
       const dish = dishes[dishId];
       orderedDishes.push(dish);
       const amount = cart[dishId];

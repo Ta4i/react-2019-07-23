@@ -1,10 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Rate } from "antd";
+import { connect } from "react-redux";
+import { selectRestaurantReviews } from "../../store/selectors";
 
 class AverageRating extends PureComponent {
   render() {
-    const { reviews } = this.props;
+    const { restaurantId, reviews } = this.props;
     const rawRating =
       reviews.reduce((acc, { rating }) => {
         return acc + rating;
@@ -22,4 +24,6 @@ AverageRating.propTypes = {
   ).isRequired
 };
 
-export default AverageRating;
+export default connect((state, ownProps) => ({
+  reviews: selectRestaurantReviews(state, ownProps)
+}))(AverageRating);
