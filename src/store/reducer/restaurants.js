@@ -1,5 +1,15 @@
 import {normalizedRestaurants} from '../../fixtures'
 
-export default (restaurantsState = normalizedRestaurants, action) => {
+const initialState = normalizedRestaurants.reduce(
+  (restaurantsMap, restaurant) => {
+    return {
+      ...restaurantsMap,
+      [restaurant.id]: restaurant,
+    }
+  },
+  {}
+)
+
+export default (restaurantsState = initialState, action) => {
   return restaurantsState
 }
