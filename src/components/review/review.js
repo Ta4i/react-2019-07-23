@@ -30,7 +30,6 @@ class Review extends Component {
 }
 
 export default connect((state, ownProps) => {
-  //  console.log(ownProps);
   return {
     review: selectReview(state, ownProps),
     user: selectUserByReviewId(state, ownProps),
