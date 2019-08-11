@@ -1,12 +1,39 @@
 import {createSelector} from 'reselect'
 
-export const selectId = (_, ownProps) => ownProps.id
+export const selectId = (_, ownProps) => {
+  return ownProps.id
+}
 
 export const selectCart = state => state.cart
 
 export const selectDishes = state => state.dishes
 
+export const selectReviews = state => state.reviews
+
+export const selectUsers = state => state.users
+
 export const selectRestaurants = state => state.restaurants
+
+export const selectUserByReviewId = createSelector(
+  selectReviews,
+  selectId,
+  selectUsers,
+  (reviews, reviewId, users) => {
+    return users[reviews[reviewId].userId]
+  }
+)
+
+export const selectUser = createSelector(
+  selectUsers,
+  selectId,
+  (users, id) => users[id]
+)
+
+export const selectReview = createSelector(
+  selectReviews,
+  selectId,
+  (reviews, id) => reviews[id]
+)
 
 export const selectDish = createSelector(
   selectDishes,
