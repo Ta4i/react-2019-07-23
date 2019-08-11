@@ -10,24 +10,23 @@ class RestaurantList extends Component {
 
       // from decorator
       openItemId,
-      toggleOpen
+      toggleOpen,
     } = this.props
     return (
       <List
         itemLayout={'horizontal'}
         dataSource={restaurants}
-        renderItem={restaurant => <Restaurant
-          key={restaurant.id}
-          restaurant={restaurant}
-          isMenuOpen={
-            openItemId === restaurant.id
-          }
-          toggleOpenMenu={toggleOpen}
-        />}
+        renderItem={restaurant => (
+          <Restaurant
+            key={restaurant.id}
+            restaurant={restaurant}
+            isMenuOpen={openItemId === restaurant.id}
+            toggleOpenMenu={toggleOpen}
+          />
+        )}
       />
     )
   }
-
 }
 
 export default accordion(RestaurantList)

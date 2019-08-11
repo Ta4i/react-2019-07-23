@@ -1,11 +1,12 @@
-import React, { Component } from "react";
-import { Button } from "antd";
-import {connect} from 'react-redux';
-import {increase, decrease} from '../../store/ac';
+import React, {Component} from 'react'
+import {Button} from 'antd'
+import {connect} from 'react-redux'
+import {increase, decrease} from '../../store/ac'
 
 class Counter extends Component {
   render() {
     const {countFromStore} = this.props
+
     return (
       <div style={{textAlign: 'center', padding: '16px'}}>
         <span>{countFromStore}</span>
@@ -14,23 +15,23 @@ class Counter extends Component {
           <Button onClick={this.increase} type="primary" icon="plus" />
         </Button.Group>
       </div>
-    );
+    )
   }
   decrease = () => {
     this.props.dispatchDecrease()
-  };
+  }
   increase = () => {
     this.props.dispatchIncrease()
-  };
+  }
 }
 
 const mapStateToProps = state => ({
-  countFromStore: state.count
+  countFromStore: state.count,
 })
 
 const mapDispatchToProps = {
   dispatchIncrease: increase,
-  dispatchDecrease: decrease
+  dispatchDecrease: decrease,
 }
 
 export default connect(
