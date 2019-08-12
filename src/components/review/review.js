@@ -1,7 +1,11 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {Comment, Rate, List} from 'antd'
+import {selectUsers} from '../../store/selectors'
 
-function Review({review}) {
+function Review({review, users}) {
+  const [user] = users.filter(elem => elem.id === review.userId)
+  const name = user !== undefined ? user.name : undefined
   return (
     <List.Item data-autoid="REVIEW">
       <Comment
@@ -10,7 +14,7 @@ function Review({review}) {
           backgroundColor: 'white',
         }}
         author={[
-          review.user,
+          name,
           <Rate
             key={review.id}
             disabled
@@ -24,4 +28,6 @@ function Review({review}) {
   )
 }
 
-export default Review
+export default connect(state => ({
+  users: selectUsers(state),
+}))(Review)
