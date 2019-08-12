@@ -6,12 +6,18 @@ import {accordion} from '../../decorators/accordion'
 class RestaurantList extends Component {
   render() {
     const {
-      restaurants,
+      //restaurants,
 
       // from decorator
       openItemId,
       toggleOpen,
     } = this.props
+    const restaurants = Object.entries(this.props.restaurants).reduce(
+      (r, item) => {
+        return [...r, item[1]]
+      },
+      []
+    )
     return (
       <List
         itemLayout={'horizontal'}

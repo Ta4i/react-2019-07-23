@@ -4,6 +4,7 @@ import RestaurantReviews from '../restaurant-reviews'
 import {toggleVisibility} from '../../decorators/toggle-visibility'
 import AverageRating from '../average-rating'
 import RestaurantMenu from '../restaurant-menu'
+import AddReview from '../add_review'
 
 class Restaurant extends PureComponent {
   state = {
@@ -58,6 +59,7 @@ class Restaurant extends PureComponent {
         {isMenuOpen ? (
           <RestaurantMenu menu={restaurant.menu} restaurantId={restaurant.id} />
         ) : null}
+        <AddReview restaurantId={id}></AddReview>
       </>
     )
   }
