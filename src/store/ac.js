@@ -4,6 +4,8 @@ import {
   DELETE_FROM_CART,
   INCREMENT,
   SUBTRACT_FROM_CART,
+  ADD_REVIEW,
+  ADD_USER,
 } from './constants'
 
 export const increase = () => ({
@@ -34,3 +36,15 @@ export const deleteDishFromCart = id => ({
     id,
   },
 })
+
+export const addReview = obj => ({
+  type: ADD_REVIEW,
+  comment: obj,
+})
+
+export const addUser = obj => {
+  return {
+    type: ADD_USER,
+    user: obj,
+  }
+}
