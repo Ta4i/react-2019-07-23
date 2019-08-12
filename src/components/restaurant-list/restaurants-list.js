@@ -12,10 +12,11 @@ class RestaurantList extends Component {
       openItemId,
       toggleOpen,
     } = this.props
+
     return (
       <List
         itemLayout={'horizontal'}
-        dataSource={restaurants}
+        dataSource={Object.values(restaurants)}
         renderItem={restaurant => (
           <Restaurant
             key={restaurant.id}
