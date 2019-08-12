@@ -6,6 +6,7 @@ import AverageRating from '../average-rating'
 import RestaurantMenu from '../restaurant-menu'
 import { connect } from 'react-redux';
 import { selectRestaurantReviews } from '../../store/selectors';
+import { ReviewForm } from '../review-form';
 
 class Restaurant extends PureComponent {
   state = {
@@ -57,7 +58,12 @@ class Restaurant extends PureComponent {
             description={`Menu positions: ${menu.length}`}
           />
         </List.Item>
-        {isOpen ? <RestaurantReviews restaurant={restaurant} /> : null}
+        {isOpen ? 
+          <>
+            <RestaurantReviews restaurant={restaurant} /> 
+            <ReviewForm />
+          </>
+          : null}
         {isMenuOpen ? (
           <RestaurantMenu menu={restaurant.menu} restaurantId={restaurant.id} />
         ) : null}
