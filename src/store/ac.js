@@ -4,6 +4,7 @@ import {
   DELETE_FROM_CART,
   INCREMENT,
   SUBTRACT_FROM_CART,
+  ADD_REVIEW,
 } from './constants'
 
 export const increase = () => ({
@@ -32,5 +33,15 @@ export const deleteDishFromCart = id => ({
   type: DELETE_FROM_CART,
   payload: {
     id,
+  },
+})
+
+export const addReview = (restaurant, username, text, rate) => ({
+  type: ADD_REVIEW,
+  payload: {
+    restaurant,
+    username,
+    text,
+    rate,
   },
 })
