@@ -15,9 +15,10 @@ class RestaurantList extends Component {
     return (
       <List
         itemLayout={'horizontal'}
-        dataSource={restaurants}
+        dataSource={Object.values(restaurants)}
         renderItem={restaurant => (
           <Restaurant
+            id={restaurant.id}
             key={restaurant.id}
             restaurant={restaurant}
             isMenuOpen={openItemId === restaurant.id}
