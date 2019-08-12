@@ -29,7 +29,7 @@ class Restaurant extends PureComponent {
     if (this.state.error) {
       return <h2>Something went wrong</h2>
     }
-
+    console.log(restaurant)
     return (
       <>
         <List.Item
