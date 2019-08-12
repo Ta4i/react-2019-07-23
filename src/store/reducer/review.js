@@ -1,7 +1,7 @@
 import {normalizedReviews} from '../../fixtures'
+import {ADD_REVIEW} from '../constants'
 
 const initialState = normalizedReviews.reduce((reviewsMap, review) => {
-  //так менее затратно перевести из массива в объект
   return {
     ...reviewsMap,
     [review.id]: review,
@@ -9,5 +9,15 @@ const initialState = normalizedReviews.reduce((reviewsMap, review) => {
 }, {})
 
 export default (reviewsState = initialState, action) => {
-  return reviewsState
+  switch (action.type) {
+    case ADD_REVIEW: {
+      return {
+        ...reviewsState,
+        [action.newId]: action.payload.review,
+      }
+    }
+
+    default:
+      return reviewsState
+  }
 }

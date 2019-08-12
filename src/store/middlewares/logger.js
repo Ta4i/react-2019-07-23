@@ -1,6 +1,12 @@
+import uuidv4 from '../../helpers'
+
 export default store => next => action => {
-  console.log('before', store.getState())
-  console.log('action', action)
-  next(action)
-  console.log('after', store.getState())
+  if (!action.generateId) {
+    next(action)
+  } else {
+    next({
+      ...action,
+      newId: uuidv4(),
+    })
+  }
 }
