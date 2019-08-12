@@ -12,7 +12,7 @@ class AverageRating extends PureComponent {
         return acc + selectReviews[Id].rating
       }, 0) / reviews.length
     const normalizedRating = Math.floor(rawRating * 2) / 2
-    return <Rate defaultValue={normalizedRating} disabled allowHalf />
+    return <Rate value={normalizedRating} disabled allowHalf />
   }
 }
 
