@@ -1,7 +1,14 @@
 import React from 'react'
 import {Comment, Rate, List} from 'antd'
+import {selectReview} from '../../store/selectors'
+import {connect, useSelector} from 'react-redux'
 
 function Review({review}) {
+  //const cart = useSelector(selectReview)
+  console.log('review', review)
+
+  //console.log('review',cart);
+
   return (
     <List.Item data-autoid="REVIEW">
       <Comment
@@ -10,7 +17,7 @@ function Review({review}) {
           backgroundColor: 'white',
         }}
         author={[
-          review.user,
+          review.name,
           <Rate
             key={review.id}
             disabled
@@ -24,4 +31,6 @@ function Review({review}) {
   )
 }
 
-export default Review
+export default connect((state, ownProps) => ({
+  review: selectReview(state, ownProps),
+}))(Review)
