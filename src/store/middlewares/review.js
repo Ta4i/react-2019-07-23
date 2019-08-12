@@ -1,11 +1,12 @@
-import {ADD_USER} from '../constants'
+import {ADD_REVIEW} from '../constants'
 import uuid from 'uuid/v1'
 
 export default store => next => action => {
-  if (action.type === ADD_USER) {
+  if (action.type === ADD_REVIEW) {
     next({
       ...action,
-      id: uuid(),
+      idUser: uuid(),
+      idReview: uuid(),
     })
   } else {
     next(action)

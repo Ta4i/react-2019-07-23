@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Form, Input, Button, Rate} from 'antd'
-import {addUser as addUserAction} from '../../store/ac'
+import {addReview as addReviewAction} from '../../store/ac'
 
 const {TextArea} = Input
 
@@ -36,11 +36,12 @@ class ReviewForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    const {addUser} = this.props
+    const {addReview, restaurantId} = this.props
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values)
-        addUser(values.username)
+        addReview({...values, restaurantId})
+        this.props.form.resetFields()
       }
     })
   }
@@ -49,7 +50,7 @@ class ReviewForm extends Component {
 const WrappedReviewForm = Form.create({name: 'review_form'})(ReviewForm)
 
 const mapDispatchToProps = dispatch => ({
-  addUser: username => dispatch(addUserAction(username)),
+  addReview: review => dispatch(addReviewAction(review)),
 })
 
 export default connect(

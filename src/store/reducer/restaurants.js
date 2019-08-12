@@ -1,4 +1,5 @@
 import {normalizedRestaurants} from '../../fixtures'
+import {ADD_REVIEW} from '../constants'
 
 const initialState = normalizedRestaurants.reduce(
   (restaurantsMap, restaurant) => {
@@ -11,5 +12,18 @@ const initialState = normalizedRestaurants.reduce(
 )
 
 export default (restaurantsState = initialState, action) => {
-  return restaurantsState
+  switch (action.type) {
+    case ADD_REVIEW: {
+      const {restaurantId} = action.payload
+      return {
+        ...restaurantsState,
+        [restaurantId]: {
+          ...restaurantsState[restaurantId],
+          reviews: [...restaurantsState[restaurantId].reviews, action.idReview],
+        },
+      }
+    }
+    default:
+      return restaurantsState
+  }
 }

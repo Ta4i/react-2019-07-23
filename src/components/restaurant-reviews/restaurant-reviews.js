@@ -13,7 +13,7 @@ function RestaurantReviews(props) {
         dataSource={restaurant.reviews}
         renderItem={reviewId => <Review key={reviewId} id={reviewId} />}
       />
-      <ReviewForm />
+      <ReviewForm restaurantId={restaurant.id} />
     </>
   )
 }
