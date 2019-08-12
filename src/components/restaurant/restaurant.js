@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import { Button, List } from "antd";
 import RestaurantReviews from "../restaurant-reviews";
+import RestaurantFormReviews from "../restaurant-form-review";
 import { toggleVisibility } from "../../decorators/toggle-visibility";
 import AverageRating from "../average-rating";
 import RestaurantMenu from "../restaurant-menu";
@@ -19,9 +20,11 @@ class Restaurant extends PureComponent {
   render() {
     const {
       isOpen,
+      isFormOpen,
       toggleOpen,
       isMenuOpen,
       toggleOpenMenu,
+      formOpen,
       restaurant
     } = this.props;
     const { id, image, name, menu, reviews } = restaurant;
@@ -35,6 +38,9 @@ class Restaurant extends PureComponent {
         <List.Item
           actions={[
             <AverageRating restaurantId={restaurant.id} />,
+            <Button type={"primary"} onClick={formOpen}>
+              {isFormOpen ? "Hide form" : "write reviews"}
+            </Button>,
             <Button type={"primary"} onClick={toggleOpen}>
               {isOpen ? "Hide reviews" : "Show reviews"}
             </Button>,
@@ -55,6 +61,9 @@ class Restaurant extends PureComponent {
           />
         </List.Item>
         {isOpen ? <RestaurantReviews restaurantId={restaurant.id} /> : null}
+        {isFormOpen ? (
+          <RestaurantFormReviews restaurantId={restaurant.id} />
+        ) : null}
         {isMenuOpen ? (
           <RestaurantMenu menu={restaurant.menu} restaurantId={restaurant.id} />
         ) : null}
