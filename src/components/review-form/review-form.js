@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, Rate } from 'antd';
 import './review-form.css'
+import {addReview} from '../../store/ac'
+import { connect } from 'react-redux';
 
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -14,24 +16,29 @@ class ReviewForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    const {restaurantId, addReview} = this.props;
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+
+        addReview(restaurantId, values);
+
+        return values;
       }
     });
   };
 
   render() {
 		const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
-		const {TextArea} = Input;
+    const {TextArea} = Input;
 
     // Only show error after a field is touched.
     const usernameError = isFieldTouched('username') && getFieldError('username');
-    const messageError = isFieldTouched('message') && getFieldError('message');
+    const textError = isFieldTouched('text') && getFieldError('text');
     return (
       <Form className="review-form" onSubmit={this.handleSubmit}>
 				<Form.Item>
-					{getFieldDecorator('rate', {
+					{getFieldDecorator('rating', {
 						initialValue: 3.5,
 					})(<Rate />)}
 				</Form.Item>
@@ -46,8 +53,8 @@ class ReviewForm extends Component {
             />,
           )}
         </Form.Item>
-        <Form.Item validateStatus={messageError ? 'error' : ''} help={messageError || ''}>
-          {getFieldDecorator('message', {
+        <Form.Item validateStatus={textError ? 'error' : ''} help={textError || ''}>
+          {getFieldDecorator('text', {
             rules: [{ required: true, message: 'Please input your message!' }],
           })(
             <TextArea
@@ -65,7 +72,14 @@ class ReviewForm extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+	// reviews: state.reviews,
+})
+
+const mapDispatchToProps = {
+  addReview
+}
 
 const WrappedReviewForm = Form.create({ name: 'review_form' })(ReviewForm);
 
-export default WrappedReviewForm;
+export default connect(mapStateToProps, mapDispatchToProps)(WrappedReviewForm);
