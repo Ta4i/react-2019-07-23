@@ -7,7 +7,7 @@ import {selectRatings} from '../../store/selectors'
 class AverageRating extends PureComponent {
   render() {
     const {rating} = this.props
-    return <Rate defaultValue={rating} disabled allowHalf />
+    return <Rate value={rating} disabled allowHalf />
   }
 }
 

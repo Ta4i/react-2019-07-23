@@ -6,11 +6,18 @@ export const selectCart = state => state.cart
 
 export const selectDishes = state => state.dishes
 
-export const selectRestaurants = state => state.restaurants
+export const selectRestaurantsImmutable = state => state.restaurants
 
 export const selectReviews = state => state.reviews
 
 export const selectUsers = state => state.users
+
+export const selectRestaurants = createSelector(
+  selectRestaurantsImmutable,
+  restaurantsList => {
+    return restaurantsList.toJS()
+  }
+)
 
 export const selectRestaurant = createSelector(
   selectRestaurants,
