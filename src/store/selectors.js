@@ -13,13 +13,13 @@ export const selectReviews = state => state.reviews
 export const selectReview = createSelector(
   selectReviews,
   selectId,
-  (dishes, id) => dishes[id]
+  (reviews, id) => reviews[id]
 )
 
 export const selectDish = createSelector(
   selectDishes,
   selectId,
-  (reviews, id) => reviews[id]
+  (dishes, id) => dishes[id]
 )
 
 export const selectDishAmount = createSelector(
