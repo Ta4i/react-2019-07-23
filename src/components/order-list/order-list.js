@@ -13,14 +13,14 @@ import {selectOrderedDishes} from '../../store/selectors'
 class OrderList extends Component {
   render() {
     const {
-      dishes,
+      orderDishes,
       totalPrice,
       addDishToCart,
       subtractDishFromCart,
       deleteDishFromCart,
     } = this.props
 
-    if (dishes.length === 0) {
+    if (orderDishes.length === 0) {
       return null
     }
 
@@ -28,7 +28,7 @@ class OrderList extends Component {
       <div className="order">
         <h3>Your order</h3>
         <List>
-          {dishes.map(dish => (
+          {orderDishes.map(dish => (
             <List.Item
               key={dish.id}
               className="order-item"
