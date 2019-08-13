@@ -10,7 +10,7 @@ function Review({review}) {
           backgroundColor: 'white',
         }}
         author={[
-          review.user,
+          review.user.name,
           <Rate
             key={review.id}
             disabled
