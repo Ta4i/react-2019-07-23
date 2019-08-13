@@ -304,6 +304,12 @@ const normalizedDishes = [
 
 const normalizedReviews = [
   {
+    id: '13b642d7-5e86-4717-a466-0640a1dee076',
+    userId: 'a304959a-76c0-4b34-954a-b38dbf310360',
+    text: 'Not bad',
+    rating: 5,
+  },
+  {
     id: '5909796d-5030-4e36-adec-68b8f9ec2d96',
     userId: 'a304959a-76c0-4b34-954a-b38dbf310360',
     text: 'Not bad',

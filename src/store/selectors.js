@@ -6,7 +6,11 @@ export const selectCart = state => state.cart
 
 export const selectDishes = state => state.dishes
 
-export const selectRestaurantsImmutable = state => state.restaurants
+export const selectRestaurantsImmutable = state =>
+  state.restaurants.get('entities')
+
+export const selectRestaurantsLoading = state =>
+  state.restaurants.get('loading')
 
 export const selectReviews = state => state.reviews
 
