@@ -14,6 +14,9 @@ class App extends Component {
     if (this.props.fetchData) {
       this.props.fetchData()
     }
+    fetch('http://localhost:3001/api/restaurants')
+      .then(res => res.json())
+      .then(console.log)
   }
 
   render() {
