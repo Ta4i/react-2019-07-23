@@ -7,14 +7,14 @@ import {selectDish, selectDishAmount} from '../../store/selectors'
 
 class Dish extends Component {
   render() {
-    const {id, dish, amount} = this.props
+    const {id, price, amount, name, ingredients} = this.props
     const dispatch = this.props.dispatch
 
     return (
       <Card
         bordered
         actions={[
-          <Price value={dish.price} />,
+          <Price value={price} />,
           <>
             <span style={{margin: '0 12px'}} data-autoid={`DISH_AMOUNT_${id}`}>
               {amount}
@@ -38,10 +38,7 @@ class Dish extends Component {
           </>,
         ]}
       >
-        <Card.Meta
-          title={dish.name}
-          description={dish.ingredients.join(', ')}
-        />
+        <Card.Meta title={name} description={ingredients.join(', ')} />
       </Card>
     )
   }

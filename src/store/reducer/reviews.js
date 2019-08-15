@@ -1,21 +1,25 @@
-import {normalizedReviews} from '../../fixtures'
 import {arrayToMap} from '../utils'
-import {ADD_REVIEW} from '../constants'
+import {ADD_REVIEW, SUCCESS, LOAD_REVIEWS} from '../constants'
+import {fromJS} from 'immutable'
 
-const initialState = arrayToMap(normalizedReviews)
+const initialState = {}
 
-export default (reviewsState = initialState, action) => {
+export default (reviewsState = fromJS(initialState), action) => {
   switch (action.type) {
+    case LOAD_REVIEWS + SUCCESS: {
+      return fromJS(arrayToMap(action.response))
+    }
     case ADD_REVIEW: {
-      return {
-        ...reviewsState,
+      const addedReview = {
         [action.generatedId]: {
           id: action.generatedId,
-          userId: action.userId,
           text: action.payload.text,
           rating: action.payload.rating,
+          userId: action.userId,
         },
       }
+
+      return reviewsState.merge(fromJS(addedReview))
     }
     default:
       return reviewsState
