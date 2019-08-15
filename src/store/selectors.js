@@ -2,7 +2,7 @@ import {createSelector} from 'reselect'
 
 export const selectId = (_, ownProps) => ownProps.id
 
-export const selectCart = state => state.cart
+export const selectCartImmutable = state => state.cart
 
 export const selectDishes = state => state.dishes
 
@@ -17,6 +17,11 @@ export const selectReviewsImmutable = state => state.reviews.get('entities')
 export const selectReviewsLoading = state => {
   return state.reviews.get('loading')
 }
+
+export const selectCart = createSelector(
+  selectCartImmutable,
+  cart => cart.toJS()
+)
 
 export const selectUsersImmutable = state => state.users.get('entities')
 
