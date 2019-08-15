@@ -17,3 +17,5 @@ export const DELETE_FROM_CART = 'DELETE_FROM_CART'
 export const ADD_REVIEW = 'ADD_REVIEW'
 
 export const LOAD_RESTAURANTS = 'LOAD_RESTAURANTS'
+
+export const LOAD_REVIEWS = 'LOAD_REVIEWS'

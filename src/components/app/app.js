@@ -37,6 +37,8 @@ class App extends Component {
 export default connect(
   state => ({restaurants: selectRestaurants(state)}),
   dispatch => ({
-    fetchData: () => dispatch(loadRestaurants()),
+    fetchData: () => {
+      dispatch(loadRestaurants())
+    },
   })
 )(App)
