@@ -9,12 +9,26 @@ import Counter from '../counter'
 import {connect} from 'react-redux'
 import OrderList from '../order-list'
 import {selectRestaurants} from '../../store/selectors'
-import {loadRestaurants} from '../../store/ac'
+import {
+  loadRestaurants,
+  loadDishes,
+  loadReviews,
+  loadUsers,
+} from '../../store/ac'
 
 class App extends Component {
   componentDidMount() {
-    if (this.props.fetchData) {
-      this.props.fetchData()
+    if (this.props.fetchRestaurants) {
+      this.props.fetchRestaurants()
+    }
+    if (this.props.fetchDishes) {
+      this.props.fetchDishes()
+    }
+    if (this.props.fetchReviews) {
+      this.props.fetchReviews()
+    }
+    if (this.props.fetchUsers) {
+      this.props.fetchUsers()
     }
   }
 
@@ -37,6 +51,9 @@ class App extends Component {
 export default connect(
   state => ({restaurants: selectRestaurants(state)}),
   dispatch => ({
-    fetchData: () => dispatch(loadRestaurants()),
+    fetchRestaurants: () => dispatch(loadRestaurants()),
+    fetchDishes: () => dispatch(loadDishes()),
+    fetchReviews: () => dispatch(loadReviews()),
+    fetchUsers: () => dispatch(loadUsers()),
   })
 )(App)
