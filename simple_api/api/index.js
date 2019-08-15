@@ -64,4 +64,8 @@ router.get('/reviews', function(req, res, next) {
   reply(res, result)
 })
 
+router.get('/users', function(req, res, next) {
+  reply(res, mocks.users)
+})
+
 module.exports = router
