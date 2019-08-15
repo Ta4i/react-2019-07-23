@@ -5,6 +5,9 @@ import {
   DELETE_FROM_CART,
   INCREMENT,
   LOAD_RESTAURANTS,
+  LOAD_DISHES,
+  LOAD_REVIEWS,
+  LOAD_USERS,
   SUBTRACT_FROM_CART,
 } from './constants'
 
@@ -53,5 +56,26 @@ export const loadRestaurants = () => {
   return {
     type: LOAD_RESTAURANTS,
     callAPI: '/api/restaurants',
+  }
+}
+
+export const loadDishes = () => {
+  return {
+    type: LOAD_DISHES,
+    callAPI: '/api/dishes',
+  }
+}
+
+export const loadReviews = () => {
+  return {
+    type: LOAD_REVIEWS,
+    callAPI: '/api/reviews',
+  }
+}
+
+export const loadUsers = () => {
+  return {
+    type: LOAD_USERS,
+    callAPI: '/api/users',
   }
 }

@@ -4,7 +4,7 @@ export const selectId = (_, ownProps) => ownProps.id
 
 export const selectCart = state => state.cart
 
-export const selectDishes = state => state.dishes
+export const selectDishesImmutable = state => state.dishes
 
 export const selectRestaurantsImmutable = state =>
   state.restaurants.get('entities')
@@ -12,14 +12,35 @@ export const selectRestaurantsImmutable = state =>
 export const selectRestaurantsLoading = state =>
   state.restaurants.get('loading')
 
-export const selectReviews = state => state.reviews
+export const selectReviewsImmutable = state => state.reviews
 
-export const selectUsers = state => state.users
+export const selectUsersImmutable = state => state.users
+
+export const selectDishes = createSelector(
+  selectDishesImmutable,
+  (dishesList) => {
+    return dishesList.toJS()
+  }
+)
+
+export const selectUsers = createSelector(
+  selectUsersImmutable,
+  (usersList) => {
+    return usersList.toJS()
+  }
+)
 
 export const selectRestaurants = createSelector(
   selectRestaurantsImmutable,
   restaurantsList => {
     return restaurantsList.toJS()
+  }
+)
+
+export const selectReviews = createSelector(
+  selectReviewsImmutable,
+  reviewsList => {
+    return reviewsList.toJS()
   }
 )
 
