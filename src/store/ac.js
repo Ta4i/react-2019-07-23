@@ -7,6 +7,7 @@ import {
   LOAD_RESTAURANTS,
   SUBTRACT_FROM_CART,
   LOAD_REVIEWS,
+  LOAD_USERS,
 } from './constants'
 
 export const increase = () => ({
@@ -61,5 +62,12 @@ export const loadReviews = restaurantId => {
   return {
     type: LOAD_REVIEWS,
     callAPI: '/api/reviews/?id=' + restaurantId,
+  }
+}
+
+export const loadUsers = () => {
+  return {
+    type: LOAD_USERS,
+    callAPI: '/api/users',
   }
 }

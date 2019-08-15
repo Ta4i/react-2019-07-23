@@ -9,7 +9,7 @@ import Counter from '../counter'
 import {connect} from 'react-redux'
 import OrderList from '../order-list'
 import {selectRestaurants} from '../../store/selectors'
-import {loadRestaurants} from '../../store/ac'
+import {loadRestaurants, loadUsers} from '../../store/ac'
 
 class App extends Component {
   componentDidMount() {
@@ -39,6 +39,7 @@ export default connect(
   dispatch => ({
     fetchData: () => {
       dispatch(loadRestaurants())
+      dispatch(loadUsers())
     },
   })
 )(App)

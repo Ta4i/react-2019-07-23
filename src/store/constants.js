@@ -19,3 +19,5 @@ export const ADD_REVIEW = 'ADD_REVIEW'
 export const LOAD_RESTAURANTS = 'LOAD_RESTAURANTS'
 
 export const LOAD_REVIEWS = 'LOAD_REVIEWS'
+
+export const LOAD_USERS = 'LOAD_USERS'

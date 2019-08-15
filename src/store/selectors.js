@@ -18,6 +18,8 @@ export const selectReviewsLoading = state => {
   return state.reviews.get('loading')
 }
 
+export const selectUsersImmutable = state => state.users.get('entities')
+
 export const selectReviews = createSelector(
   selectReviewsImmutable,
   reviews => {
@@ -32,7 +34,12 @@ export const selectRestaurants = createSelector(
   }
 )
 
-export const selectUsers = state => state.users
+export const selectUsers = createSelector(
+  selectUsersImmutable,
+  usersList => {
+    return usersList.toJS()
+  }
+)
 
 export const selectRestaurant = createSelector(
   selectRestaurants,
@@ -108,9 +115,10 @@ export const selectFullRestaurantReviews = createSelector(
   selectRestaurantReviews,
   selectUsers,
   (restaurantReviews, users) => {
+    console.log(users)
     return restaurantReviews.map(review => ({
       ...review,
-      user: users[review.userId],
+      user: users.find(user => user.id === review.userId),
     }))
   }
 )
