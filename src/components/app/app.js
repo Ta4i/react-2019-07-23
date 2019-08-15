@@ -9,7 +9,12 @@ import Counter from '../counter'
 import {connect} from 'react-redux'
 import OrderList from '../order-list'
 import {selectRestaurants} from '../../store/selectors'
-import {loadRestaurants} from '../../store/ac'
+import {
+  loadDishes,
+  loadRestaurants,
+  loadReviews,
+  loadUsers,
+} from '../../store/ac'
 
 class App extends Component {
   componentDidMount() {
@@ -37,6 +42,11 @@ class App extends Component {
 export default connect(
   state => ({restaurants: selectRestaurants(state)}),
   dispatch => ({
-    fetchData: () => dispatch(loadRestaurants()),
+    fetchData: () => {
+      dispatch(loadUsers())
+      dispatch(loadReviews())
+      dispatch(loadDishes())
+      dispatch(loadRestaurants())
+    },
   })
 )(App)
