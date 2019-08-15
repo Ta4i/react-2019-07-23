@@ -24,7 +24,7 @@ class Restaurant extends PureComponent {
       toggleOpenMenu,
       restaurant,
     } = this.props
-    const {id, image, name, menu, reviews} = restaurant
+    const {id, image, name, menu} = restaurant
 
     if (this.state.error) {
       return <h2>Something went wrong</h2>
@@ -34,7 +34,7 @@ class Restaurant extends PureComponent {
       <>
         <List.Item
           actions={[
-            <AverageRating reviews={reviews} />,
+            <AverageRating id={restaurant.id} />,
             <Button type={'primary'} onClick={toggleOpen}>
               {isOpen ? 'Hide reviews' : 'Show reviews'}
             </Button>,
@@ -54,7 +54,7 @@ class Restaurant extends PureComponent {
             description={`Menu positions: ${menu.length}`}
           />
         </List.Item>
-        {isOpen ? <RestaurantReviews restaurant={restaurant} /> : null}
+        {isOpen ? <RestaurantReviews id={restaurant.id} /> : null}
         {isMenuOpen ? (
           <RestaurantMenu menu={restaurant.menu} restaurantId={restaurant.id} />
         ) : null}
