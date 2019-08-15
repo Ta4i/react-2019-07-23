@@ -1,20 +1,23 @@
 import { normalizedReviews } from "../../fixtures";
-import { ADD_COMM } from "../constants";
-import { selectReviews } from "../selectors";
-import {} from "../index";
+import { arrayToMap } from "../utils";
+import { ADD_REVIEW } from "../constants";
 
-export default (reviewsState = normalizedReviews, action) => {
-  /*switch (action.type) {
-    case ADD_COMM: {
-      // debugger
-      const {restaurantId,user,comm} = action.payload;
+const initialState = arrayToMap(normalizedReviews);
+
+export default (reviewsState = initialState, action) => {
+  switch (action.type) {
+    case ADD_REVIEW: {
       return {
         ...reviewsState,
-        //[id]: cartState[id] ? cartState[id] + 1 : 1
+        [action.generatedId]: {
+          id: action.generatedId,
+          userId: action.userId,
+          text: action.payload.text,
+          rating: action.payload.rating
+        }
       };
     }
-    default:sState;
+    default:
+      return reviewsState;
   }
-return review*/
-  return reviewsState;
 };

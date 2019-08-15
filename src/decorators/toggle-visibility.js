@@ -4,8 +4,7 @@ import React, { Component } from "react";
 const toggleVisibility = OriginalComponent =>
   class WrappedComponent extends Component {
     state = {
-      isOpen: null,
-      isFormOpen: null
+      isOpen: null
     };
 
     render() {
@@ -13,9 +12,7 @@ const toggleVisibility = OriginalComponent =>
         <OriginalComponent
           {...this.props}
           isOpen={this.state.isOpen}
-          isFormOpen={this.state.isFormOpen}
           toggleOpen={this.toggleOpen}
-          formOpen={this.formOpen}
         />
       );
     }
@@ -24,8 +21,6 @@ const toggleVisibility = OriginalComponent =>
       this.setState(prev => ({
         isOpen: !prev.isOpen
       }));
-
-    formOpen = () => this.setState(prev => ({ isFormOpen: !prev.isFormOpen }));
   };
 
 export { toggleVisibility };

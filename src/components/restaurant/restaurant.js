@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import { Button, List } from "antd";
 import RestaurantReviews from "../restaurant-reviews";
-import RestaurantFormReviews from "../restaurant-form-review";
 import { toggleVisibility } from "../../decorators/toggle-visibility";
 import AverageRating from "../average-rating";
 import RestaurantMenu from "../restaurant-menu";
@@ -20,14 +19,12 @@ class Restaurant extends PureComponent {
   render() {
     const {
       isOpen,
-      isFormOpen,
       toggleOpen,
       isMenuOpen,
       toggleOpenMenu,
-      formOpen,
       restaurant
     } = this.props;
-    const { id, image, name, menu, reviews } = restaurant;
+    const { id, image, name, menu } = restaurant;
 
     if (this.state.error) {
       return <h2>Something went wrong</h2>;
@@ -37,10 +34,7 @@ class Restaurant extends PureComponent {
       <>
         <List.Item
           actions={[
-            <AverageRating restaurantId={restaurant.id} />,
-            <Button type={"primary"} onClick={formOpen}>
-              {isFormOpen ? "Hide form" : "write reviews"}
-            </Button>,
+            <AverageRating id={restaurant.id} />,
             <Button type={"primary"} onClick={toggleOpen}>
               {isOpen ? "Hide reviews" : "Show reviews"}
             </Button>,
@@ -60,10 +54,7 @@ class Restaurant extends PureComponent {
             description={`Menu positions: ${menu.length}`}
           />
         </List.Item>
-        {isOpen ? <RestaurantReviews restaurantId={restaurant.id} /> : null}
-        {isFormOpen ? (
-          <RestaurantFormReviews restaurantId={restaurant.id} />
-        ) : null}
+        {isOpen ? <RestaurantReviews id={restaurant.id} /> : null}
         {isMenuOpen ? (
           <RestaurantMenu menu={restaurant.menu} restaurantId={restaurant.id} />
         ) : null}

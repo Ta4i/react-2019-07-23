@@ -4,46 +4,40 @@ export const selectId = (_, ownProps) => ownProps.id;
 
 export const selectCart = state => state.cart;
 
-export const selectUsers = state => state.users;
-
 export const selectDishes = state => state.dishes;
 
-export const selectRestaurants = state => state.restaurants;
+export const selectRestaurantsImmutable = state =>
+  state.restaurants.get("entities");
+
+export const selectRestaurantsLoading = state =>
+  state.restaurants.get("loading");
 
 export const selectReviews = state => state.reviews;
 
-export const selectRestaurantReviewIds = (state, ownProps) => {
-  const restaurants = selectRestaurants(state);
-  const restaurant = restaurants.find(
-    rest => rest.id === ownProps.restaurantId
-  );
-  return restaurant.reviews;
-};
+export const selectUsers = state => state.users;
 
-export const selectRestaurantReviews = (state, ownProps) => {
-  const ids = selectRestaurantReviewIds(state, ownProps);
-  const reviews = selectReviews(state);
-  var retVal = [];
-  for (var i in ids) {
-    var id = ids[i];
-    for (var j in reviews) {
-      var review = reviews[j];
-      if (review.id === id) {
-        retVal.push(review);
-        break;
-      }
-    }
+export const selectRestaurants = createSelector(
+  selectRestaurantsImmutable,
+  restaurantsList => {
+    return restaurantsList.toJS();
   }
-  return retVal;
-};
+);
 
-export const selectReviewById = (state, ownProps) => {
-  const id = ownProps.id;
-  var rev = selectReviews(state).find(review => review.id === id);
-  const user = selectUsers(state).find(user => user.id === rev.userId);
-  rev.user = user.name;
-  return rev;
-};
+export const selectRestaurant = createSelector(
+  selectRestaurants,
+  selectId,
+  (restaurants, id) => restaurants.find(restaurant => restaurant.id === id)
+);
+
+export const selectDishList = createSelector(
+  selectDishes,
+  dishes => Object.values(dishes)
+);
+
+export const selectUserList = createSelector(
+  selectUsers,
+  users => Object.values(users)
+);
 
 export const selectDish = createSelector(
   selectDishes,
@@ -59,64 +53,20 @@ export const selectDishAmount = createSelector(
 
 export const selectOrderedDishes = createSelector(
   selectCart,
-  selectDishes,
+  selectDishList,
   (cart, dishes) => {
-    var totalPrice = 0;
-    var orderedDishes = [];
-    for (var dishId in cart) {
-      const dish = dishes[dishId];
-      orderedDishes.push(dish);
-      const amount = cart[dishId];
-      dish.amount = amount;
-      totalPrice += amount * dish.price;
-    }
-    return { dishes: orderedDishes, totalPrice: totalPrice };
-    /*return dishes.reduce(
-            (result, dish) => {
-                restaurant.menu.forEach(dishId => {
-                    const amount = cart[dishId];
-                    const dish = selectDish(dishId)
-                    if (amount) {
-                        const totalDishPrice = amount * dish.price;
-                        result.totalPrice += totalDishPrice;
-                        result.dishes.push({
-                            ...dish,
-                            amount,
-                            totalDishPrice
-                        });
-                    }
-                });
-                debugger
-                return result;
-            },
-            {
-                dishes: [],
-                totalPrice: 0
-            }
-        );*/
-  }
-);
-/*
-export const selectOrderedDishes = createSelector(
-  selectCart,
-  selectRestaurants,
-  (cart, restaurants) => {
-    return restaurants.reduce(
-      (result, restaurant) => {
-        restaurant.menu.forEach(dishId => {
-          const amount = cart[dishId];
-            const dish = selectDish(dishId)
-          if (amount) {
-            const totalDishPrice = amount * dish.price;
-            result.totalPrice += totalDishPrice;
-            result.dishes.push({
-              ...dish,
-              amount,
-              totalDishPrice
-            });
-          }
-        });
-          debugger
+    return dishes.reduce(
+      (result, dish) => {
+        const amount = cart[dish.id];
+        if (amount) {
+          const totalDishPrice = amount * dish.price;
+          result.totalPrice += totalDishPrice;
+          result.dishes.push({
+            ...dish,
+            amount,
+            totalDishPrice
+          });
+        }
         return result;
       },
       {
@@ -127,4 +77,32 @@ export const selectOrderedDishes = createSelector(
   }
 );
 
-   */
+export const selectRestaurantReviews = createSelector(
+  selectRestaurant,
+  selectReviews,
+  (restaurant, reviews) => {
+    return restaurant.reviews.map(reviewId => reviews[reviewId]);
+  }
+);
+
+export const selectFullRestaurantReviews = createSelector(
+  selectRestaurantReviews,
+  selectUsers,
+  (restaurantReviews, users) => {
+    return restaurantReviews.map(review => ({
+      ...review,
+      user: users[review.userId]
+    }));
+  }
+);
+
+export const selectRatings = createSelector(
+  selectRestaurantReviews,
+  restaurantReviews => {
+    const rawRating =
+      restaurantReviews.reduce((acc, { rating }) => {
+        return acc + rating;
+      }, 0) / restaurantReviews.length;
+    return Math.floor(rawRating * 2) / 2;
+  }
+);

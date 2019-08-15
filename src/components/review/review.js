@@ -1,11 +1,7 @@
 import React from "react";
 import { Comment, Rate, List } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { selectReviewById } from "../../store/selectors";
 
-function Review(props) {
-  const { id } = props;
-  const review = useSelector(state => selectReviewById(state, props));
+function Review({ review }) {
   return (
     <List.Item data-autoid="REVIEW">
       <Comment
@@ -14,9 +10,9 @@ function Review(props) {
           backgroundColor: "white"
         }}
         author={[
-          review.user,
+          review.user.name,
           <Rate
-            key={id}
+            key={review.id}
             disabled
             defaultValue={review.rating}
             style={{ marginLeft: "24px" }}

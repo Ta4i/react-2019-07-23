@@ -1,16 +1,16 @@
 import { combineReducers } from "redux";
 import counter from "./counter";
 import restaurants from "./restaurants";
-import reviews from "./reviews";
 import cart from "./cart";
-import users from "./users";
 import dishes from "./dishes";
+import users from "./users";
+import reviews from "./reviews";
 
 export default combineReducers({
   count: counter,
   restaurants,
   cart,
-  users,
   dishes,
+  users,
   reviews
 });

@@ -1,20 +1,25 @@
 import React from "react";
 import { List } from "antd";
 import Review from "../review";
-import { useDispatch, useSelector } from "react-redux";
-import { selectRestaurantReviewIds } from "../../store/selectors";
+import { connect } from "react-redux";
+import { selectFullRestaurantReviews } from "../../store/selectors";
+import AddReview from "../add-review";
 
 function RestaurantReviews(props) {
-  const { restaurantId } = props;
-  const reviews = useSelector(state => selectRestaurantReviewIds(state, props));
+  const { reviews, id } = props;
 
   return (
-    <List
-      itemLayout={"horizontal"}
-      dataSource={reviews}
-      renderItem={reviewId => <Review key={reviewId} id={reviewId} />}
-    />
+    <>
+      <List
+        itemLayout={"horizontal"}
+        dataSource={reviews}
+        renderItem={review => <Review key={review.id} review={review} />}
+      />
+      <AddReview restaurantId={id} />
+    </>
   );
 }
 
-export default RestaurantReviews;
+export default connect((state, ownProps) => ({
+  reviews: selectFullRestaurantReviews(state, ownProps)
+}))(RestaurantReviews);
