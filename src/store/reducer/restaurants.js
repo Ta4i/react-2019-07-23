@@ -1,5 +1,5 @@
 import {ADD_REVIEW, FAIL, LOAD_RESTAURANTS, START, SUCCESS} from '../constants'
-import {fromJS, List} from 'immutable'
+import {fromJS} from 'immutable'
 
 const initialState = {
   loaded: false,

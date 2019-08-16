@@ -6,10 +6,7 @@ import RestaurantList from '../restaurant-list'
 import OrderForm from '../order-form'
 import Counter from '../counter'
 // import RestaurantsMap from '../restaurants-map'
-import {connect} from 'react-redux'
 import OrderList from '../order-list'
-import {selectRestaurants} from '../../store/selectors'
-import {loadRestaurants} from '../../store/ac'
 
 class App extends Component {
   componentDidMount() {
@@ -23,7 +20,7 @@ class App extends Component {
       <Layout>
         <Header />
         <main role="main">
-          <RestaurantList restaurants={this.props.restaurants} />
+          <RestaurantList />
           {/*<RestaurantsMap restaurants={this.props.restaurants} />*/}
           <OrderList />
           <OrderForm />
@@ -34,9 +31,4 @@ class App extends Component {
   }
 }
 
-export default connect(
-  state => ({restaurants: selectRestaurants(state)}),
-  dispatch => ({
-    fetchData: () => dispatch(loadRestaurants()),
-  })
-)(App)
+export default App
