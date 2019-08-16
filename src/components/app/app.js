@@ -8,6 +8,7 @@ import OrderList from '../order-list'
 import {Route} from 'react-router-dom'
 import RestaurantListPage from '../routes/restaurant-list-page'
 import RestaurantsMapPage from '../routes/restaurants-map-page'
+import RestaurantMenuPage from '../routes/restaurant-menu-page'
 
 class App extends Component {
   componentDidMount() {
@@ -22,6 +23,7 @@ class App extends Component {
         <Header />
         <main role="main">
           <Route path={'/restaurants'} component={RestaurantListPage} />
+          <Route path={'/restaurant-menu/:id'} component={RestaurantMenuPage} />
           <Route
             path={'/restaurants-map'}
             render={params => <RestaurantsMapPage />}

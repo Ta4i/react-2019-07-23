@@ -68,7 +68,10 @@ export const selectUsers = createSelector(
 export const selectRestaurant = createSelector(
   selectRestaurants,
   selectId,
-  (restaurants, id) => restaurants.find(restaurant => restaurant.id === id)
+  (restaurants, id) => {
+    debugger
+    return restaurants.find(restaurant => restaurant.id === id)
+  }
 )
 
 export const selectDishList = createSelector(
