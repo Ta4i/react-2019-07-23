@@ -21,7 +21,7 @@ class App extends Component {
         <Header />
         <main role="main">
           <RestaurantList />
-          {/*<RestaurantsMap restaurants={this.props.restaurants} />*/}
+          {/*<RestaurantsMap />*/}
           <OrderList />
           <OrderForm />
         </main>

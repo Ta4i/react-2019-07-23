@@ -17,6 +17,8 @@ export const selectRestaurantsImmutable = state =>
 export const selectRestaurantsLoading = state =>
   state.restaurants.get('loading')
 
+export const selectRestaurantsLoaded = state => state.restaurants.get('loaded')
+
 export const selectDishesImmutable = state => state.dishes.get('entities')
 
 export const selectDishesLoading = state => state.dishes.get('loading')
@@ -121,9 +123,7 @@ export const selectRestaurantReviews = createSelector(
   selectRestaurant,
   selectReviews,
   (restaurant, reviews) => {
-    return restaurant.reviews
-      .map(reviewId => reviews[reviewId])
-      .filter(item => item !== undefined)
+    return restaurant.reviews.map(reviewId => reviews[reviewId]).filter(Boolean)
   }
 )
 
