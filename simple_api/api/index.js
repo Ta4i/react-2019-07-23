@@ -7,7 +7,25 @@ const reply = (res, body, timeout = 1000, status = 200) =>
   }, timeout)
 
 router.get('/restaurants', function(req, res, next) {
-  reply(res, mocks.restaurants)
+  const reviews = mocks.reviews
+  const restaurants = mocks.restaurants.map(restaurant => {
+    const rawRating =
+      reviews.reduce((acc, review) => {
+        if (!restaurant.reviews.includes(review.id)) {
+          return acc
+        }
+
+        return acc + review.rating
+      }, 0) / restaurant.reviews.length
+    const rating = Math.floor(rawRating * 2) / 2
+
+    return {
+      ...restaurant,
+      rating,
+    }
+  })
+
+  reply(res, restaurants)
 })
 
 router.get('/dishes', function(req, res, next) {

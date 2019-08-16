@@ -25,6 +25,7 @@ class RestaurantList extends Component {
         renderItem={restaurant => (
           <Restaurant
             key={restaurant.id}
+            id={restaurant.id}
             restaurant={restaurant}
             isMenuOpen={openItemId === restaurant.id}
             toggleOpenMenu={toggleOpen}

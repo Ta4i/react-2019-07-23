@@ -5,6 +5,15 @@ import {toggleVisibility} from '../../decorators/toggle-visibility'
 import AverageRating from '../average-rating'
 import RestaurantMenu from '../restaurant-menu'
 
+import {connect} from 'react-redux'
+import {
+  selectReviewsLoading,
+  selectRestaurantReviews,
+  selectDishesLoading,
+  selectRestaurantDishes,
+} from '../../store/selectors'
+import {loadReviews, loadDishes} from '../../store/ac'
+
 class Restaurant extends PureComponent {
   state = {
     error: null,
@@ -17,14 +26,8 @@ class Restaurant extends PureComponent {
   }
 
   render() {
-    const {
-      isOpen,
-      toggleOpen,
-      isMenuOpen,
-      toggleOpenMenu,
-      restaurant,
-    } = this.props
-    const {id, image, name, menu} = restaurant
+    const {isOpen, isMenuOpen, restaurant, id} = this.props
+    const {image, name, menu} = restaurant
 
     if (this.state.error) {
       return <h2>Something went wrong</h2>
@@ -35,12 +38,12 @@ class Restaurant extends PureComponent {
         <List.Item
           actions={[
             <AverageRating id={restaurant.id} />,
-            <Button type={'primary'} onClick={toggleOpen}>
+            <Button type={'primary'} onClick={this.handleToggle}>
               {isOpen ? 'Hide reviews' : 'Show reviews'}
             </Button>,
             <Button
               type="primary"
-              onClick={() => toggleOpenMenu(id)}
+              onClick={this.handleToggleMenu}
               data-autoid={`OPEN_MENU_ITEM_${id}`}
             >
               {isMenuOpen ? 'Close menu' : 'Open menu'}
@@ -56,11 +59,70 @@ class Restaurant extends PureComponent {
         </List.Item>
         {isOpen ? <RestaurantReviews id={restaurant.id} /> : null}
         {isMenuOpen ? (
-          <RestaurantMenu menu={restaurant.menu} restaurantId={restaurant.id} />
+          <RestaurantMenu
+            menu={restaurant.menu}
+            restaurantId={restaurant.id}
+            id={restaurant.id}
+          />
         ) : null}
       </>
     )
   }
+
+  handleToggle = () => {
+    const {
+      id,
+      toggleOpen,
+      reviews,
+      fetchReviews,
+      isOpen,
+      loadingReviews,
+    } = this.props
+    if (!reviews.length && !isOpen) {
+      fetchReviews(id)
+    }
+    if (!loadingReviews) {
+      toggleOpen()
+    }
+  }
+
+  handleToggleMenu = () => {
+    const {
+      id,
+      fetchDishes,
+      loadingDishes,
+      toggleOpenMenu,
+      dishes,
+      isMenuOpen,
+    } = this.props
+
+    if (!dishes.length && !isMenuOpen) {
+      fetchDishes(id)
+    }
+
+    if (!loadingDishes) {
+      toggleOpenMenu(id)
+    }
+  }
 }
 
-export default toggleVisibility(Restaurant)
+const mapStateToProps = (state, ownProps) => ({
+  loadingReviews: selectReviewsLoading(state),
+  loadingDishes: selectDishesLoading(state),
+  reviews: selectRestaurantReviews(state, ownProps),
+  dishes: selectRestaurantDishes(state, ownProps),
+})
+
+const mapDispatchToProps = dispatch => ({
+  fetchReviews: id => {
+    dispatch(loadReviews(id))
+  },
+  fetchDishes: id => {
+    dispatch(loadDishes(id))
+  },
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(toggleVisibility(Restaurant))

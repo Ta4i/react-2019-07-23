@@ -2,9 +2,9 @@ import {createSelector} from 'reselect'
 
 export const selectId = (_, ownProps) => ownProps.id
 
-export const selectCart = state => state.cart
+export const selectCartImmutable = state => state.cart
 
-export const selectDishes = state => state.dishes
+export const selectDishesImmutable = state => state.dishes.get('entities')
 
 export const selectRestaurantsImmutable = state =>
   state.restaurants.get('entities')
@@ -12,9 +12,34 @@ export const selectRestaurantsImmutable = state =>
 export const selectRestaurantsLoading = state =>
   state.restaurants.get('loading')
 
-export const selectReviews = state => state.reviews
+export const selectReviewsImmutable = state => state.reviews.get('entities')
 
-export const selectUsers = state => state.users
+export const selectReviewsLoading = state => {
+  return state.reviews.get('loading')
+}
+
+export const selectDishesLoading = state => {
+  return state.dishes.get('loading')
+}
+
+export const selectCart = createSelector(
+  selectCartImmutable,
+  cart => cart.toJS()
+)
+
+export const selectDishes = createSelector(
+  selectDishesImmutable,
+  dishes => dishes.toJS()
+)
+
+export const selectUsersImmutable = state => state.users.get('entities')
+
+export const selectReviews = createSelector(
+  selectReviewsImmutable,
+  reviews => {
+    return reviews.toJS()
+  }
+)
 
 export const selectRestaurants = createSelector(
   selectRestaurantsImmutable,
@@ -23,26 +48,39 @@ export const selectRestaurants = createSelector(
   }
 )
 
+export const selectUsers = createSelector(
+  selectUsersImmutable,
+  usersList => {
+    return usersList.toJS()
+  }
+)
+
 export const selectRestaurant = createSelector(
   selectRestaurants,
   selectId,
-  (restaurants, id) => restaurants.find(restaurant => restaurant.id === id)
+  (restaurants, id) => {
+    return restaurants.find(restaurant => restaurant.id === id)
+  }
 )
-
-export const selectDishList = createSelector(
-  selectDishes,
-  dishes => Object.values(dishes)
-)
-
 export const selectUserList = createSelector(
   selectUsers,
   users => Object.values(users)
 )
 
+export const selectRestaurantDishes = createSelector(
+  selectRestaurant,
+  selectDishes,
+  (restaurant, dishes) => {
+    return dishes.filter(dish => {
+      return restaurant.menu.includes(dish.id)
+    })
+  }
+)
+
 export const selectDish = createSelector(
   selectDishes,
   selectId,
-  (dishes, id) => dishes[id]
+  (dishes, id) => dishes.find(dish => dish.id === id)
 )
 
 export const selectDishAmount = createSelector(
@@ -53,7 +91,7 @@ export const selectDishAmount = createSelector(
 
 export const selectOrderedDishes = createSelector(
   selectCart,
-  selectDishList,
+  selectDishes,
   (cart, dishes) => {
     return dishes.reduce(
       (result, dish) => {
@@ -81,7 +119,13 @@ export const selectRestaurantReviews = createSelector(
   selectRestaurant,
   selectReviews,
   (restaurant, reviews) => {
-    return restaurant.reviews.map(reviewId => reviews[reviewId])
+    if (!reviews.length) {
+      return []
+    }
+
+    return reviews.filter(review => {
+      return restaurant.reviews.includes(review.id)
+    })
   }
 )
 
@@ -91,18 +135,14 @@ export const selectFullRestaurantReviews = createSelector(
   (restaurantReviews, users) => {
     return restaurantReviews.map(review => ({
       ...review,
-      user: users[review.userId],
+      user: users.find(user => user.id === review.userId),
     }))
   }
 )
 
-export const selectRatings = createSelector(
-  selectRestaurantReviews,
-  restaurantReviews => {
-    const rawRating =
-      restaurantReviews.reduce((acc, {rating}) => {
-        return acc + rating
-      }, 0) / restaurantReviews.length
-    return Math.floor(rawRating * 2) / 2
+export const selectRestaurantAverageRating = createSelector(
+  selectRestaurant,
+  restaurant => {
+    return restaurant.rating
   }
 )
