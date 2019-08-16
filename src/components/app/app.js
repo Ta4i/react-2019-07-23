@@ -5,7 +5,7 @@ import Header from '../header'
 import OrderForm from '../order-form'
 import Counter from '../counter'
 import OrderList from '../order-list'
-import {Route} from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 import RestaurantListPage from '../routes/restaurant-list-page'
 import RestaurantsMapPage from '../routes/restaurants-map-page'
 import RestaurantMenuPage from '../routes/restaurant-menu-page'
@@ -22,12 +22,27 @@ class App extends Component {
       <Layout>
         <Header />
         <main role="main">
-          <Route path={'/restaurants'} component={RestaurantListPage} />
-          <Route path={'/restaurant-menu/:id'} component={RestaurantMenuPage} />
-          <Route
-            path={'/restaurants-map'}
-            render={params => <RestaurantsMapPage />}
-          />
+          <Switch>
+            <Route
+              path={'/restaurants'}
+              render={params => {
+                console.log(params)
+                return <RestaurantListPage />
+              }}
+            />
+            <Route
+              path={'/restaurant-menu/:id'}
+              render={params => {
+                console.log(params)
+                return <RestaurantMenuPage {...params} />
+              }}
+            />
+            <Route
+              path={'/restaurants-map'}
+              render={params => <RestaurantsMapPage />}
+            />
+            <Route path={'/'} render={() => <h3>Page found</h3>} />
+          </Switch>
           <OrderList />
           <OrderForm />
         </main>
