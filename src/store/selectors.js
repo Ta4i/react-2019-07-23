@@ -4,7 +4,7 @@ export const selectId = (_, ownProps) => ownProps.id
 
 export const selectCartImmutable = state => state.cart
 
-export const selectDishes = state => state.dishes
+export const selectDishesImmutable = state => state.dishes.get('entities')
 
 export const selectRestaurantsImmutable = state =>
   state.restaurants.get('entities')
@@ -18,9 +18,18 @@ export const selectReviewsLoading = state => {
   return state.reviews.get('loading')
 }
 
+export const selectDishesLoading = state => {
+  return state.dishes.get('loading')
+}
+
 export const selectCart = createSelector(
   selectCartImmutable,
   cart => cart.toJS()
+)
+
+export const selectDishes = createSelector(
+  selectDishesImmutable,
+  dishes => dishes.toJS()
 )
 
 export const selectUsersImmutable = state => state.users.get('entities')
@@ -53,21 +62,25 @@ export const selectRestaurant = createSelector(
     return restaurants.find(restaurant => restaurant.id === id)
   }
 )
-
-export const selectDishList = createSelector(
-  selectDishes,
-  dishes => Object.values(dishes)
-)
-
 export const selectUserList = createSelector(
   selectUsers,
   users => Object.values(users)
 )
 
+export const selectRestaurantDishes = createSelector(
+  selectRestaurant,
+  selectDishes,
+  (restaurant, dishes) => {
+    return dishes.filter(dish => {
+      return restaurant.menu.includes(dish.id)
+    })
+  }
+)
+
 export const selectDish = createSelector(
   selectDishes,
   selectId,
-  (dishes, id) => dishes[id]
+  (dishes, id) => dishes.find(dish => dish.id === id)
 )
 
 export const selectDishAmount = createSelector(
@@ -78,7 +91,7 @@ export const selectDishAmount = createSelector(
 
 export const selectOrderedDishes = createSelector(
   selectCart,
-  selectDishList,
+  selectDishes,
   (cart, dishes) => {
     return dishes.reduce(
       (result, dish) => {
@@ -120,7 +133,6 @@ export const selectFullRestaurantReviews = createSelector(
   selectRestaurantReviews,
   selectUsers,
   (restaurantReviews, users) => {
-    console.log(users)
     return restaurantReviews.map(review => ({
       ...review,
       user: users.find(user => user.id === review.userId),

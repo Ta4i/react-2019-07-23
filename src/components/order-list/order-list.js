@@ -77,9 +77,7 @@ class OrderList extends Component {
 }
 
 export default connect(
-  state => ({
-    ...selectOrderedDishes(state),
-  }),
+  state => selectOrderedDishes(state),
   {
     addDishToCart,
     subtractDishFromCart,

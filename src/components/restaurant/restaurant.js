@@ -9,8 +9,10 @@ import {connect} from 'react-redux'
 import {
   selectReviewsLoading,
   selectRestaurantReviews,
+  selectDishesLoading,
+  selectRestaurantDishes,
 } from '../../store/selectors'
-import {loadReviews} from '../../store/ac'
+import {loadReviews, loadDishes} from '../../store/ac'
 
 class Restaurant extends PureComponent {
   state = {
@@ -24,7 +26,7 @@ class Restaurant extends PureComponent {
   }
 
   render() {
-    const {isOpen, isMenuOpen, toggleOpenMenu, restaurant, id} = this.props
+    const {isOpen, isMenuOpen, restaurant, id} = this.props
     const {image, name, menu} = restaurant
 
     if (this.state.error) {
@@ -41,7 +43,7 @@ class Restaurant extends PureComponent {
             </Button>,
             <Button
               type="primary"
-              onClick={() => toggleOpenMenu(id)}
+              onClick={this.handleToggleMenu}
               data-autoid={`OPEN_MENU_ITEM_${id}`}
             >
               {isMenuOpen ? 'Close menu' : 'Open menu'}
@@ -57,32 +59,66 @@ class Restaurant extends PureComponent {
         </List.Item>
         {isOpen ? <RestaurantReviews id={restaurant.id} /> : null}
         {isMenuOpen ? (
-          <RestaurantMenu menu={restaurant.menu} restaurantId={restaurant.id} />
+          <RestaurantMenu
+            menu={restaurant.menu}
+            restaurantId={restaurant.id}
+            id={restaurant.id}
+          />
         ) : null}
       </>
     )
   }
 
   handleToggle = () => {
-    const {id, toggleOpen, reviews, fetchData, isOpen, loading} = this.props
-    console.log(reviews)
+    const {
+      id,
+      toggleOpen,
+      reviews,
+      fetchReviews,
+      isOpen,
+      loadingReviews,
+    } = this.props
     if (!reviews.length && !isOpen) {
-      fetchData(id)
+      fetchReviews(id)
     }
-    if (!loading) {
+    if (!loadingReviews) {
       toggleOpen()
+    }
+  }
+
+  handleToggleMenu = () => {
+    const {
+      id,
+      fetchDishes,
+      loadingDishes,
+      toggleOpenMenu,
+      dishes,
+      isMenuOpen,
+    } = this.props
+
+    if (!dishes.length && !isMenuOpen) {
+      fetchDishes(id)
+    }
+
+    if (!loadingDishes) {
+      toggleOpenMenu(id)
     }
   }
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  loading: selectReviewsLoading(state),
+  loadingReviews: selectReviewsLoading(state),
+  loadingDishes: selectDishesLoading(state),
   reviews: selectRestaurantReviews(state, ownProps),
+  dishes: selectRestaurantDishes(state, ownProps),
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchData: id => {
+  fetchReviews: id => {
     dispatch(loadReviews(id))
+  },
+  fetchDishes: id => {
+    dispatch(loadDishes(id))
   },
 })
 
