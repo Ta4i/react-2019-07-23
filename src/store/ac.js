@@ -3,13 +3,22 @@ import {
   ADD_TO_CART,
   DECREMENT,
   DELETE_FROM_CART,
+  FAIL,
   INCREMENT,
   LOAD_DISHES,
   LOAD_RESTAURANTS,
   LOAD_REVIEWS,
   LOAD_USERS,
+  START,
   SUBTRACT_FROM_CART,
+  SUCCESS,
 } from './constants'
+import {
+  selectReviewsLoaded,
+  selectReviewsLoading,
+  selectUsersLoaded,
+  selectUsersLoading,
+} from './selectors'
 
 export const increase = () => ({
   type: INCREMENT,
@@ -77,5 +86,33 @@ export const loadUsers = () => {
   return {
     type: LOAD_USERS,
     callAPI: '/api/users',
+  }
+}
+
+export const loadFullReviewsData = () => (dispatch, getState) => {
+  const state = getState()
+
+  const isReviewsLoading = selectReviewsLoading(state)
+  const isReviewsLoaded = selectReviewsLoaded(state)
+  if (!isReviewsLoaded && !isReviewsLoading) {
+    dispatch({type: LOAD_REVIEWS + START})
+    fetch('/api/reviews')
+      .then(res => res.json())
+      .then(response => {
+        dispatch({type: LOAD_REVIEWS + SUCCESS, response})
+      })
+      .catch(error => dispatch({type: LOAD_REVIEWS + FAIL, error}))
+  }
+
+  const isUsersLoading = selectUsersLoading(state)
+  const isUsersLoaded = selectUsersLoaded(state)
+  if (!isUsersLoading && !isUsersLoaded) {
+    dispatch({type: LOAD_USERS + START})
+    fetch('/api/users')
+      .then(res => res.json())
+      .then(response => {
+        dispatch({type: LOAD_USERS + SUCCESS, response})
+      })
+      .catch(error => dispatch({type: LOAD_USERS + FAIL, error}))
   }
 }

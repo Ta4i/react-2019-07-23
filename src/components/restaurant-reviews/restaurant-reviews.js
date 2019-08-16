@@ -5,33 +5,17 @@ import {connect} from 'react-redux'
 import {
   selectFullRestaurantReviews,
   selectReviewsLoaded,
-  selectReviewsLoading,
   selectUsersLoaded,
-  selectUsersLoading,
 } from '../../store/selectors'
 import AddReview from '../add-review'
 import Loader from '../loader'
-import {loadReviews, loadUsers} from '../../store/ac'
+import {loadFullReviewsData} from '../../store/ac'
 
 function RestaurantReviews(props) {
-  const {
-    reviews,
-    id,
-    loadingReviews,
-    loadingUsers,
-    loadedReviews,
-    loadedUsers,
-    loadReviews,
-    loadUsers,
-  } = props
+  const {reviews, id, loadedReviews, loadedUsers, loadFullReviewsData} = props
 
   useEffect(() => {
-    if (!loadingUsers && !loadedUsers) {
-      loadUsers()
-    }
-    if (!loadingReviews && !loadedReviews) {
-      loadReviews()
-    }
+    loadFullReviewsData()
   })
 
   return !loadedReviews || !loadedUsers ? (
@@ -51,13 +35,10 @@ function RestaurantReviews(props) {
 export default connect(
   (state, ownProps) => ({
     reviews: selectFullRestaurantReviews(state, ownProps),
-    loadingReviews: selectReviewsLoading(state),
-    loadingUsers: selectUsersLoading(state),
     loadedReviews: selectReviewsLoaded(state),
     loadedUsers: selectUsersLoaded(state),
   }),
   {
-    loadReviews,
-    loadUsers,
+    loadFullReviewsData,
   }
 )(RestaurantReviews)
