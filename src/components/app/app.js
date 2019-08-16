@@ -2,11 +2,12 @@ import React, {Component} from 'react'
 import {Layout} from 'antd'
 import './app.css'
 import Header from '../header'
-import RestaurantList from '../restaurant-list'
 import OrderForm from '../order-form'
 import Counter from '../counter'
-// import RestaurantsMap from '../restaurants-map'
 import OrderList from '../order-list'
+import {Route} from 'react-router-dom'
+import RestaurantListPage from '../routes/restaurant-list-page'
+import RestaurantsMapPage from '../routes/restaurants-map-page'
 
 class App extends Component {
   componentDidMount() {
@@ -20,8 +21,11 @@ class App extends Component {
       <Layout>
         <Header />
         <main role="main">
-          <RestaurantList />
-          {/*<RestaurantsMap />*/}
+          <Route path={'/restaurants'} component={RestaurantListPage} />
+          <Route
+            path={'/restaurants-map'}
+            render={params => <RestaurantsMapPage />}
+          />
           <OrderList />
           <OrderForm />
         </main>
