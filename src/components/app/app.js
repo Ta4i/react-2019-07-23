@@ -2,13 +2,13 @@ import React, {Component} from 'react'
 import {Layout} from 'antd'
 import './app.css'
 import Header from '../header'
-import OrderForm from '../order-form'
 import Counter from '../counter'
-import OrderList from '../order-list'
 import {Route, Switch} from 'react-router-dom'
 import RestaurantListPage from '../routes/restaurant-list-page'
 import RestaurantsMapPage from '../routes/restaurants-map-page'
 import RestaurantMenuPage from '../routes/restaurant-menu-page'
+import OrderPage from '../routes/order-page'
+import OrderCompletePage from '../routes/order-complete-page'
 
 class App extends Component {
   componentDidMount() {
@@ -38,13 +38,45 @@ class App extends Component {
               }}
             />
             <Route
+              path={'/order'}
+              render={params => {
+                console.log(params)
+                return <OrderPage />
+              }}
+            />
+            <Route
+              path={'/order-complete'}
+              render={params => {
+                console.log(params)
+                return <OrderCompletePage />
+              }}
+            />
+            <Route
               path={'/restaurants-map'}
-              render={params => <RestaurantsMapPage />}
+              render={params => (
+                <Switch>
+                  <Route
+                    path={'/restaurants-map/:id'}
+                    render={params => {
+                      return (
+                        <>
+                          <h2>Find our restaurant</h2>
+                          <RestaurantsMapPage {...params} />
+                        </>
+                      )
+                    }}
+                  />
+                  <Route
+                    path={'/restaurants-map'}
+                    render={params => {
+                      return <RestaurantsMapPage {...params} />
+                    }}
+                  />
+                </Switch>
+              )}
             />
             <Route path={'/'} render={() => <h3>Page found</h3>} />
           </Switch>
-          <OrderList />
-          <OrderForm />
         </main>
         <Counter />
       </Layout>

@@ -3,9 +3,10 @@ import RestaurantsMap from '../restaurants-map'
 
 class RestaurantsMapPage extends Component {
   render() {
+    console.log(this.props)
     return (
       <div>
-        <RestaurantsMap />
+        <RestaurantsMap restaurantId={this.props.match.params.id || null} />
       </div>
     )
   }
