@@ -4,3 +4,8 @@
   padding: 18px;
   text-align: center;
 }
+
+.menu {
+  position: relative;
+  top: -10px;
+}

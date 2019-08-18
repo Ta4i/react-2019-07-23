@@ -2,14 +2,13 @@ import React, {Component} from 'react'
 import {Layout} from 'antd'
 import './app.css'
 import Header from '../header'
-import RestaurantList from '../restaurant-list'
 import OrderForm from '../order-form'
 import Counter from '../counter'
-// import RestaurantsMap from '../restaurants-map'
-import {connect} from 'react-redux'
 import OrderList from '../order-list'
-import {selectRestaurants} from '../../store/selectors'
-import {loadRestaurants} from '../../store/ac'
+import {Route, Switch} from 'react-router-dom'
+import RestaurantListPage from '../routes/restaurant-list-page'
+import RestaurantsMapPage from '../routes/restaurants-map-page'
+import RestaurantMenuPage from '../routes/restaurant-menu-page'
 
 class App extends Component {
   componentDidMount() {
@@ -23,8 +22,27 @@ class App extends Component {
       <Layout>
         <Header />
         <main role="main">
-          <RestaurantList restaurants={this.props.restaurants} />
-          {/*<RestaurantsMap restaurants={this.props.restaurants} />*/}
+          <Switch>
+            <Route
+              path={'/restaurants'}
+              render={params => {
+                console.log(params)
+                return <RestaurantListPage />
+              }}
+            />
+            <Route
+              path={'/restaurant-menu/:id'}
+              render={params => {
+                console.log(params)
+                return <RestaurantMenuPage {...params} />
+              }}
+            />
+            <Route
+              path={'/restaurants-map'}
+              render={params => <RestaurantsMapPage />}
+            />
+            <Route path={'/'} render={() => <h3>Page found</h3>} />
+          </Switch>
           <OrderList />
           <OrderForm />
         </main>
@@ -34,9 +52,4 @@ class App extends Component {
   }
 }
 
-export default connect(
-  state => ({restaurants: selectRestaurants(state)}),
-  dispatch => ({
-    fetchData: () => dispatch(loadRestaurants()),
-  })
-)(App)
+export default App

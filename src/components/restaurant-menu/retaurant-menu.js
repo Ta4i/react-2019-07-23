@@ -1,15 +1,52 @@
 import React from 'react'
 import Dish from '../dish'
 import {Row, Col} from 'antd'
+import {useDispatch, useSelector} from 'react-redux'
+import {
+  selectDishesLoaded,
+  selectDishesLoading,
+  selectRestaurant,
+  selectRestaurantsLoaded,
+  selectRestaurantsLoading,
+} from '../../store/selectors'
+import {loadDishes, loadRestaurants} from '../../store/ac'
+import Loader from '../loader'
 
 function RestaurantMenu(props) {
+  const {
+    loadingDishes,
+    loadedDishes,
+    loadingRestaurants,
+    loadedRestaurants,
+    restaurant,
+  } = useSelector(state => ({
+    loadingDishes: selectDishesLoading(state),
+    loadedDishes: selectDishesLoaded(state),
+    loadingRestaurants: selectRestaurantsLoading(state),
+    loadedRestaurants: selectRestaurantsLoaded(state),
+    restaurant: selectRestaurant(state, {id: props.restaurantId}),
+  }))
+  const dispatch = useDispatch()
+
+  if (!loadedDishes && !loadingDishes) {
+    dispatch(loadDishes())
+  }
+
+  if (!loadingRestaurants && !loadedRestaurants) {
+    dispatch(loadRestaurants())
+  }
+
+  if (!loadedDishes || !loadedRestaurants) {
+    return <Loader />
+  }
+
   return (
     <div
       style={{padding: '16px'}}
       data-autoid={`MENU_ITEMS_${props.restaurantId}`}
     >
       <Row gutter={16}>
-        {props.menu.map(dishId => (
+        {restaurant.menu.map(dishId => (
           <Col key={dishId} span={8}>
             <Dish id={dishId} />
           </Col>

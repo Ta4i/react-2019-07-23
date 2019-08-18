@@ -3,10 +3,18 @@ import {List} from 'antd'
 import Restaurant from '../restaurant'
 import {accordion} from '../../decorators/accordion'
 import connect from 'react-redux/es/connect/connect'
-import {selectRestaurantsLoading} from '../../store/selectors'
+import {
+  selectRestaurants,
+  selectRestaurantsLoading,
+} from '../../store/selectors'
 import Loader from '../loader'
+import {loadRestaurants, loadReviews} from '../../store/ac'
 
 class RestaurantList extends Component {
+  componentDidMount() {
+    this.props.fetchData()
+  }
+
   render() {
     const {
       restaurants,
@@ -35,6 +43,15 @@ class RestaurantList extends Component {
   }
 }
 
-export default connect(state => ({
-  loading: selectRestaurantsLoading(state),
-}))(accordion(RestaurantList))
+export default connect(
+  state => ({
+    loading: selectRestaurantsLoading(state),
+    restaurants: selectRestaurants(state),
+  }),
+  dispatch => ({
+    fetchData: () => {
+      dispatch(loadRestaurants())
+      dispatch(loadReviews())
+    },
+  })
+)(accordion(RestaurantList))
