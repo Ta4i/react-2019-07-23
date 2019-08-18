@@ -9,6 +9,7 @@ import {Route, Switch} from 'react-router-dom'
 import RestaurantListPage from '../routes/restaurant-list-page'
 import RestaurantsMapPage from '../routes/restaurants-map-page'
 import RestaurantMenuPage from '../routes/restaurant-menu-page'
+import OrderPage from '../routes/order-page'
 
 class App extends Component {
   componentDidMount() {
@@ -43,13 +44,11 @@ class App extends Component {
                 return <RestaurantsMapPage {...params} />
               }}
             />
-            <Route
-              path={'/restaurants-map'}
-              render={params => <RestaurantsMapPage />}
-            />
+            <Route path={'/order'} render={params => <OrderPage />} />
+            <Route path={'/'} render={params => <RestaurantsMapPage />} />
             <Route path={'/'} render={() => <h3>Page found</h3>} />
           </Switch>
-          <OrderList />
+          {/*<OrderList />*/}
           <OrderForm />
         </main>
         <Counter />
