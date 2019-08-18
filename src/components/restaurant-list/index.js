@@ -1,1 +1,1 @@
-export { default } from "./restaurants-list";
+export {default} from './restaurants-list'

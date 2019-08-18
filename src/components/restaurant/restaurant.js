@@ -1,19 +1,19 @@
-import React, { PureComponent } from "react";
-import { Button, List } from "antd";
-import RestaurantReviews from "../restaurant-reviews";
-import { toggleVisibility } from "../../decorators/toggle-visibility";
-import AverageRating from "../average-rating";
-import RestaurantMenu from "../restaurant-menu";
+import React, {PureComponent} from 'react'
+import {Button, List} from 'antd'
+import RestaurantReviews from '../restaurant-reviews'
+import {toggleVisibility} from '../../decorators/toggle-visibility'
+import AverageRating from '../average-rating'
+import RestaurantMenu from '../restaurant-menu'
 
 class Restaurant extends PureComponent {
   state = {
-    error: null
-  };
+    error: null,
+  }
 
   componentDidCatch(error, errorInfo) {
     this.setState({
-      error
-    });
+      error,
+    })
   }
 
   render() {
@@ -22,12 +22,12 @@ class Restaurant extends PureComponent {
       toggleOpen,
       isMenuOpen,
       toggleOpenMenu,
-      restaurant
-    } = this.props;
-    const { id, image, name, menu } = restaurant;
+      restaurant,
+    } = this.props
+    const {id, image, name, menu} = restaurant
 
     if (this.state.error) {
-      return <h2>Something went wrong</h2>;
+      return <h2>Something went wrong</h2>
     }
 
     return (
@@ -35,16 +35,16 @@ class Restaurant extends PureComponent {
         <List.Item
           actions={[
             <AverageRating id={restaurant.id} />,
-            <Button type={"primary"} onClick={toggleOpen}>
-              {isOpen ? "Hide reviews" : "Show reviews"}
+            <Button type={'primary'} onClick={toggleOpen}>
+              {isOpen ? 'Hide reviews' : 'Show reviews'}
             </Button>,
             <Button
               type="primary"
               onClick={() => toggleOpenMenu(id)}
               data-autoid={`OPEN_MENU_ITEM_${id}`}
             >
-              {isMenuOpen ? "Close menu" : "Open menu"}
-            </Button>
+              {isMenuOpen ? 'Close menu' : 'Open menu'}
+            </Button>,
           ]}
           data-autoid="RESTAURANT_ITEM"
         >
@@ -59,8 +59,8 @@ class Restaurant extends PureComponent {
           <RestaurantMenu menu={restaurant.menu} restaurantId={restaurant.id} />
         ) : null}
       </>
-    );
+    )
   }
 }
 
-export default toggleVisibility(Restaurant);
+export default toggleVisibility(Restaurant)

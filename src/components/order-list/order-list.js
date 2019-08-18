@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { Button, List } from "antd";
-import { connect } from "react-redux";
-import "./order-list.css";
-import Price from "../price";
+import React, {Component} from 'react'
+import {Button, List} from 'antd'
+import {connect} from 'react-redux'
+import './order-list.css'
+import Price from '../price'
 import {
   addDishToCart,
   deleteDishFromCart,
-  subtractDishFromCart
-} from "../../store/ac";
-import { selectOrderedDishes } from "../../store/selectors";
+  subtractDishFromCart,
+} from '../../store/ac'
+import {selectOrderedDishes} from '../../store/selectors'
 
 class OrderList extends Component {
   render() {
@@ -17,11 +17,11 @@ class OrderList extends Component {
       totalPrice,
       addDishToCart,
       subtractDishFromCart,
-      deleteDishFromCart
-    } = this.props;
+      deleteDishFromCart,
+    } = this.props
 
     if (dishes.length === 0) {
-      return null;
+      return null
     }
 
     return (
@@ -40,7 +40,7 @@ class OrderList extends Component {
                   <Price
                     className="dish-amount"
                     value={dish.totalDishPrice}
-                  />{" "}
+                  />{' '}
                   <Button.Group>
                     <Button
                       onClick={() => subtractDishFromCart(dish.id)}
@@ -61,7 +61,7 @@ class OrderList extends Component {
                   type="danger"
                   icon="delete"
                   shape="circle"
-                />
+                />,
               ]}
             >
               {dish.name}
@@ -72,17 +72,17 @@ class OrderList extends Component {
           Total: <Price className="dish-amount" value={totalPrice} />
         </h3>
       </div>
-    );
+    )
   }
 }
 
 export default connect(
   state => ({
-    ...selectOrderedDishes(state)
+    ...selectOrderedDishes(state),
   }),
   {
     addDishToCart,
     subtractDishFromCart,
-    deleteDishFromCart
+    deleteDishFromCart,
   }
-)(OrderList);
+)(OrderList)

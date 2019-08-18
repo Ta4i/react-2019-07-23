@@ -2,19 +2,24 @@
   "name": "react-2019-07-23",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001/",
   "dependencies": {
     "antd": "^3.20.7",
-    "generate-id": "^2.0.1",
+    "immutable": "^4.0.0-rc.12",
+    "leaflet": "^1.5.1",
+    "lint-staged": "^9.2.1",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
     "react-scripts": "3.0.1",
     "redux": "^4.0.4",
-    "redux-devtools-extension": "^2.13.8",
-    "reselect": "^4.0.0"
+    "reselect": "^4.0.0",
+    "uuid": "^3.3.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"react-scripts start\" \"npm run api\"",
+    "api": "node simple_api/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -35,11 +40,13 @@
     ]
   },
   "devDependencies": {
+    "concurrently": "^4.1.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "husky": "^3.0.1",
     "prettier": "1.18.2",
-    "pretty-quick": "^1.11.1"
+    "pretty-quick": "^1.11.1",
+    "redux-devtools-extension": "^2.13.8"
   },
   "husky": {
     "hooks": {

@@ -1,1 +1,1 @@
-export { default } from "./order-form";
+export {default} from './order-form'

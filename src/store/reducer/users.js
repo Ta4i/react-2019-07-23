@@ -1,8 +1,8 @@
-import { normalizedUsers } from "../../fixtures";
-import { arrayToMap } from "../utils";
-import { ADD_REVIEW } from "../constants";
+import {normalizedUsers} from '../../fixtures'
+import {arrayToMap} from '../utils'
+import {ADD_REVIEW} from '../constants'
 
-const initialState = arrayToMap(normalizedUsers);
+const initialState = arrayToMap(normalizedUsers)
 
 export default (usersState = initialState, action) => {
   switch (action.type) {
@@ -12,14 +12,14 @@ export default (usersState = initialState, action) => {
           ...usersState,
           [action.userId]: {
             id: action.userId,
-            name: action.payload.userName
-          }
-        };
+            name: action.payload.userName,
+          },
+        }
       } else {
-        return usersState;
+        return usersState
       }
     }
     default:
-      return usersState;
+      return usersState
   }
-};
+}

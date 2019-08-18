@@ -1,1 +1,1 @@
-export { default } from "./restaurants-map";
+export {default} from './restaurants-map'

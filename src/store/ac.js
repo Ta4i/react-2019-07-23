@@ -5,37 +5,38 @@ import {
   DELETE_FROM_CART,
   INCREMENT,
   LOAD_RESTAURANTS,
-  SUBTRACT_FROM_CART
-} from "./constants";
+  SUBTRACT_FROM_CART,
+  LOAD_DISHES,
+} from './constants'
 
 export const increase = () => ({
-  type: INCREMENT
-});
+  type: INCREMENT,
+})
 
 export const decrease = () => ({
-  type: DECREMENT
-});
+  type: DECREMENT,
+})
 
 export const addDishToCart = id => ({
   type: ADD_TO_CART,
   payload: {
-    id
-  }
-});
+    id,
+  },
+})
 
 export const subtractDishFromCart = id => ({
   type: SUBTRACT_FROM_CART,
   payload: {
-    id
-  }
-});
+    id,
+  },
+})
 
 export const deleteDishFromCart = id => ({
   type: DELETE_FROM_CART,
   payload: {
-    id
-  }
-});
+    id,
+  },
+})
 
 export const addReview = (userName, rating, text, restaurantId) => ({
   type: ADD_REVIEW,
@@ -43,15 +44,22 @@ export const addReview = (userName, rating, text, restaurantId) => ({
     userName,
     rating,
     text,
-    restaurantId
+    restaurantId,
   },
   generateId: true,
-  provideUserId: true
-});
+  provideUserId: true,
+})
 
 export const loadRestaurants = () => {
   return {
     type: LOAD_RESTAURANTS,
-    callAPI: "/api/restaurants"
-  };
-};
+    callAPI: '/api/restaurants',
+  }
+}
+
+export const loadDishes = () => {
+  return {
+    type: LOAD_DISHES,
+    callAPI: '/api/dishes',
+  }
+}

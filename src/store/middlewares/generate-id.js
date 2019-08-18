@@ -1,13 +1,13 @@
-import uuid from "uuid/v4";
+import uuid from 'uuid/v4'
 
 export default store => next => action => {
-  const { generateId, ...rest } = action;
+  const {generateId, ...rest} = action
   if (!generateId) {
-    next(rest);
+    next(rest)
   } else {
     next({
       ...rest,
-      generatedId: uuid()
-    });
+      generatedId: uuid(),
+    })
   }
-};
+}

@@ -1,1 +1,1 @@
-export { default } from "./dish";
+export {default} from './dish'

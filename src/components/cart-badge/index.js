@@ -1,1 +1,1 @@
-export { default } from "./cart-badge";
+export {default} from './cart-badge'

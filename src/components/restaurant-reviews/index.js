@@ -1,1 +1,1 @@
-export { default } from "./restaurant-reviews";
+export {default} from './restaurant-reviews'

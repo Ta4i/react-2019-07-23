@@ -1,29 +1,30 @@
-import { FAIL, START, SUCCESS } from "../constants";
+import {FAIL, START, SUCCESS} from '../constants'
 
 export default store => next => action => {
-  const { callAPI, ...rest } = action;
+  const {callAPI, ...rest} = action
   if (!callAPI) {
-    next(rest);
+    next(rest)
   } else {
+    debugger
     next({
       ...rest,
-      type: action.type + START
-    });
+      type: action.type + START,
+    })
     fetch(callAPI)
       .then(res => res.json())
       .then(response => {
         next({
           ...rest,
           response,
-          type: action.type + SUCCESS
-        });
+          type: action.type + SUCCESS,
+        })
       })
       .catch(error => {
         next({
           ...rest,
           error,
-          type: action.type + FAIL
-        });
-      });
+          type: action.type + FAIL,
+        })
+      })
   }
-};
+}

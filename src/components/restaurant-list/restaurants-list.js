@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { List } from "antd";
-import Restaurant from "../restaurant";
-import { accordion } from "../../decorators/accordion";
-import connect from "react-redux/es/connect/connect";
-import { selectRestaurantsLoading } from "../../store/selectors";
-import Loader from "../loader";
+import React, {Component} from 'react'
+import {List} from 'antd'
+import Restaurant from '../restaurant'
+import {accordion} from '../../decorators/accordion'
+import connect from 'react-redux/es/connect/connect'
+import {selectRestaurantsLoading} from '../../store/selectors'
+import Loader from '../loader'
 
 class RestaurantList extends Component {
   render() {
@@ -14,13 +14,13 @@ class RestaurantList extends Component {
 
       // from decorator
       openItemId,
-      toggleOpen
-    } = this.props;
+      toggleOpen,
+    } = this.props
     return loading ? (
       <Loader />
     ) : (
       <List
-        itemLayout={"horizontal"}
+        itemLayout={'horizontal'}
         dataSource={restaurants}
         renderItem={restaurant => (
           <Restaurant
@@ -31,10 +31,10 @@ class RestaurantList extends Component {
           />
         )}
       />
-    );
+    )
   }
 }
 
 export default connect(state => ({
-  loading: selectRestaurantsLoading(state)
-}))(accordion(RestaurantList));
+  loading: selectRestaurantsLoading(state),
+}))(accordion(RestaurantList))
