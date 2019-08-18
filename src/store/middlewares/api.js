@@ -5,7 +5,6 @@ export default store => next => action => {
   if (!callAPI) {
     next(rest)
   } else {
-    debugger
     next({
       ...rest,
       type: action.type + START,
