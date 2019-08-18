@@ -39,6 +39,9 @@ class Restaurant extends PureComponent {
             >
               <Link to={`/restaurant-menu/${id}`}>Go to menu</Link>
             </Button>,
+            <Button type="primary" onClick={() => toggleOpenMenu(id)}>
+              <Link to={`/restaurants-map/${id}`}>Go to map</Link>
+            </Button>,
           ]}
           data-autoid="RESTAURANT_ITEM"
         >

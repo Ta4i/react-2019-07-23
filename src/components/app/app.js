@@ -38,6 +38,12 @@ class App extends Component {
               }}
             />
             <Route
+              path={'/restaurants-map/:id'}
+              render={params => {
+                return <RestaurantsMapPage {...params} />
+              }}
+            />
+            <Route
               path={'/restaurants-map'}
               render={params => <RestaurantsMapPage />}
             />
