@@ -2,13 +2,13 @@ import React, {Component} from 'react'
 import {Layout} from 'antd'
 import './app.css'
 import Header from '../header'
-import OrderForm from '../order-form'
 import Counter from '../counter'
-import OrderList from '../order-list'
 import {Route, Switch} from 'react-router-dom'
 import RestaurantListPage from '../routes/restaurant-list-page'
 import RestaurantsMapPage from '../routes/restaurants-map-page'
 import RestaurantMenuPage from '../routes/restaurant-menu-page'
+import OrderPage from '../routes/order-page'
+import OrderCompletePage from '../routes/order-complete-page'
 
 class App extends Component {
   componentDidMount() {
@@ -33,18 +33,29 @@ class App extends Component {
             <Route
               path={'/restaurant-menu/:id'}
               render={params => {
-                console.log(params)
                 return <RestaurantMenuPage {...params} />
               }}
             />
             <Route
+              exact
+              path={'/restaurants-map/:id'}
+              render={params => <RestaurantsMapPage {...params} />}
+            />
+            <Route
               path={'/restaurants-map'}
-              render={params => <RestaurantsMapPage />}
+              render={params => {
+                console.log(params)
+                return <RestaurantsMapPage {...params} />
+              }}
+            />
+            <Route exact path={'/order'} render={params => <OrderPage />} />
+            <Route
+              exact
+              path={'/order/complete'}
+              render={params => <OrderCompletePage />}
             />
             <Route path={'/'} render={() => <h3>Page found</h3>} />
           </Switch>
-          <OrderList />
-          <OrderForm />
         </main>
         <Counter />
       </Layout>
