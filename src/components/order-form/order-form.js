@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 
 class Order extends Component {
   state = {
@@ -14,7 +15,9 @@ class Order extends Component {
           value={this.state.userName}
           onChange={this.handleUserNameInputChange}
         />
-        <button type={'submit'}>Send order</button>
+        <Link to="/order-complete">
+          <button type={'submit'}>Send order</button>
+        </Link>
       </form>
     )
   }
