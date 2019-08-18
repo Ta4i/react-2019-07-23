@@ -1,8 +1,10 @@
 import React, {Component} from 'react'
+import {Redirect} from 'react-router-dom'
 
 class Order extends Component {
   state = {
     userName: '',
+    redirect: false,
   }
 
   render() {
@@ -14,7 +16,8 @@ class Order extends Component {
           value={this.state.userName}
           onChange={this.handleUserNameInputChange}
         />
-        <button type={'submit'}>Send order</button>
+        <button onClick={this.handleSubmit}>Send order</button>
+        {this.state.redirect && <Redirect to={'/order-complete'} />}
       </form>
     )
   }
@@ -29,9 +32,15 @@ class Order extends Component {
     this.userNameInput = ref
   }
 
+  setRedirect = () => {
+    this.setState({
+      redirect: true,
+    })
+  }
+
   handleSubmit = event => {
     event.preventDefault()
-    console.log(this.state)
+    this.setRedirect()
   }
 }
 
