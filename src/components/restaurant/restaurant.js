@@ -39,6 +39,9 @@ class Restaurant extends PureComponent {
             >
               <Link to={`/restaurant-menu/${id}`}>Go to menu</Link>
             </Button>,
+            <Button type="primary">
+              <Link to={`/restaurant-map/${id}`}>Show on map</Link>
+            </Button>,
           ]}
           data-autoid="RESTAURANT_ITEM"
         >
