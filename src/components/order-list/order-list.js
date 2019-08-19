@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 import {Button, List} from 'antd'
 import {connect} from 'react-redux'
 import './order-list.css'
@@ -71,6 +72,10 @@ class OrderList extends Component {
         <h3>
           Total: <Price className="dish-amount" value={totalPrice} />
         </h3>
+        <br />
+        <Link to={'/order-complete'}>
+          <Button htmlType="submit">Send Order</Button>
+        </Link>
       </div>
     )
   }

@@ -3,9 +3,11 @@ import RestaurantsMap from '../restaurants-map'
 
 class RestaurantsMapPage extends Component {
   render() {
+    const {id} = this.props.match.params
+
     return (
       <div>
-        <RestaurantsMap />
+        <RestaurantsMap restaurantId={id || null} />
       </div>
     )
   }
