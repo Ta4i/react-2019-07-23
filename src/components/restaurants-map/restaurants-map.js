@@ -36,8 +36,16 @@ class RestaurantsMap extends Component {
   }
   renderTiles = () => {
     console.log(this.props.restaurants)
-    this.props.restaurants.forEach(({location: {lat, lng}}) => {
-      Leaflet.marker([lat, lng]).addTo(this.map)
+    this.props.restaurants.forEach((restaurant, i) => {
+      const {lat, lng} = restaurant.location
+      if (
+        this.props.restaurantId &&
+        this.props.restaurants[i].id == this.props.restaurantId
+      ) {
+        Leaflet.marker([lat, lng]).addTo(this.map)
+      } else if (!this.props.restaurantId) {
+        Leaflet.marker([lat, lng]).addTo(this.map)
+      }
     })
   }
 }

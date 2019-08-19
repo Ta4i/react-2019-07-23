@@ -1,4 +1,9 @@
-import {ADD_TO_CART, DELETE_FROM_CART, SUBTRACT_FROM_CART} from '../constants'
+import {
+  ADD_TO_CART,
+  DELETE_FROM_CART,
+  SUBTRACT_FROM_CART,
+  MAKE_ORDER,
+} from '../constants'
 import {Map} from 'immutable'
 
 export default (cartState = new Map(), action) => {
@@ -21,6 +26,12 @@ export default (cartState = new Map(), action) => {
         return cartState
       }
       return cartState.delete(id)
+    }
+
+    case MAKE_ORDER: {
+      if (action.orderId) {
+        return new Map()
+      }
     }
     default:
       return cartState

@@ -12,6 +12,7 @@ import {
   START,
   SUBTRACT_FROM_CART,
   SUCCESS,
+  MAKE_ORDER,
 } from './constants'
 import {
   selectReviewsLoaded,
@@ -86,6 +87,13 @@ export const loadUsers = () => {
   return {
     type: LOAD_USERS,
     callAPI: '/api/users',
+  }
+}
+
+export const makeOrder = () => {
+  return {
+    type: MAKE_ORDER,
+    makeOrder: true,
   }
 }
 

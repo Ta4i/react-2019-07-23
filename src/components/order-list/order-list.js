@@ -3,6 +3,7 @@ import {Button, List} from 'antd'
 import {connect} from 'react-redux'
 import './order-list.css'
 import Price from '../price'
+import OrderForm from '../order-form'
 import {
   addDishToCart,
   deleteDishFromCart,
@@ -71,6 +72,7 @@ class OrderList extends Component {
         <h3>
           Total: <Price className="dish-amount" value={totalPrice} />
         </h3>
+        <OrderForm />
       </div>
     )
   }

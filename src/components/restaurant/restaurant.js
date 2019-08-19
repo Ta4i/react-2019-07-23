@@ -4,6 +4,7 @@ import RestaurantReviews from '../restaurant-reviews'
 import {toggleVisibility} from '../../decorators/toggle-visibility'
 import AverageRating from '../average-rating'
 import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 class Restaurant extends PureComponent {
   state = {
@@ -38,6 +39,14 @@ class Restaurant extends PureComponent {
               data-autoid={`OPEN_MENU_ITEM_${id}`}
             >
               <Link to={`/restaurant-menu/${id}`}>Go to menu</Link>
+            </Button>,
+            <Button type="primary">
+              <NavLink
+                to={'/restaurant-map/' + restaurant.id}
+                activeStyle={{color: 'blue'}}
+              >
+                map
+              </NavLink>
             </Button>,
           ]}
           data-autoid="RESTAURANT_ITEM"

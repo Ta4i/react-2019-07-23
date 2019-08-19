@@ -23,3 +23,5 @@ export const LOAD_REVIEWS = 'LOAD_REVIEWS'
 export const LOAD_DISHES = 'LOAD_DISHES'
 
 export const LOAD_USERS = 'LOAD_USERS'
+
+export const MAKE_ORDER = 'MAKE_ORDER'

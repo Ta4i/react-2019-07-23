@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import {makeOrder} from '../../store/ac'
+import {useDispatch} from 'react-redux'
 
 class Order extends Component {
   state = {
@@ -30,8 +32,9 @@ class Order extends Component {
   }
 
   handleSubmit = event => {
-    event.preventDefault()
-    console.log(this.state)
+    useDispatch(makeOrder())
+    // event.preventDefault()
+    // console.log(this.state)
   }
 }
 
