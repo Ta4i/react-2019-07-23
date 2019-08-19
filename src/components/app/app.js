@@ -9,6 +9,7 @@ import RestaurantsMapPage from '../routes/restaurants-map-page'
 import RestaurantMapPage from '../routes/restaurant-map-page'
 import RestaurantMenuPage from '../routes/restaurant-menu-page'
 import OrderPage from '../routes/order-page'
+import OrderCompletePage from '../routes/order-complete-page'
 
 class App extends Component {
   componentDidMount() {
@@ -48,6 +49,10 @@ class App extends Component {
               }}
             />
             <Route path={'/order'} render={params => <OrderPage />} />
+            <Route
+              path={'/order-complete'}
+              render={params => <OrderCompletePage />}
+            />
             <Route path={'/'} render={() => <h3>Page found</h3>} />
           </Switch>
         </main>
