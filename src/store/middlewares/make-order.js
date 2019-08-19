@@ -5,6 +5,7 @@ export default store => next => action => {
   if (!makeOrder) {
     next(rest)
   } else {
+    debugger
     next({
       ...rest,
       orderId: uuid(),

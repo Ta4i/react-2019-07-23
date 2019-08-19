@@ -30,7 +30,7 @@ export default (cartState = new Map(), action) => {
 
     case MAKE_ORDER: {
       if (action.orderId) {
-        return new Map()
+        return Map({orderId: action.orderId})
       }
     }
     default:

@@ -10,6 +10,7 @@ import {
   subtractDishFromCart,
 } from '../../store/ac'
 import {selectOrderedDishes} from '../../store/selectors'
+import {selectOrderId} from '../../store/selectors'
 
 class OrderList extends Component {
   render() {
@@ -19,8 +20,12 @@ class OrderList extends Component {
       addDishToCart,
       subtractDishFromCart,
       deleteDishFromCart,
+      orderId,
     } = this.props
-
+    debugger
+    if (orderId) {
+      return <div className="order">Order Complete</div>
+    }
     if (dishes.length === 0) {
       return null
     }
@@ -81,6 +86,7 @@ class OrderList extends Component {
 export default connect(
   state => ({
     ...selectOrderedDishes(state),
+    orderId: selectOrderId(state),
   }),
   {
     addDishToCart,

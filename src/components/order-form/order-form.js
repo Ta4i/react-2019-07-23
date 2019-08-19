@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {makeOrder} from '../../store/ac'
 import {useDispatch} from 'react-redux'
+import {NavLink} from 'react-router-dom'
+import {connect} from 'react-redux'
 
 class Order extends Component {
   state = {
@@ -16,6 +18,7 @@ class Order extends Component {
           value={this.state.userName}
           onChange={this.handleUserNameInputChange}
         />
+
         <button type={'submit'}>Send order</button>
       </form>
     )
@@ -23,7 +26,7 @@ class Order extends Component {
 
   handleUserNameInputChange = event => {
     this.setState({
-      userName: event.target.value.length > 5 ? '' : event.target.value,
+      userName: event.target.value,
     })
   }
 
@@ -32,10 +35,16 @@ class Order extends Component {
   }
 
   handleSubmit = event => {
-    useDispatch(makeOrder())
+    debugger
+    this.props.makeOrder()
     // event.preventDefault()
     // console.log(this.state)
   }
 }
 
-export default Order
+export default connect(
+  null,
+  {
+    makeOrder,
+  }
+)(Order)

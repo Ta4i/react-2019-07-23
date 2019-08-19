@@ -46,6 +46,7 @@ class App extends Component {
               path={'/restaurants-map'}
               render={params => <RestaurantsMapPage />}
             />
+            <Route path={'/order/:complete'} render={params => <OrderPage />} />
             <Route path={'/order'} render={params => <OrderPage />} />
             <Route path={'/'} render={() => <h3>Page found</h3>} />
           </Switch>

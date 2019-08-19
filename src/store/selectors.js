@@ -4,6 +4,8 @@ export const selectId = (_, ownProps) => ownProps.id
 
 export const selectCartImmutable = state => state.cart
 
+export const selectOrderId = state => state.cart.get('orderId')
+
 export const selectCart = createSelector(
   selectCartImmutable,
   cart => {
