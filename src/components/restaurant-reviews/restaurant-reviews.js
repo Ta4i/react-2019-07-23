@@ -1,14 +1,26 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {List} from 'antd'
 import Review from '../review'
 import {connect} from 'react-redux'
-import {selectFullRestaurantReviews} from '../../store/selectors'
+import {
+  selectFullRestaurantReviews,
+  selectReviewsLoaded,
+  selectUsersLoaded,
+} from '../../store/selectors'
 import AddReview from '../add-review'
+import Loader from '../loader'
+import {loadFullReviewsData} from '../../store/ac'
 
 function RestaurantReviews(props) {
-  const {reviews, id} = props
+  const {reviews, id, loadedReviews, loadedUsers, loadFullReviewsData} = props
 
-  return (
+  useEffect(() => {
+    loadFullReviewsData()
+  })
+
+  return !loadedReviews || !loadedUsers ? (
+    <Loader />
+  ) : (
     <>
       <List
         itemLayout={'horizontal'}
@@ -20,6 +32,13 @@ function RestaurantReviews(props) {
   )
 }
 
-export default connect((state, ownProps) => ({
-  reviews: selectFullRestaurantReviews(state, ownProps),
-}))(RestaurantReviews)
+export default connect(
+  (state, ownProps) => ({
+    reviews: selectFullRestaurantReviews(state, ownProps),
+    loadedReviews: selectReviewsLoaded(state),
+    loadedUsers: selectUsersLoaded(state),
+  }),
+  {
+    loadFullReviewsData,
+  }
+)(RestaurantReviews)

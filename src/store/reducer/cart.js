@@ -1,35 +1,26 @@
 import {ADD_TO_CART, DELETE_FROM_CART, SUBTRACT_FROM_CART} from '../constants'
+import {Map} from 'immutable'
 
-export default (cartState = {}, action) => {
+export default (cartState = new Map(), action) => {
   switch (action.type) {
     case ADD_TO_CART: {
       const {id} = action.payload
-      return {
-        ...cartState,
-        [id]: cartState[id] ? cartState[id] + 1 : 1,
-      }
+      return cartState.set(id, cartState.has(id) ? cartState.get(id) + 1 : 1)
     }
     case SUBTRACT_FROM_CART: {
       const {id} = action.payload
-      if (!cartState[id]) {
+      const amount = cartState.get(id)
+      if (!amount) {
         return cartState
       }
-      const newCartState = {...cartState}
-      if (newCartState[id] === 1) {
-        delete newCartState[id]
-      } else {
-        newCartState[id] = newCartState[id] - 1
-      }
-      return newCartState
+      return amount === 1 ? cartState.delete(id) : cartState.set(id, amount - 1)
     }
     case DELETE_FROM_CART: {
       const {id} = action.payload
-      if (!cartState[id]) {
+      if (!cartState.has(id)) {
         return cartState
       }
-      const newCartState = {...cartState}
-      delete newCartState[id]
-      return newCartState
+      return cartState.delete(id)
     }
     default:
       return cartState

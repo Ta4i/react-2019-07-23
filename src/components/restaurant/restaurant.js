@@ -3,7 +3,7 @@ import {Button, List} from 'antd'
 import RestaurantReviews from '../restaurant-reviews'
 import {toggleVisibility} from '../../decorators/toggle-visibility'
 import AverageRating from '../average-rating'
-import RestaurantMenu from '../restaurant-menu'
+import {Link} from 'react-router-dom'
 
 class Restaurant extends PureComponent {
   state = {
@@ -17,13 +17,7 @@ class Restaurant extends PureComponent {
   }
 
   render() {
-    const {
-      isOpen,
-      toggleOpen,
-      isMenuOpen,
-      toggleOpenMenu,
-      restaurant,
-    } = this.props
+    const {isOpen, toggleOpen, toggleOpenMenu, restaurant} = this.props
     const {id, image, name, menu} = restaurant
 
     if (this.state.error) {
@@ -43,7 +37,7 @@ class Restaurant extends PureComponent {
               onClick={() => toggleOpenMenu(id)}
               data-autoid={`OPEN_MENU_ITEM_${id}`}
             >
-              {isMenuOpen ? 'Close menu' : 'Open menu'}
+              <Link to={`/restaurant-menu/${id}`}>Go to menu</Link>
             </Button>,
           ]}
           data-autoid="RESTAURANT_ITEM"
@@ -55,9 +49,6 @@ class Restaurant extends PureComponent {
           />
         </List.Item>
         {isOpen ? <RestaurantReviews id={restaurant.id} /> : null}
-        {isMenuOpen ? (
-          <RestaurantMenu menu={restaurant.menu} restaurantId={restaurant.id} />
-        ) : null}
       </>
     )
   }

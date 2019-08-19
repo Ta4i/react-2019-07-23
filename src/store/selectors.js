@@ -2,9 +2,14 @@ import {createSelector} from 'reselect'
 
 export const selectId = (_, ownProps) => ownProps.id
 
-export const selectCart = state => state.cart
+export const selectCartImmutable = state => state.cart
 
-export const selectDishes = state => state.dishes
+export const selectCart = createSelector(
+  selectCartImmutable,
+  cart => {
+    return cart.toJS()
+  }
+)
 
 export const selectRestaurantsImmutable = state =>
   state.restaurants.get('entities')
@@ -12,9 +17,25 @@ export const selectRestaurantsImmutable = state =>
 export const selectRestaurantsLoading = state =>
   state.restaurants.get('loading')
 
-export const selectReviews = state => state.reviews
+export const selectRestaurantsLoaded = state => state.restaurants.get('loaded')
 
-export const selectUsers = state => state.users
+export const selectDishesImmutable = state => state.dishes.get('entities')
+
+export const selectDishesLoading = state => state.dishes.get('loading')
+
+export const selectDishesLoaded = state => state.dishes.get('loaded')
+
+export const selectReviewsImmutable = state => state.reviews.get('entities')
+
+export const selectReviewsLoading = state => state.reviews.get('loading')
+
+export const selectReviewsLoaded = state => state.reviews.get('loaded')
+
+export const selectUsersImmutable = state => state.users.get('entities')
+
+export const selectUsersLoading = state => state.users.get('loading')
+
+export const selectUsersLoaded = state => state.users.get('loaded')
 
 export const selectRestaurants = createSelector(
   selectRestaurantsImmutable,
@@ -23,10 +44,34 @@ export const selectRestaurants = createSelector(
   }
 )
 
+export const selectDishes = createSelector(
+  selectDishesImmutable,
+  dishes => {
+    return dishes.toJS()
+  }
+)
+
+export const selectReviews = createSelector(
+  selectReviewsImmutable,
+  reviews => {
+    return reviews.toJS()
+  }
+)
+
+export const selectUsers = createSelector(
+  selectUsersImmutable,
+  users => {
+    return users.toJS()
+  }
+)
+
 export const selectRestaurant = createSelector(
   selectRestaurants,
   selectId,
-  (restaurants, id) => restaurants.find(restaurant => restaurant.id === id)
+  (restaurants, id) => {
+    debugger
+    return restaurants.find(restaurant => restaurant.id === id)
+  }
 )
 
 export const selectDishList = createSelector(
@@ -81,7 +126,7 @@ export const selectRestaurantReviews = createSelector(
   selectRestaurant,
   selectReviews,
   (restaurant, reviews) => {
-    return restaurant.reviews.map(reviewId => reviews[reviewId])
+    return restaurant.reviews.map(reviewId => reviews[reviewId]).filter(Boolean)
   }
 )
 
