@@ -26,7 +26,9 @@ const Header = () => (
       </Menu.Item>
     </Menu>
     <Logo />
-    <CartBadge amount={10} />
+    <NavLink to={'/order'} activeStyle={{color: 'white'}}>
+      <CartBadge amount={10} />
+    </NavLink>
   </header>
 )
 

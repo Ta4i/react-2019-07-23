@@ -6,11 +6,14 @@ import {
   selectRestaurantsLoading,
   selectRestaurantsLoaded,
   selectRestaurants,
+  selectRestaurant,
 } from '../../store/selectors'
 import {loadRestaurants} from '../../store/ac'
 
 class RestaurantsMap extends Component {
   render() {
+    console.log('prop', this.props)
+    console.log('state', this.state)
     return <div ref={this.setEl} className="map" />
   }
   setEl = ref => {
@@ -35,16 +38,21 @@ class RestaurantsMap extends Component {
     this.renderTiles()
   }
   renderTiles = () => {
-    console.log(this.props.restaurants)
-    this.props.restaurants.forEach(({location: {lat, lng}}) => {
+    console.log('fn renderTiles', this.props)
+    const restaurantArray = this.props.restaurant
+      ? [this.props.restaurant]
+      : this.props.restaurants
+    console.log('resmap', restaurantArray)
+    restaurantArray.forEach(({location: {lat, lng}}) => {
       Leaflet.marker([lat, lng]).addTo(this.map)
     })
   }
 }
 
 export default connect(
-  state => ({
+  (state, ownProps) => ({
     restaurants: selectRestaurants(state),
+    restaurant: selectRestaurant(state, {id: ownProps.restaurantId}),
     isRestaurantLoading: selectRestaurantsLoading(state),
     isRestaurantLoaded: selectRestaurantsLoaded(state),
   }),
