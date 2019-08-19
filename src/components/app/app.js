@@ -9,6 +9,7 @@ import {Route, Switch} from 'react-router-dom'
 import RestaurantListPage from '../routes/restaurant-list-page'
 import RestaurantsMapPage from '../routes/restaurants-map-page'
 import RestaurantMenuPage from '../routes/restaurant-menu-page'
+import OrderComplete from '../order-complete';
 
 class App extends Component {
   componentDidMount() {
@@ -37,16 +38,24 @@ class App extends Component {
                 return <RestaurantMenuPage {...params} />
               }}
             />
+            <Route 
+              path={'/order-list'} 
+              render={params => <OrderList />}
+            />
+            <Route
+              path={'/restaurants-map/:id'}
+              render={params => <RestaurantsMapPage {...params} />}
+            />
             <Route
               path={'/restaurants-map'}
-              render={params => <RestaurantsMapPage />}
+              render={params => <RestaurantsMapPage {...params} />}
             />
+            <Route path={'/order-complete'} render={() => <OrderComplete />} />
             <Route path={'/'} render={() => <h3>Page found</h3>} />
           </Switch>
-          <OrderList />
-          <OrderForm />
+          {/* <OrderForm /> */}
         </main>
-        <Counter />
+        {/* <Counter /> */}
       </Layout>
     )
   }

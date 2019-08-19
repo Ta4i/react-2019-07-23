@@ -26,7 +26,9 @@ const Header = () => (
       </Menu.Item>
     </Menu>
     <Logo />
-    <CartBadge amount={10} />
+    <NavLink to={'/order-list'}>
+      <CartBadge amount={10} />
+    </NavLink>
   </header>
 )
 

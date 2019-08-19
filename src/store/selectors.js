@@ -69,7 +69,6 @@ export const selectRestaurant = createSelector(
   selectRestaurants,
   selectId,
   (restaurants, id) => {
-    debugger
     return restaurants.find(restaurant => restaurant.id === id)
   }
 )
