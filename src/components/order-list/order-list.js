@@ -21,7 +21,7 @@ class OrderList extends Component {
     } = this.props
 
     if (dishes.length === 0) {
-      return null
+      return <h3>your cart is empty :(</h3>
     }
 
     return (

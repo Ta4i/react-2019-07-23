@@ -5,7 +5,7 @@ class RestaurantsMapPage extends Component {
   render() {
     return (
       <div>
-        <RestaurantsMap />
+        <RestaurantsMap restaurantId={this.props.match.params.id} />
       </div>
     )
   }

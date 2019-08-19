@@ -9,6 +9,8 @@ import {Route, Switch} from 'react-router-dom'
 import RestaurantListPage from '../routes/restaurant-list-page'
 import RestaurantsMapPage from '../routes/restaurants-map-page'
 import RestaurantMenuPage from '../routes/restaurant-menu-page'
+import OrderMenuPage from '../routes/order'
+import OrderSuccessMenuPage from '../routes/order-success'
 
 class App extends Component {
   componentDidMount() {
@@ -33,18 +35,38 @@ class App extends Component {
             <Route
               path={'/restaurant-menu/:id'}
               render={params => {
-                console.log(params)
+                console.log('params', params)
                 return <RestaurantMenuPage {...params} />
               }}
             />
             <Route
               path={'/restaurants-map'}
+              exact
               render={params => <RestaurantsMapPage />}
+            />
+            <Route
+              path={'/restaurants-map/:id'}
+              render={params => {
+                console.log('paramsappjs', params)
+                return <RestaurantsMapPage {...params} />
+              }}
+            />
+            <Route
+              path={'/order'}
+              render={params => {
+                console.log('paramsappjs', params)
+                return <OrderMenuPage {...params} />
+              }}
+            />
+            <Route
+              path={'/order-success'}
+              render={params => {
+                console.log('paramsappjs', params)
+                return <OrderSuccessMenuPage {...params} />
+              }}
             />
             <Route path={'/'} render={() => <h3>Page found</h3>} />
           </Switch>
-          <OrderList />
-          <OrderForm />
         </main>
         <Counter />
       </Layout>
