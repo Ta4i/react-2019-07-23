@@ -3,7 +3,7 @@ import React from 'react'
 import Logo from '../logo'
 import CartBadge from '../cart-badge'
 import './header.css'
-import {NavLink} from 'react-router-dom'
+import {NavLink, Link} from 'react-router-dom'
 import {Menu} from 'antd'
 
 const Header = () => (
@@ -26,7 +26,9 @@ const Header = () => (
       </Menu.Item>
     </Menu>
     <Logo />
-    <CartBadge amount={10} />
+    <Link to={'/order'}>
+      <CartBadge amount={10} />
+    </Link>
   </header>
 )
 
