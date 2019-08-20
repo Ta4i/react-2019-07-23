@@ -1,0 +1,17 @@
+.restaurant-visibility-enter {
+    opacity: 0.01;
+}
+
+.restaurant-visibility-enter.restaurant-visibility-enter-active {
+    opacity: 1;
+    transition: opacity 300ms ease-in;
+}
+
+.restaurant-visibility-leave {
+    opacity: 1;
+}
+
+.restaurant-visibility-leave.restaurant-visibility-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+}
