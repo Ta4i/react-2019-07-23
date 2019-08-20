@@ -21,7 +21,7 @@ import {
   selectUsersLoaded,
   selectUsersLoading,
 } from './selectors'
-
+import {push} from 'connected-react-router'
 export const increase = () => ({
   type: INCREMENT,
 })
@@ -129,5 +129,5 @@ export const sendOrder = details => (dispatch, getState) => {
       dishes,
     },
   })
-  window.location.href = '/order-complete'
+  dispatch(push('/order-complete'))
 }

@@ -12,7 +12,6 @@ import {
 } from '../../store/selectors'
 import {loadDishes, loadRestaurants} from '../../store/ac'
 import Loader from '../loader'
-import {Redirect} from 'react-router-dom'
 
 function RestaurantMenu(props) {
   const {
@@ -31,10 +30,6 @@ function RestaurantMenu(props) {
     restaurant: selectRestaurant(state, {id: props.restaurantId}),
   }))
   const dispatch = useDispatch()
-
-  if (errorDishes) {
-    return <Redirect to={'/error'} />
-  }
 
   if (!loadedDishes && !loadingDishes && !errorDishes) {
     dispatch(loadDishes(props.restaurantId))
