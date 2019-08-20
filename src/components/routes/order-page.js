@@ -1,16 +1,16 @@
 import React, {Component} from 'react'
-import RestaurantList from '../restaurant-list/restaurants-list'
+import OrderForm from '../order-form/order-form'
 import OrderList from '../order-list/order-list'
 
-class RestaurantListPage extends Component {
+class OrderPage extends Component {
   render() {
     return (
       <div>
-        <RestaurantList />
+        <OrderForm />
         <OrderList />
       </div>
     )
   }
 }
 
-export default RestaurantListPage
+export default OrderPage
