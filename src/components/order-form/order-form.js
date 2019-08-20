@@ -33,10 +33,11 @@ class Order extends Component {
     )
   }
 
-  handleUserNameInputChange = event => {
+  handleUserNameInputChange = ({target: {value}}) => {
     this.setState({
-      userName: event.target.value,
+      userName: value,
     })
+    this.props.setUserName(value)
   }
 
   setInput = ref => {

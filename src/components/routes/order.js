@@ -7,7 +7,7 @@ class Order extends Component {
     return (
       <div>
         <OrderList />
-        <OrderForm />
+        <OrderForm setUserName={this.props.setUserName} />
       </div>
     )
   }

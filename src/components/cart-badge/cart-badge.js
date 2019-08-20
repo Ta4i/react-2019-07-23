@@ -3,6 +3,7 @@ import {Badge, Button} from 'antd'
 import './cart-badge.css'
 import {useSelector} from 'react-redux'
 import {selectCart} from '../../store/selectors'
+import {Consumer as AuthConsumer} from '../../contexts/auth'
 
 function CartBadge() {
   const cart = useSelector(selectCart)
@@ -20,6 +21,11 @@ function CartBadge() {
         type="primary"
         className="cart-button"
       />
+      <AuthConsumer>
+        {value => {
+          console.log('AuthConsumer value:', value)
+        }}
+      </AuthConsumer>
     </Badge>
   )
 }
