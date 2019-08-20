@@ -73,14 +73,14 @@ export const loadRestaurants = () => {
 export const loadReviews = id => {
   return {
     type: LOAD_REVIEWS,
-    callAPI: id ? `/api/reviews/id=${id}` : '/api/reviews',
+    callAPI: id ? `/api/reviews?id=${id}` : '/api/reviews',
   }
 }
 
 export const loadDishes = id => {
   return {
     type: LOAD_DISHES,
-    callAPI: id ? `/api/dishes/id=${id}` : '/api/dishes',
+    callAPI: id ? `/api/dishes?id=${id}` : '/api/dishes',
   }
 }
 
