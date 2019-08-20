@@ -3,28 +3,16 @@ import React from 'react'
 import Logo from '../logo'
 import CartBadge from '../cart-badge'
 import './header.css'
-import {NavLink, Link} from 'react-router-dom'
-import {Menu} from 'antd'
+import {Link} from 'react-router-dom'
+import OurMenu from '../our-menu'
+import OurMenuItem from '../our-menu/our-menu-item'
 
 const Header = () => (
   <header className="header">
-    <Menu
-      className="menu"
-      theme="dark"
-      mode="horizontal"
-      style={{float: 'left', backgroundColor: 'transparent'}}
-    >
-      <Menu.Item>
-        <NavLink to={'/restaurants'} activeStyle={{color: 'white'}}>
-          List
-        </NavLink>
-      </Menu.Item>
-      <Menu.Item>
-        <NavLink to={'/restaurants-map'} activeStyle={{color: 'white'}}>
-          Map
-        </NavLink>
-      </Menu.Item>
-    </Menu>
+    <OurMenu>
+      <OurMenuItem to={'/restaurants'}>List</OurMenuItem>
+      <OurMenuItem to={'/restaurants-map'}>Map</OurMenuItem>
+    </OurMenu>
     <Logo />
     <Link to={'/order'}>
       <CartBadge />
