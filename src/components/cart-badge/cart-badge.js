@@ -1,11 +1,10 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {Badge, Button} from 'antd'
 import './cart-badge.css'
 import {useSelector} from 'react-redux'
 import {selectCart} from '../../store/selectors'
 
-function CartBadge(props) {
+function CartBadge() {
   const cart = useSelector(selectCart)
 
   const amount = Object.values(cart).reduce(
@@ -23,10 +22,6 @@ function CartBadge(props) {
       />
     </Badge>
   )
-}
-
-CartBadge.propTypes = {
-  amount: PropTypes.number.isRequired,
 }
 
 export default CartBadge

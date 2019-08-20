@@ -9,11 +9,13 @@ import {
   LOAD_RESTAURANTS,
   LOAD_REVIEWS,
   LOAD_USERS,
+  SEND_ORDER,
   START,
   SUBTRACT_FROM_CART,
   SUCCESS,
 } from './constants'
 import {
+  selectCart,
   selectReviewsLoaded,
   selectReviewsLoading,
   selectUsersLoaded,
@@ -115,4 +117,17 @@ export const loadFullReviewsData = () => (dispatch, getState) => {
       })
       .catch(error => dispatch({type: LOAD_USERS + FAIL, error}))
   }
+}
+
+export const sendOrder = details => (dispatch, getState) => {
+  const state = getState()
+  const dishes = selectCart(state)
+  dispatch({
+    type: SEND_ORDER,
+    payload: {
+      ...details,
+      dishes,
+    },
+  })
+  window.location.href = '/order-complete'
 }
