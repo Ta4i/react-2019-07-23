@@ -2,12 +2,13 @@ import React, {Component} from 'react'
 import {Layout} from 'antd'
 import './app.css'
 import Header from '../header'
-import {Route, Switch} from 'react-router-dom'
+import {Redirect, Route, Switch} from 'react-router-dom'
 import RestaurantListPage from '../routes/restaurant-list-page'
 import RestaurantsMapPage from '../routes/restaurants-map-page'
 import RestaurantMenuPage from '../routes/restaurant-menu-page'
 import Order from '../routes/order'
 import OrderComplete from '../routes/order-complete'
+import ErrorPage from '../routes/error'
 
 class App extends Component {
   componentDidMount() {
@@ -41,7 +42,8 @@ class App extends Component {
             <Route path={'/restaurants-map'} component={RestaurantsMapPage} />
             <Route path={'/order'} component={Order} />
             <Route path={'/order-complete'} component={OrderComplete} />
-            <Route path={'/'} render={() => <h3>Page found</h3>} />
+            <Route path={'/error'} render={() => <ErrorPage />} />
+            <Redirect from={'/'} exact to={'/restaurants'} />
           </Switch>
         </main>
       </Layout>

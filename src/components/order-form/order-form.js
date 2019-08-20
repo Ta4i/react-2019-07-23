@@ -40,7 +40,6 @@ class Order extends Component {
   }
 
   setInput = ref => {
-    console.log(ref)
     this.userNameInput = ref
   }
 
