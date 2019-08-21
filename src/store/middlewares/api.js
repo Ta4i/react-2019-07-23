@@ -1,4 +1,5 @@
 import {FAIL, START, SUCCESS} from '../constants'
+import {replace} from 'connected-react-router'
 
 export default store => next => action => {
   const {callAPI, ...rest} = action
@@ -24,6 +25,7 @@ export default store => next => action => {
           error,
           type: action.type + FAIL,
         })
+        store.dispatch(replace('/error'))
       })
   }
 }

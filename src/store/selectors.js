@@ -25,6 +25,8 @@ export const selectDishesLoading = state => state.dishes.get('loading')
 
 export const selectDishesLoaded = state => state.dishes.get('loaded')
 
+export const selectDishesError = state => state.dishes.get('error')
+
 export const selectReviewsImmutable = state => state.reviews.get('entities')
 
 export const selectReviewsLoading = state => state.reviews.get('loading')
@@ -69,7 +71,6 @@ export const selectRestaurant = createSelector(
   selectRestaurants,
   selectId,
   (restaurants, id) => {
-    debugger
     return restaurants.find(restaurant => restaurant.id === id)
   }
 )

@@ -23,6 +23,8 @@ router.get('/dishes', function(req, res, next) {
           return dish.id === dishId
         })
       })
+    } else {
+      return reply(res, {error: 'not found'}, 100, 404)
     }
   }
   reply(res, result)
@@ -41,6 +43,8 @@ router.get('/reviews', function(req, res, next) {
           return review.id === reviewId
         })
       })
+    } else {
+      return reply(res, {error: 'not found'}, 100, 404)
     }
   }
   reply(res, result)

@@ -4,6 +4,8 @@ import RestaurantReviews from '../restaurant-reviews'
 import {toggleVisibility} from '../../decorators/toggle-visibility'
 import AverageRating from '../average-rating'
 import {Link} from 'react-router-dom'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import './restaurant.css'
 
 class Restaurant extends PureComponent {
   state = {
@@ -39,6 +41,9 @@ class Restaurant extends PureComponent {
             >
               <Link to={`/restaurant-menu/${id}`}>Go to menu</Link>
             </Button>,
+            <Button type="primary">
+              <Link to={`/restaurants-map/${id}`}>Show on map</Link>
+            </Button>,
           ]}
           data-autoid="RESTAURANT_ITEM"
         >
@@ -48,7 +53,13 @@ class Restaurant extends PureComponent {
             description={`Menu positions: ${menu.length}`}
           />
         </List.Item>
-        {isOpen ? <RestaurantReviews id={restaurant.id} /> : null}
+        <ReactCSSTransitionGroup
+          transitionName="restaurant-visibility"
+          transitionEnterTimeout={300}
+          transitionLeaveTimeout={300}
+        >
+          {isOpen ? <RestaurantReviews id={restaurant.id} /> : null}
+        </ReactCSSTransitionGroup>
       </>
     )
   }

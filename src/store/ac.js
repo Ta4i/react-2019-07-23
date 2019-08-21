@@ -9,17 +9,19 @@ import {
   LOAD_RESTAURANTS,
   LOAD_REVIEWS,
   LOAD_USERS,
+  SEND_ORDER,
   START,
   SUBTRACT_FROM_CART,
   SUCCESS,
 } from './constants'
 import {
+  selectCart,
   selectReviewsLoaded,
   selectReviewsLoading,
   selectUsersLoaded,
   selectUsersLoading,
 } from './selectors'
-
+import {push} from 'connected-react-router'
 export const increase = () => ({
   type: INCREMENT,
 })
@@ -71,14 +73,14 @@ export const loadRestaurants = () => {
 export const loadReviews = id => {
   return {
     type: LOAD_REVIEWS,
-    callAPI: id ? `/api/reviews/id=${id}` : '/api/reviews',
+    callAPI: id ? `/api/reviews?id=${id}` : '/api/reviews',
   }
 }
 
 export const loadDishes = id => {
   return {
     type: LOAD_DISHES,
-    callAPI: id ? `/api/dishes/id=${id}` : '/api/dishes',
+    callAPI: id ? `/api/dishes?id=${id}` : '/api/dishes',
   }
 }
 
@@ -115,4 +117,17 @@ export const loadFullReviewsData = () => (dispatch, getState) => {
       })
       .catch(error => dispatch({type: LOAD_USERS + FAIL, error}))
   }
+}
+
+export const sendOrder = details => (dispatch, getState) => {
+  const state = getState()
+  const dishes = selectCart(state)
+  dispatch({
+    type: SEND_ORDER,
+    payload: {
+      ...details,
+      dishes,
+    },
+  })
+  dispatch(push('/order-complete'))
 }

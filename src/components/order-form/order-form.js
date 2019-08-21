@@ -1,4 +1,7 @@
 import React, {Component} from 'react'
+import {Input, Button, Form} from 'antd'
+import {connect} from 'react-redux'
+import {sendOrder} from '../../store/ac'
 
 class Order extends Component {
   state = {
@@ -7,22 +10,34 @@ class Order extends Component {
 
   render() {
     return (
-      <form style={{padding: '24px'}} onSubmit={this.handleSubmit}>
-        <input
-          ref={this.setInput}
-          placeholder={'User name'}
-          value={this.state.userName}
-          onChange={this.handleUserNameInputChange}
-        />
-        <button type={'submit'}>Send order</button>
-      </form>
+      <Form
+        layout={'inline'}
+        style={{padding: '24px'}}
+        onSubmit={this.handleSubmit}
+      >
+        <Form.Item>
+          <Input
+            ref={this.setInput}
+            placeholder={'User name'}
+            value={this.state.userName}
+            onChange={this.handleUserNameInputChange}
+            style={{width: '120px'}}
+          />
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Send order
+          </Button>
+        </Form.Item>
+      </Form>
     )
   }
 
-  handleUserNameInputChange = event => {
+  handleUserNameInputChange = ({target: {value}}) => {
     this.setState({
-      userName: event.target.value.length > 5 ? '' : event.target.value,
+      userName: value,
     })
+    this.props.setUserName(value)
   }
 
   setInput = ref => {
@@ -31,8 +46,11 @@ class Order extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    console.log(this.state)
+    this.props.sendOrder(this.state)
   }
 }
 
-export default Order
+export default connect(
+  null,
+  {sendOrder}
+)(Order)
