@@ -4,8 +4,7 @@
 }
 
 .cart-button-container {
-  float: right;
   position: relative;
-  top: -7px;
   right: 3px;
+  margin-left: 20px;
 }
