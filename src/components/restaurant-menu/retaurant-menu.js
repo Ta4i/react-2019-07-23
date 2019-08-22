@@ -6,6 +6,7 @@ import {
   selectDishesError,
   selectDishesLoaded,
   selectDishesLoading,
+  selectDishList,
   selectRestaurant,
   selectRestaurantsLoaded,
   selectRestaurantsLoading,
@@ -21,6 +22,7 @@ function RestaurantMenu(props) {
     loadedRestaurants,
     restaurant,
     errorDishes,
+    dishes,
   } = useSelector(state => ({
     errorDishes: selectDishesError(state),
     loadingDishes: selectDishesLoading(state),
@@ -28,6 +30,7 @@ function RestaurantMenu(props) {
     loadingRestaurants: selectRestaurantsLoading(state),
     loadedRestaurants: selectRestaurantsLoaded(state),
     restaurant: selectRestaurant(state, {id: props.restaurantId}),
+    dishes: selectDishList(state, {id: props.restaurantId}),
   }))
   const dispatch = useDispatch()
 
@@ -41,6 +44,15 @@ function RestaurantMenu(props) {
 
   if (!loadedDishes || !loadedRestaurants) {
     return <Loader />
+  }
+
+  const checkDishesArray = dishes.reduce((acc, dish) => {
+    acc.push(restaurant.menu.includes(dish.id))
+    return acc
+  }, [])
+
+  if (checkDishesArray.includes(false)) {
+    dispatch(loadDishes(props.restaurantId))
   }
 
   return (

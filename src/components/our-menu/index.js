@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {Menu} from 'antd'
 
 class OurMenu extends Component {
   render() {
