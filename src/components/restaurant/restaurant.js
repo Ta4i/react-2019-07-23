@@ -6,6 +6,7 @@ import AverageRating from '../average-rating'
 import {Link} from 'react-router-dom'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import './restaurant.css'
+import {Consumer as LocalizationConsumer} from '../../contexts/localization'
 
 class Restaurant extends PureComponent {
   state = {
@@ -27,40 +28,50 @@ class Restaurant extends PureComponent {
     }
 
     return (
-      <>
-        <List.Item
-          actions={[
-            <AverageRating id={restaurant.id} />,
-            <Button type={'primary'} onClick={toggleOpen}>
-              {isOpen ? 'Hide reviews' : 'Show reviews'}
-            </Button>,
-            <Button
-              type="primary"
-              onClick={() => toggleOpenMenu(id)}
-              data-autoid={`OPEN_MENU_ITEM_${id}`}
+      <LocalizationConsumer>
+        {value => (
+          <>
+            <List.Item
+              actions={[
+                <AverageRating id={restaurant.id} />,
+                <Button type={'primary'} onClick={toggleOpen}>
+                  {isOpen
+                    ? value.localization.restaurants.hideReviews
+                    : value.localization.restaurants.showReviews}
+                </Button>,
+                <Button
+                  type="primary"
+                  onClick={() => toggleOpenMenu(id)}
+                  data-autoid={`OPEN_MENU_ITEM_${id}`}
+                >
+                  <Link to={`/restaurant-menu/${id}`}>
+                    {value.localization.restaurants.goToMenu}
+                  </Link>
+                </Button>,
+                <Button type="primary">
+                  <Link to={`/restaurants-map/${id}`}>
+                    {value.localization.restaurants.showOnMap}
+                  </Link>
+                </Button>,
+              ]}
+              data-autoid="RESTAURANT_ITEM"
             >
-              <Link to={`/restaurant-menu/${id}`}>Go to menu</Link>
-            </Button>,
-            <Button type="primary">
-              <Link to={`/restaurants-map/${id}`}>Show on map</Link>
-            </Button>,
-          ]}
-          data-autoid="RESTAURANT_ITEM"
-        >
-          <List.Item.Meta
-            avatar={<img src={image} width={64} height={64} alt={name} />}
-            title={name}
-            description={`Menu positions: ${menu.length}`}
-          />
-        </List.Item>
-        <ReactCSSTransitionGroup
-          transitionName="restaurant-visibility"
-          transitionEnterTimeout={300}
-          transitionLeaveTimeout={300}
-        >
-          {isOpen ? <RestaurantReviews id={restaurant.id} /> : null}
-        </ReactCSSTransitionGroup>
-      </>
+              <List.Item.Meta
+                avatar={<img src={image} width={64} height={64} alt={name} />}
+                title={name}
+                description={`${value.localization.restaurants.menuPositions}: ${menu.length}`}
+              />
+            </List.Item>
+            <ReactCSSTransitionGroup
+              transitionName="restaurant-visibility"
+              transitionEnterTimeout={300}
+              transitionLeaveTimeout={300}
+            >
+              {isOpen ? <RestaurantReviews id={restaurant.id} /> : null}
+            </ReactCSSTransitionGroup>
+          </>
+        )}
+      </LocalizationConsumer>
     )
   }
 }
