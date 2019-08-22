@@ -3,9 +3,11 @@
   background: #1d1d1d;
   padding: 18px;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .menu {
   position: relative;
-  top: -10px;
 }
