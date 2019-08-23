@@ -1,8 +1,8 @@
 import {createContext} from 'react'
-import {translations} from '../translations'
+import {eng} from '../translations'
 
 const {Provider, Consumer} = createContext({
-  lang: translations.eng,
+  lang: eng,
 })
 
 export {Provider, Consumer}

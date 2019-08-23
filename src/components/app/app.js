@@ -11,12 +11,12 @@ import OrderComplete from '../routes/order-complete'
 import ErrorPage from '../routes/error'
 import {Provider as AuthProvider} from '../../contexts/auth'
 import {Provider as LangProvider} from '../../contexts/lang'
-import {translations} from '../../translations'
+import {eng, ru} from '../../translations'
 
 class App extends Component {
   state = {
     userName: '',
-    lang: translations.eng,
+    lang: eng,
   }
 
   componentDidMount() {
@@ -26,7 +26,7 @@ class App extends Component {
   }
 
   toggleLanguage = lang => {
-    this.setState({lang: lang === 'ru' ? translations.ru : translations.eng})
+    this.setState({lang: lang === 'ru' ? ru : eng})
   }
 
   render() {
