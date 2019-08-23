@@ -5,8 +5,10 @@ import CartBadge from '../cart-badge'
 import './header.css'
 import {NavLink, Link} from 'react-router-dom'
 import {Menu} from 'antd'
+import LangSelect from '../lang-select'
+import i18n from '../../decorators/i18n'
 
-const Header = () => (
+const Header = ({lang, setLang, t}) => (
   <header className="header">
     <Menu
       className="menu"
@@ -16,14 +18,15 @@ const Header = () => (
     >
       <Menu.Item>
         <NavLink to={'/restaurants'} activeStyle={{color: 'white'}}>
-          List
+          {t('list')}
         </NavLink>
       </Menu.Item>
       <Menu.Item>
         <NavLink to={'/restaurants-map'} activeStyle={{color: 'white'}}>
-          Map
+          {t('map')}
         </NavLink>
       </Menu.Item>
+      <LangSelect currentLang={lang} setLang={setLang} />
     </Menu>
     <Logo />
     <Link to={'/order'}>
@@ -32,4 +35,4 @@ const Header = () => (
   </header>
 )
 
-export default Header
+export default i18n(Header)

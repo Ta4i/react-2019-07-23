@@ -6,6 +6,7 @@ import AverageRating from '../average-rating'
 import {Link} from 'react-router-dom'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import './restaurant.css'
+import i18n from '../../decorators/i18n'
 
 class Restaurant extends PureComponent {
   state = {
@@ -19,11 +20,11 @@ class Restaurant extends PureComponent {
   }
 
   render() {
-    const {isOpen, toggleOpen, toggleOpenMenu, restaurant} = this.props
+    const {isOpen, toggleOpen, toggleOpenMenu, restaurant, t} = this.props
     const {id, image, name, menu} = restaurant
 
     if (this.state.error) {
-      return <h2>Something went wrong</h2>
+      return <h2>{t('not available')}</h2>
     }
 
     return (
@@ -32,17 +33,17 @@ class Restaurant extends PureComponent {
           actions={[
             <AverageRating id={restaurant.id} />,
             <Button type={'primary'} onClick={toggleOpen}>
-              {isOpen ? 'Hide reviews' : 'Show reviews'}
+              {t(isOpen ? 'hide reviews' : 'show reviews')}
             </Button>,
             <Button
               type="primary"
               onClick={() => toggleOpenMenu(id)}
               data-autoid={`OPEN_MENU_ITEM_${id}`}
             >
-              <Link to={`/restaurant-menu/${id}`}>Go to menu</Link>
+              <Link to={`/restaurant-menu/${id}`}>{t('go to menu')}</Link>
             </Button>,
             <Button type="primary">
-              <Link to={`/restaurants-map/${id}`}>Show on map</Link>
+              <Link to={`/restaurants-map/${id}`}>{t('show on map')}</Link>
             </Button>,
           ]}
           data-autoid="RESTAURANT_ITEM"
@@ -50,7 +51,7 @@ class Restaurant extends PureComponent {
           <List.Item.Meta
             avatar={<img src={image} width={64} height={64} alt={name} />}
             title={name}
-            description={`Menu positions: ${menu.length}`}
+            description={`${t('menu positions')}: ${menu.length}`}
           />
         </List.Item>
         <ReactCSSTransitionGroup
@@ -65,4 +66,4 @@ class Restaurant extends PureComponent {
   }
 }
 
-export default toggleVisibility(Restaurant)
+export default i18n(toggleVisibility(Restaurant))

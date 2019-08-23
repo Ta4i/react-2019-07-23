@@ -4,6 +4,7 @@ import {toggleVisibility} from '../../decorators/toggle-visibility'
 import './add-review.css'
 import {connect} from 'react-redux'
 import {addReview} from '../../store/ac'
+import i18n from '../../decorators/i18n'
 
 class AddReview extends Component {
   state = {
@@ -13,21 +14,21 @@ class AddReview extends Component {
   }
   render() {
     const {userName, rating, text} = this.state
-    const {isOpen, toggleOpen} = this.props
+    const {isOpen, toggleOpen, t} = this.props
 
     return (
       <>
         {isOpen && (
           <Form>
             <Form.Item
-              label="Name"
+              label={t('name')}
               labelCol={{span: 4}}
               wrapperCol={{span: 14}}
             >
               <Input value={userName} onChange={this.handleNameChange} />
             </Form.Item>
             <Form.Item
-              label="Rating"
+              label={t('rating')}
               labelCol={{span: 4}}
               wrapperCol={{span: 14}}
             >
@@ -39,7 +40,7 @@ class AddReview extends Component {
               />
             </Form.Item>
             <Form.Item
-              label="Text"
+              label={t('text')}
               labelCol={{span: 4}}
               wrapperCol={{span: 14}}
             >
@@ -47,10 +48,10 @@ class AddReview extends Component {
             </Form.Item>
             <Form.Item className="user-form-submit-section">
               <Button type="primary" htmlType="submit" onClick={this.submit}>
-                Post review
+                {t('post review')}
               </Button>{' '}
               <Button type="primary" onClick={this.handleCancel}>
-                Cancel
+                {t('cancel')}
               </Button>
             </Form.Item>
           </Form>
@@ -61,7 +62,7 @@ class AddReview extends Component {
             type="primary"
             onClick={toggleOpen}
           >
-            Add review
+            {t('add review')}
           </Button>
         )}
       </>
@@ -114,4 +115,4 @@ export default connect(
   {
     addReview,
   }
-)(toggleVisibility(AddReview))
+)(i18n(toggleVisibility(AddReview)))
