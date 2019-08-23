@@ -4,7 +4,7 @@ import {Row, Col} from 'antd'
 import {useDispatch, useSelector} from 'react-redux'
 import {
   selectDishesError,
-  selectDishesLoaded,
+  selectDishesLoadedForRestaurant,
   selectDishesLoading,
   selectRestaurant,
   selectRestaurantsLoaded,
@@ -16,22 +16,24 @@ import Loader from '../loader'
 function RestaurantMenu(props) {
   const {
     loadingDishes,
-    loadedDishes,
     loadingRestaurants,
     loadedRestaurants,
+    loadedForRestaurant,
     restaurant,
     errorDishes,
   } = useSelector(state => ({
     errorDishes: selectDishesError(state),
     loadingDishes: selectDishesLoading(state),
-    loadedDishes: selectDishesLoaded(state),
     loadingRestaurants: selectRestaurantsLoading(state),
     loadedRestaurants: selectRestaurantsLoaded(state),
+    loadedForRestaurant: selectDishesLoadedForRestaurant(state, {
+      id: props.restaurantId,
+    }),
     restaurant: selectRestaurant(state, {id: props.restaurantId}),
   }))
   const dispatch = useDispatch()
 
-  if (!loadedDishes && !loadingDishes && !errorDishes) {
+  if (!loadingDishes && !errorDishes && !loadedForRestaurant) {
     dispatch(loadDishes(props.restaurantId))
   }
 
@@ -39,7 +41,7 @@ function RestaurantMenu(props) {
     dispatch(loadRestaurants())
   }
 
-  if (!loadedDishes || !loadedRestaurants) {
+  if (!loadedForRestaurant || !loadedRestaurants) {
     return <Loader />
   }
 

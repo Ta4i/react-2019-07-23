@@ -27,6 +27,9 @@ export const selectDishesLoaded = state => state.dishes.get('loaded')
 
 export const selectDishesError = state => state.dishes.get('error')
 
+export const selectDishesLoadedRestaurants = state =>
+  state.dishes.get('loadedRestaurants')
+
 export const selectReviewsImmutable = state => state.reviews.get('entities')
 
 export const selectReviewsLoading = state => state.reviews.get('loading')
@@ -43,6 +46,14 @@ export const selectRestaurants = createSelector(
   selectRestaurantsImmutable,
   restaurantsList => {
     return restaurantsList.toJS()
+  }
+)
+
+export const selectDishesLoadedForRestaurant = createSelector(
+  selectDishesLoadedRestaurants,
+  selectId,
+  (restaurantsLoaded, id) => {
+    return restaurantsLoaded.get(id)
   }
 )
 

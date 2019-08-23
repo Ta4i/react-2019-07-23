@@ -5,6 +5,7 @@ import {FAIL, LOAD_DISHES, START, SUCCESS} from '../constants'
 const initialState = {
   loaded: false,
   loading: false,
+  loadedRestaurants: {},
   error: null,
   entities: {},
 }
@@ -18,8 +19,9 @@ export default (dishesState = fromJS(initialState), action) => {
       return dishesState
         .set('loaded', true)
         .set('loading', false)
+        .setIn(['loadedRestaurants', action.payload.id], true)
         .set('error', null)
-        .set('entities', fromJS(arrayToMap(action.response)))
+        .mergeIn(['entities'], fromJS(arrayToMap(action.response)))
     }
     case LOAD_DISHES + FAIL: {
       return dishesState

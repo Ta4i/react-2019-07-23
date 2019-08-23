@@ -80,6 +80,7 @@ export const loadReviews = id => {
 export const loadDishes = id => {
   return {
     type: LOAD_DISHES,
+    payload: {id},
     callAPI: id ? `/api/dishes?id=${id}` : '/api/dishes',
   }
 }

@@ -5,6 +5,7 @@ import {accordion} from '../../decorators/accordion'
 import connect from 'react-redux/es/connect/connect'
 import {
   selectRestaurants,
+  selectRestaurantsLoaded,
   selectRestaurantsLoading,
 } from '../../store/selectors'
 import Loader from '../loader'
@@ -12,19 +13,19 @@ import {loadRestaurants, loadReviews} from '../../store/ac'
 
 class RestaurantList extends Component {
   componentDidMount() {
-    this.props.fetchData()
+    !this.props.loaded && this.props.fetchData()
   }
 
   render() {
     const {
       restaurants,
-      loading,
+      restaurantsLoading,
 
       // from decorator
       openItemId,
       toggleOpen,
     } = this.props
-    return loading ? (
+    return restaurantsLoading ? (
       <Loader />
     ) : (
       <List
@@ -46,6 +47,7 @@ class RestaurantList extends Component {
 export default connect(
   state => ({
     loading: selectRestaurantsLoading(state),
+    loaded: selectRestaurantsLoaded(state),
     restaurants: selectRestaurants(state),
   }),
   dispatch => ({
