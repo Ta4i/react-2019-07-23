@@ -5,6 +5,7 @@ import {toggleVisibility} from '../../decorators/toggle-visibility'
 import AverageRating from '../average-rating'
 import {Link} from 'react-router-dom'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import {Consumer as LangConsumer} from '../../contexts/lang'
 import './restaurant.css'
 
 class Restaurant extends PureComponent {
@@ -21,6 +22,7 @@ class Restaurant extends PureComponent {
   render() {
     const {isOpen, toggleOpen, toggleOpenMenu, restaurant} = this.props
     const {id, image, name, menu} = restaurant
+    let lang = this.context.lang
 
     if (this.state.error) {
       return <h2>Something went wrong</h2>
@@ -39,10 +41,10 @@ class Restaurant extends PureComponent {
               onClick={() => toggleOpenMenu(id)}
               data-autoid={`OPEN_MENU_ITEM_${id}`}
             >
-              <Link to={`/restaurant-menu/${id}`}>Go to menu</Link>
+              <Link to={`/restaurant-menu/${id}`}>{lang.buttonText}</Link>
             </Button>,
             <Button type="primary">
-              <Link to={`/restaurants-map/${id}`}>Show on map</Link>
+              <Link to={`/restaurants-map/${id}`}>{lang.buttonText2}</Link>
             </Button>,
           ]}
           data-autoid="RESTAURANT_ITEM"
@@ -64,5 +66,7 @@ class Restaurant extends PureComponent {
     )
   }
 }
+
+Restaurant.contextType = LangConsumer
 
 export default toggleVisibility(Restaurant)
