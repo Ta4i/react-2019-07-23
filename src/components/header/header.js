@@ -5,8 +5,9 @@ import CartBadge from '../cart-badge'
 import './header.css'
 import {NavLink, Link} from 'react-router-dom'
 import {Menu} from 'antd'
+import Language from '../lang'
 
-const Header = () => (
+const Header = props => (
   <header className="header">
     <Menu
       className="menu"
@@ -26,6 +27,7 @@ const Header = () => (
       </Menu.Item>
     </Menu>
     <Logo />
+    <Language click={props.click} />
     <Link to={'/order'}>
       <CartBadge />
     </Link>
